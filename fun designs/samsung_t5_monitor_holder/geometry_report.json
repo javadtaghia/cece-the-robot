@@ -1,0 +1,25 @@
+{
+  "monitor_thickness_mm": 5.0,
+  "front_bezel_overlap_mm": 2.0,
+  "padding_clearance_mm": 0.8,
+  "ssd_envelope_mm": [
+    57.3,
+    74,
+    10.5
+  ],
+  "ssd_intersection_volume_mm3": 0.0,
+  "hook_monitor_proxy_intersection_mm3": 0.0,
+  "holder_volume_mm3": 18292.79482670939,
+  "hook_volume_mm3_each": 1142.0423916933764,
+  "holder_bbox_mm": [
+    78.5,
+    80.0,
+    15.9
+  ],
+  "hook_print_bbox_mm": [
+    17.0,
+    13.600000000000001,
+    14.000000000000002
+  ],
+  "note": "Provisional; monitor shape, actual bezel safety, cable and strength are not verified."
+}

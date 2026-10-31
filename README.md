@@ -20,6 +20,7 @@ hardware repository. It is an independent repository, not a GitHub fork.
 | Bullet walking experiments, assumptions and recordings | [Bullet gait study](experiments/cece/bullet_gait/README.md) |
 | Electronics and wiring | [wiring draft](experiments/cece/electronics/WIRING_DRAFT.md), [legacy KiCad studies](archive/workspace/Otto_PCB_Prototype/README.md) |
 | Earlier Otto-based references and experiments | [Otto studies](experiments/otto/README.md), [older workspace files](archive/workspace/README.md) |
+| Fun designs and accessories | [Fun designs](fun%20designs/README.md) |
 | Third-party sources and license notes | [Notices](THIRD_PARTY_NOTICES.md) |
 
 The CAD, circuit and gait are **prototypes**. The current Gazebo controller
