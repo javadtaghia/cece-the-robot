@@ -29,8 +29,8 @@ def write_stl(shape, path):
     mesh.write(str(path))
 
 def build(thickness, bezel, gap):
-    if not 5 <= thickness <= 70:
-        raise ValueError('Monitor thickness must be between 5 and 70 mm')
+    if not 2 <= thickness <= 70:
+        raise ValueError('Monitor thickness must be between 2 and 70 mm')
     if not 1 <= bezel <= 8:
         raise ValueError('Front overlap must be between 1 and 8 mm')
     if not 0.3 <= gap <= 3:
@@ -66,19 +66,34 @@ def build(thickness, bezel, gap):
                   box(-3.8, 0, front_z-2.4, 3.8+bezel, 14, 2.4)]
     hook = fuse(hook_parts)
     hook = hook.cut(Part.makeCylinder(1.7, 3.4, V(-9, 7, back-0.2))).removeSplitter()
+    # Positive stop: the upper hook has a horizontal ledge resting on the top
+    # edge. The user must place that hook at the screen's top-left corner.
+    # It supports weight on the edge rather than squeezing the display faces.
+    upper_hook = hook.fuse(box(-3.8, 14, -thickness, 21.8, 3, thickness)).removeSplitter()
     # Simplified SSD/monitor envelopes for checking; not exported as print parts.
     drive = box(3.1, 3.1, back, 57.3, 74, 10.5)
-    screen = box(0, -25, -thickness, 250, 140, thickness)
+    # Top of the rectangular reference lid is flush with upper hook y=14.
+    screen_top = ear_y[1] + 14
+    screen = box(0, screen_top - 140, -thickness, 250, 140, thickness)
     drive_overlap = tray.common(drive).Volume
     hook_monitor_overlap = hook.copy()
     hook_monitor_overlap.translate(V(0, ear_y[0], 0))
     hook_monitor_overlap = hook_monitor_overlap.common(screen).Volume
-    if hook_monitor_overlap > 1e-5:
+    upper_monitor_overlap = upper_hook.copy()
+    upper_monitor_overlap.translate(V(0, ear_y[1], 0))
+    upper_monitor_overlap = upper_monitor_overlap.common(screen).Volume
+    if hook_monitor_overlap > 1e-5 or upper_monitor_overlap > 1e-5:
         raise RuntimeError('Hook intersects the rectangular monitor envelope')
+    dropped_upper = upper_hook.copy()
+    dropped_upper.translate(V(0, ear_y[1] - 0.5, 0))
+    stop_overlap = dropped_upper.common(screen).Volume
+    if stop_overlap < 1e-5:
+        raise RuntimeError('Upper ledge did not stop the modeled downward motion')
     if drive_overlap > 1e-5:
         raise RuntimeError('SSD envelope collides with holder: %.5f mm3' % drive_overlap)
-    if not tray.isValid() or not hook.isValid() or len(tray.Solids) != 1 or len(hook.Solids) != 1:
-        raise RuntimeError('Generated holder or clip is not a valid single solid')
+    for name, shape in (('holder', tray), ('lower hook', hook), ('upper hook', upper_hook)):
+        if not shape.isValid() or len(shape.Solids) != 1:
+            raise RuntimeError(name + ' is not a valid single solid')
 
     doc = App.newDocument('Samsung_T5_Monitor_Holder')
     def feature(name, shape, color):
@@ -88,7 +103,7 @@ def build(thickness, bezel, gap):
         return obj
     feature('Holder_print_one', tray, (0.2, 0.45, 0.72))
     first = hook.copy(); first.translate(V(0, ear_y[0], 0))
-    second = hook.copy(); second.translate(V(0, ear_y[1], 0))
+    second = upper_hook.copy(); second.translate(V(0, ear_y[1], 0))
     feature('Hook_lower_print_one', first, (0.9, 0.55, 0.12))
     feature('Hook_upper_print_one', second, (0.9, 0.55, 0.12))
     feature('SSD_envelope_reference_only', drive, (0.75, 0.75, 0.75))
@@ -96,19 +111,30 @@ def build(thickness, bezel, gap):
     doc.recompute()
     doc.saveAs(str(HERE / 'Samsung_T5_Holder_Assembly_PROVISIONAL.FCStd'))
     write_stl(tray, HERE / 'T5_holder_print_1_PROVISIONAL.stl')
-    # Lay the hook on its side, so its clamp cross-section is printed flat.
-    printable = hook.copy()
-    printable.rotate(V(0, 0, 0), V(1, 0, 0), 90)
-    printable.translate(V(0, 0, -printable.BoundBox.ZMin))
-    write_stl(printable, HERE / 'Monitor_hook_print_2_PROVISIONAL.stl')
+    # Hooks lie on their sides for printing; inspect supports under top ledge.
+    def print_orient(shape, name):
+        printable = shape.copy()
+        printable.rotate(V(0, 0, 0), V(1, 0, 0), 90)
+        printable.translate(V(0, 0, -printable.BoundBox.ZMin))
+        write_stl(printable, HERE / name)
+        return [printable.BoundBox.XLength, printable.BoundBox.YLength, printable.BoundBox.ZLength]
+    lower_bbox = print_orient(hook, 'Lower_side_hook_print_1_PROVISIONAL.stl')
+    upper_bbox = print_orient(upper_hook, 'Upper_corner_support_print_1_PROVISIONAL.stl')
     result = {'monitor_thickness_mm': thickness, 'front_bezel_overlap_mm': bezel,
-              'padding_clearance_mm': gap, 'ssd_envelope_mm': [57.3, 74, 10.5],
+              'padding_clearance_mm': gap, 'hook_opening_mm': thickness + gap,
+              'ssd_envelope_mm': [57.3, 74, 10.5],
               'ssd_intersection_volume_mm3': drive_overlap,
-              'hook_monitor_proxy_intersection_mm3': hook_monitor_overlap,
-              'holder_volume_mm3': tray.Volume, 'hook_volume_mm3_each': hook.Volume,
+              'lower_hook_monitor_proxy_intersection_mm3': hook_monitor_overlap,
+              'upper_hook_monitor_proxy_intersection_mm3': upper_monitor_overlap,
+              'downward_0p5mm_interference_mm3': stop_overlap,
+              'top_support_width_over_lid_mm': 18.0,
+              'top_support_depth_over_lid_mm': thickness,
+              'top_support_contact_face_mm2': 18.0 * thickness,
+              'holder_volume_mm3': tray.Volume, 'lower_hook_volume_mm3': hook.Volume,
+              'upper_hook_volume_mm3': upper_hook.Volume,
               'holder_bbox_mm': [tray.BoundBox.XLength, tray.BoundBox.YLength, tray.BoundBox.ZLength],
-              'hook_print_bbox_mm': [printable.BoundBox.XLength, printable.BoundBox.YLength, printable.BoundBox.ZLength],
-              'note': 'Provisional; monitor shape, actual bezel safety, cable and strength are not verified.'}
+              'lower_hook_print_bbox_mm': lower_bbox, 'upper_hook_print_bbox_mm': upper_bbox,
+              'note': 'Top-edge ledge provides a positive stop in the idealized geometry; actual lid edge, loading, strength and safety are not verified.'}
     (HERE / 'geometry_report.json').write_text(json.dumps(result, indent=2)+'\n', encoding='utf-8')
     print(json.dumps(result, indent=2))
     App.closeDocument(doc.Name)

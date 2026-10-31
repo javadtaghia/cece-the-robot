@@ -1,25 +1,37 @@
 {
-  "monitor_thickness_mm": 5.0,
-  "front_bezel_overlap_mm": 2.0,
-  "padding_clearance_mm": 0.8,
+  "monitor_thickness_mm": 4.0,
+  "front_bezel_overlap_mm": 3.0,
+  "padding_clearance_mm": 2.0,
+  "hook_opening_mm": 6.0,
   "ssd_envelope_mm": [
     57.3,
     74,
     10.5
   ],
   "ssd_intersection_volume_mm3": 0.0,
-  "hook_monitor_proxy_intersection_mm3": 0.0,
+  "lower_hook_monitor_proxy_intersection_mm3": 0.0,
+  "upper_hook_monitor_proxy_intersection_mm3": 0.0,
+  "downward_0p5mm_interference_mm3": 36.0,
+  "top_support_width_over_lid_mm": 18.0,
+  "top_support_depth_over_lid_mm": 4.0,
+  "top_support_contact_face_mm2": 72.0,
   "holder_volume_mm3": 18292.79482670939,
-  "hook_volume_mm3_each": 1142.0423916933764,
+  "lower_hook_volume_mm3": 1184.0423916933767,
+  "upper_hook_volume_mm3": 1445.6423916933766,
   "holder_bbox_mm": [
     78.5,
     80.0,
     15.9
   ],
-  "hook_print_bbox_mm": [
-    17.0,
-    13.600000000000001,
+  "lower_hook_print_bbox_mm": [
+    18.0,
+    13.800000000000002,
     14.000000000000002
   ],
-  "note": "Provisional; monitor shape, actual bezel safety, cable and strength are not verified."
+  "upper_hook_print_bbox_mm": [
+    33.0,
+    13.800000000000002,
+    17.0
+  ],
+  "note": "Top-edge ledge provides a positive stop in the idealized geometry; actual lid edge, loading, strength and safety are not verified."
 }
