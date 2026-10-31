@@ -1,22 +1,31 @@
 {
-  "measured_lid_thickness_mm": 4,
+  "measured_lid_thickness_mm": 4.0,
   "user_measured_black_bezel_width_mm": 7,
-  "side_hook_opening_mm": 6,
-  "nominal_total_clearance_mm": 2,
-  "nominal_front_hook_overlap_mm": 3,
-  "nominal_margin_to_active_screen_mm": 4,
+  "side_hook_opening_mm": 6.0,
+  "nominal_total_clearance_mm": 2.0,
+  "nominal_front_hook_overlap_mm": 3.0,
+  "nominal_margin_to_active_screen_mm": 4.0,
   "ssd_intersection_volume_mm3": 0.0,
   "lid_proxy_intersection_volume_mm3": 0.0,
-  "downward_0p5mm_interference_mm3": 36.0,
+  "side_hook_count": 2,
+  "top_hook_count": 2,
+  "top_hook_opening_mm": 6.0,
+  "top_bezel_width_reported_mm": 7,
+  "top_front_hook_overlap_mm": 5.0,
+  "downward_0p5mm_interference_mm3": 62.99999999999997,
+  "top_hook_interference_each_mm3": [
+    36.0,
+    27.0
+  ],
   "solid_count": 1,
   "mesh_watertight": true,
   "mesh_components": 1,
-  "volume_mm3": 7704.756000000008,
-  "solid_pla_mass_estimate_g_at_1p24": 9.553897440000009,
+  "volume_mm3": 8681.315999999999,
+  "solid_pla_mass_estimate_g_at_1p24": 10.76483184,
   "print_bbox_mm": [
-    24.300000000000004,
+    24.30000000000001,
     80.0,
     67.3
   ],
-  "status": "Single CAD solid; real lid shape, print supports, strength and physical retention are unverified."
+  "status": "Single CAD solid with two side and two top hooks; physical fit, supports, strength and retention are unverified."
 }
