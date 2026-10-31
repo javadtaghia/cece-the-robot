@@ -7,6 +7,7 @@ import queue
 import subprocess
 import threading
 import time
+import urllib.request
 import tkinter as tk
 from tkinter import ttk
 
@@ -145,7 +146,7 @@ def main():
         model = Model(args.model)
     root = tk.Tk()
     root.title("Cece - laptop voice prototype")
-    root.geometry("640x320")
+    root.geometry("720x520")
     status = tk.StringVar(value="Ready. Click Start conversation, then speak.")
     heard = tk.StringVar(value="")
     answer = tk.StringVar(value="")
@@ -168,6 +169,30 @@ def main():
     ttk.Label(root, textvariable=answer, wraplength=520).pack(pady=4)
     button = ttk.Button(root, text="Start conversation")
     button.pack(pady=12)
+    controls = ttk.LabelFrame(root, text="Gazebo movement (experimental)")
+    controls.pack(pady=6)
+    controls_status = tk.StringVar(value="Forward is a test gait; other directions are not ready.")
+    ttk.Label(controls, textvariable=controls_status).grid(row=3, column=0, columnspan=3)
+
+    def command_motion(command):
+        def send():
+            try:
+                request = urllib.request.Request("http://127.0.0.1:8768/ask",
+                    data=command.encode("utf-8"), method="POST",
+                    headers={"Content-Type": "text/plain; charset=utf-8"})
+                with urllib.request.urlopen(request, timeout=15) as result:
+                    message = result.read().decode("utf-8")
+                root.after(0, controls_status.set, message)
+            except Exception as exc:
+                root.after(0, controls_status.set, "Movement unavailable: " + str(exc))
+        threading.Thread(target=send, daemon=True).start()
+
+    ttk.Button(controls, text="Forward", command=lambda: command_motion("move forward 2 steps")).grid(row=0, column=1, padx=4, pady=2)
+    ttk.Button(controls, text="Left (not ready)", command=lambda: command_motion("move left 2 steps")).grid(row=1, column=0, padx=4, pady=2)
+    ttk.Button(controls, text="Stop", command=lambda: command_motion("stop")).grid(row=1, column=1, padx=4, pady=2)
+    ttk.Button(controls, text="Right (not ready)", command=lambda: command_motion("move right 2 steps")).grid(row=1, column=2, padx=4, pady=2)
+    ttk.Button(controls, text="Back (not ready)", command=lambda: command_motion("move backward 2 steps")).grid(row=2, column=1, padx=4, pady=2)
+    ttk.Button(root, text="Autonomous obstacle avoidance: unavailable", state="disabled").pack(pady=4)
     stop_event = threading.Event()
     running = False
 

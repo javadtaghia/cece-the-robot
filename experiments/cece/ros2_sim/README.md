@@ -64,3 +64,15 @@ robot, sensors and room. A direct Wokwi servo-output-to-ROS bridge still has
 to be written and tested. ChatGPT plan OAuth does not provide simulated I2S audio,
 and its preview route does not support audio or transcription; speech needs
 an additional supported speech path.
+
+## Sensor work in progress
+
+The generated Gazebo world publishes a 320 × 240 camera image on
+`/cece/camera/image` and a narrow five-ray range approximation on
+`/cece/range_scan`. The assumed forward direction is -Y and needs physical
+verification. The range model is lidar-style geometry, not an HC-SR04
+electrical, acoustic or firmware simulation. The camera and range topics were
+observed publishing in a headless test. They are not connected to the ESP32,
+the interface, navigation, or an obstacle avoidance controller. Autonomous
+motion is disabled until perception, stopping, and turning are integrated and
+validated.

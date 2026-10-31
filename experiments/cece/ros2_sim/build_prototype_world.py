@@ -72,6 +72,8 @@ def joint(model, name, parent, child, axis):
 def main():
     tree = ET.parse(HERE / "worlds" / "starter_room.sdf")
     world = tree.getroot().find("world")
+    sensors = element(world, "plugin", filename="gz-sim-sensors-system", name="gz::sim::systems::Sensors")
+    element(sensors, "render_engine", "ogre2")
     model = element(world, "model", name="cece_prototype")
     element(model, "pose", "0 0 0.08902 0 0 0")
     element(model, "plugin", filename="gz-sim-joint-state-publisher-system",
@@ -79,6 +81,30 @@ def main():
     masses = json.loads(RESULTS.read_text())["model"]["body_masses_g"]
     base = link(model, "base", (0, 0, 0), masses["base"]/1000,
                 (.082, .079, .095), (0, 0, 0.008))
+    # Approximate front direction is -Y; range is lidar, not HC-SR04 emulation.
+    cam = element(base, "sensor", name="front_camera", type="camera")
+    element(cam, "pose", "0 -0.055 0.07 0 0 -1.57079632679")
+    element(cam, "topic", "/cece/camera/image")
+    element(cam, "update_rate", "10")
+    camera = element(cam, "camera")
+    element(camera, "horizontal_fov", "1.047")
+    image = element(camera, "image")
+    for key, value in (("width", "320"), ("height", "240"), ("format", "R8G8B8")):
+        element(image, key, value)
+    clip = element(camera, "clip")
+    element(clip, "near", "0.03")
+    element(clip, "far", "5")
+    sensor = element(base, "sensor", name="front_range_approx", type="gpu_lidar")
+    element(sensor, "pose", "0 -0.055 0.04 0 0 -1.57079632679")
+    element(sensor, "topic", "/cece/range_scan")
+    element(sensor, "update_rate", "10")
+    ray = element(sensor, "ray")
+    horizontal = element(element(ray, "scan"), "horizontal")
+    for key, value in (("samples", "5"), ("resolution", "1"), ("min_angle", "-0.13"), ("max_angle", "0.13")):
+        element(horizontal, key, value)
+    bounds = element(ray, "range")
+    for key, value in (("min", "0.03"), ("max", "2"), ("resolution", "0.01")):
+        element(bounds, key, value)
     colors = {"Body": "0.86 0.91 0.95 1", "Rounded_Head_Study": "0.9 0.94 0.98 1",
               "Heart_Frame_V3": "0.9 0.3 0.45 1", "Antenna": "1 0.72 0.26 1",
               "Left_Arm": "0.55 0.72 0.86 1", "Right_Arm": "0.55 0.72 0.86 1",
