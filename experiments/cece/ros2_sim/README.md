@@ -80,3 +80,17 @@ eight blocked turns. The camera is not used for visual obstacle recognition.
 The range model and controller do not run in ESP32 firmware. One headless
 scenario with an obstacle approximately 0.25 m ahead was tested; this is not
 a general obstacle avoidance or physical safety validation.
+
+## View the simulated camera
+
+With Gazebo running, in this directory in Ubuntu run:
+
+```bash
+source /opt/ros/jazzy/setup.bash
+python3 camera_view.py
+```
+
+The viewer uses the `/cece/camera/image` Gazebo topic and needs Ubuntu Python
+Tkinter and Pillow. Use the same `GZ_PARTITION` environment setting as the
+Gazebo instance; for the current Windows session that is `cece_current`.
+It shows simulated images, not a physical camera or the Wokwi ESP32.
