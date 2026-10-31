@@ -49,8 +49,9 @@ labelled RX/TX and can affect serial use. GPIO0/1 assignment and 3.3 V I2C
 pull-ups must be checked on actual modules. The selected Adafruit 4741 SSD1327 OLED defaults to I2C 0x3D (0x3C if its address jumper is bridged); the PiicoDev socket labels 1,2,3,4 map to chip channels 3,2,1,0. The default PiicoDev address is
 0x44; verify OLED address and ensure no duplicate pull-up or 5 V pull-ups.
 ESP32-C3 supports full-duplex standard I2S with shared clocks in current ESP-IDF.
-The firmware has unverified microphone and test-tone diagnostics; voice streaming
-and physical audio validation are still outstanding. See
+The firmware includes unverified microphone diagnostics, experimental Wi-Fi
+microphone chunks, speaker PCM playback and a speaker test tone. Physical
+audio validation is still outstanding. See
 https://docs.espressif.com/projects/esp-idf/en/release-v6.0/esp32c3/api-reference/peripherals/i2s.html
 
 ## Missing or unverified before ordering the rest

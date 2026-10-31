@@ -7,7 +7,7 @@ This project builds real Arduino ESP32-C3 firmware. It is currently a component 
 - Wokwi runs the compiled C3 firmware and shows a modeled HC-SR04 range reading of about 25 cm. An I2C scan detects the modeled PCA9685 servo driver at 0x44. This is functional simulation, not electrical or mechanical certification.
 - An SSD1327 custom-chip model displays the firmware's status screen in Wokwi; the simulated ESP32 I2C scan detects it at 0x3D. The model covers the command subset used by this firmware, not the complete display controller, and the physical display remains untested.
 - The simulated ESP32 connected to Wokwi Wi-Fi and sent text requests through its private gateway to the PC bridge, receiving responses from Ollama and from OpenAI via AtBots ChatGPT sign-in. It has also retrieved live Sydney weather through the updated bridge. The separate API-key provider has only mocked tests.
-- Wokwi does not emulate the ESP32-C3 I2S peripheral. The firmware contains hardware I2S `mic` and `beep` diagnostics, but the microphone, amplifier and speaker have not been emulated or tested on hardware. Camera, robot-side speech streaming and a validated walking controller remain outstanding. The camera interface and model are not selected.
+- Wokwi does not emulate the ESP32-C3 I2S peripheral. The firmware contains hardware I2S `mic` and `beep` diagnostics, but the microphone, amplifier and speaker have not been emulated or tested on hardware. The experimental robot microphone Wi-Fi path is unverified; camera, robot-side speech playback and a validated walking controller remain outstanding. The camera interface and model are not selected.
 
 An experimental laptop conversational voice application is in `pc_bridge/laptop_voice.py`.
 It uses Vosk or faster-whisper for local speech recognition and Windows speech synthesis for
@@ -61,3 +61,43 @@ To accept requests from a real ESP32 on a trusted LAN, explicitly choose the PC'
 For Wokwi VS Code's private gateway, after connecting with `wifi Wokwi-GUEST -`, the local text path is `ask http://host.wokwi.internal:8765/ask Say hello briefly`. Start the bridge first; when using the Ollama provider, its server must also be running. Weather was tested via the same path on port 8766.
 
 The PCA9685 Wokwi model is from https://github.com/bonnyr/wokwi-pca9685-custom-chip (MIT; license included). The SSD1327 model implements only a subset of the controller. References: https://learn.adafruit.com/adafruit-grayscale-1-5-128x128-oled-display ; https://github.com/CoreElectronics/CE-PiicoDev-PyPI/blob/main/src/PiicoDev_Servo.py ; https://docs.wokwi.com/guides/esp32 .
+
+## Experimental laptop-to-robot Wi-Fi messages
+
+This path is implemented but **not yet tested with the purchased ESP32, OLED,
+microphone or speaker**. It sends text to the firmware's display buffer. It
+includes experimental robot-microphone capture and speaker playback paths,
+but does not command physical servos. The camera and autonomous Gazebo behavior also remain separate.
+
+1. Connect the ESP32 to your Wi-Fi using the serial `wifi <ssid> <password>`
+   command; `status` reports the IP address. Never paste your password into a
+   repository, issue, or chat.
+2. In the serial monitor, issue `remote <your-random-token>` with a unique
+   random 16–64 character token without spaces. For example, generate one
+   privately on your PC with `python -c "import secrets; print(secrets.token_hex(16))"`.
+   Do not share it or include it in chat. The token
+   stays in RAM and must be configured again after reset. `remote off` disables
+   the message endpoint.
+3. On the laptop, open the Cece voice app. In the real-robot Wi-Fi section,
+   enter `http://` followed by the ESP32 IP address, enter the same token,
+   type a message and press **Send**. An acceptance response means the firmware
+   accepted the message; it does not prove the display is wired or working.
+4. With those fields filled before clicking **Start conversation**, the laptop
+   transcribes its microphone locally, sends the recognized text to the robot
+   display, asks the laptop bridge for a reply, sends the reply to the display,
+   and plays speech on the **laptop speaker**. With the experimental robot
+   speaker option checked it also sends the generated PCM to the robot, though
+   timing, audio quality and playback on the hardware have not been verified.
+   The laptop polls the robot ultrasonic reading; no echo is shown as unavailable.
+   Select **Use robot microphone**
+   to request 16 kHz mono I2S audio chunks over Wi-Fi instead of using the
+   laptop microphone. This path is untested on hardware; the microphone I2S
+   slot, wiring, gain and bit alignment must be checked on the actual device. Start the PC bridge as described
+   in Start Here. With the robot address left blank, the existing Wokwi path is
+   used.
+
+The prototype uses HTTP and sends the token and text **without encryption**.
+Use only a trusted private network; do not expose the endpoint to the internet
+or use it on public Wi-Fi. The firmware requires a token but has not had a
+security audit. Use the robot's USB serial setup only after its power and GPIO
+wiring have been independently verified.

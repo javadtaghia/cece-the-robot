@@ -6,7 +6,9 @@
 #include <Wire.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <WebServer.h>
 #include <ESP_I2S.h>
+#include <mbedtls/base64.h>
 #include <math.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1327.h>
@@ -15,11 +17,121 @@ constexpr uint8_t SDA_PIN = 0, SCL_PIN = 1, TRIG_PIN = 7, ECHO_PIN = 10;
 constexpr uint8_t SERVO_ADDR = 0x44;
 Adafruit_SSD1327 display(128, 128, &Wire, -1, 400000);
 bool screen_ok = false, servo_ok = false, driver_configured = false;
-unsigned long previous = 0;
+unsigned long previous = 0, last_echo_at = 0;
+unsigned long last_echo_us = 0;
 I2SClass audio;
 bool audio_ready = false;
 String line;
 String last_reply;
+WebServer remote_server(80);
+String remote_token;
+bool remote_started = false;
+bool startAudio();
+
+void receiveRemoteMessage() {
+  if (remote_token.length() < 16 || remote_server.header("X-Cece-Token") != remote_token) {
+    remote_server.send(403, "text/plain", "Forbidden");
+    return;
+  }
+  if (!remote_server.hasArg("plain")) {
+    remote_server.send(400, "text/plain", "Missing message");
+    return;
+  }
+  String message = remote_server.arg("plain");
+  message.trim();
+  if (!message.length() || message.length() > 120) {
+    remote_server.send(400, "text/plain", "Message must contain 1-120 bytes");
+    return;
+  }
+  last_reply = message;
+  remote_server.send(200, "text/plain", "Message accepted; OLED output not verified");
+}
+
+void receiveRemoteMic() {
+  if (remote_token.length() < 16 || remote_server.header("X-Cece-Token") != remote_token) {
+    remote_server.send(403, "text/plain", "Forbidden"); return;
+  }
+  if (!startAudio()) { remote_server.send(503, "text/plain", "I2S unavailable"); return; }
+  // 256 ms of 16 kHz, signed 16-bit mono PCM from the left I2S slot.
+  // INMP441 wiring, slot selection, bit alignment and actual level need bench tests.
+  const size_t samples = 4096;
+  int16_t *pcm = static_cast<int16_t*>(malloc(samples * sizeof(int16_t)));
+  if (!pcm) { remote_server.send(503, "text/plain", "Audio buffer unavailable"); return; }
+  int32_t frames[256];
+  size_t written = 0;
+  while (written < samples) {
+    size_t got = audio.readBytes(reinterpret_cast<char*>(frames), sizeof(frames));
+    if (!got || got % 8) break;
+    for (size_t i = 0; i + 1 < got / sizeof(int32_t) && written < samples; i += 2) {
+      pcm[written++] = static_cast<int16_t>(frames[i] >> 16);
+    }
+  }
+  if (written != samples) {
+    free(pcm); remote_server.send(503, "text/plain", "I2S capture incomplete"); return;
+  }
+  remote_server.setContentLength(samples * sizeof(int16_t));
+  remote_server.send(200, "application/octet-stream", "");
+  remote_server.sendContent(reinterpret_cast<const char*>(pcm), samples * sizeof(int16_t));
+  free(pcm);
+}
+
+void receiveRemoteStatus() {
+  if (remote_token.length() < 16 || remote_server.header("X-Cece-Token") != remote_token) {
+    remote_server.send(403, "text/plain", "Forbidden"); return;
+  }
+  bool valid = last_echo_us > 0 && millis() - last_echo_at < 2000;
+  String result = "{\"range_cm\":";
+  result += valid ? String(last_echo_us / 58.0f, 1) : "null";
+  result += ",\"oled_detected\":"; result += screen_ok ? "true" : "false";
+  result += ",\"servo_driver_detected\":"; result += servo_ok ? "true" : "false";
+  result += "}";
+  remote_server.send(200, "application/json", result);
+}
+
+void receiveRemoteSpeaker() {
+  if (remote_token.length() < 16 || remote_server.header("X-Cece-Token") != remote_token) {
+    remote_server.send(403, "text/plain", "Forbidden"); return;
+  }
+  if (!remote_server.hasArg("plain")) { remote_server.send(400, "text/plain", "Missing audio"); return; }
+  String encoded = remote_server.arg("plain");
+  if (!encoded.length() || encoded.length() > 5500) { remote_server.send(400, "text/plain", "Invalid audio size"); return; }
+  uint8_t *pcm = static_cast<uint8_t*>(malloc(4096)); size_t decoded = 0;
+  if (!pcm) { remote_server.send(503, "text/plain", "Audio buffer unavailable"); return; }
+  if (mbedtls_base64_decode(pcm, 4096, &decoded,
+      reinterpret_cast<const unsigned char*>(encoded.c_str()), encoded.length()) != 0 || decoded == 0 || decoded % 2) {
+    free(pcm); remote_server.send(400, "text/plain", "Invalid audio encoding"); return;
+  }
+  if (!startAudio()) { free(pcm); remote_server.send(503, "text/plain", "I2S unavailable"); return; }
+  int32_t frames[256];
+  for (size_t offset = 0; offset < decoded; ) {
+    size_t n = 0;
+    while (offset + 1 < decoded && n < 128) {
+      int16_t sample = static_cast<int16_t>(uint16_t(pcm[offset]) | (uint16_t(pcm[offset + 1]) << 8));
+      int32_t expanded = static_cast<int32_t>(sample) * 65536;
+      frames[2*n] = expanded; frames[2*n+1] = expanded;
+      offset += 2; n++;
+    }
+    if (audio.write(frames, n * 2 * sizeof(int32_t)) != n * 2 * sizeof(int32_t)) {
+      free(pcm); remote_server.send(503, "text/plain", "I2S playback incomplete"); return;
+    }
+  }
+  free(pcm);
+  remote_server.send(200, "text/plain", "Audio submitted to I2S; output not verified");
+}
+
+void startRemote() {
+  if (!remote_started) {
+    const char *headers[] = {"X-Cece-Token"};
+    remote_server.collectHeaders(headers, 1);
+    remote_server.on("/message", HTTP_POST, receiveRemoteMessage);
+    remote_server.on("/microphone", HTTP_GET, receiveRemoteMic);
+    remote_server.on("/status", HTTP_GET, receiveRemoteStatus);
+    remote_server.on("/speaker", HTTP_POST, receiveRemoteSpeaker);
+    remote_server.begin();
+    remote_started = true;
+  }
+}
+
 
 bool present(uint8_t address) { Wire.beginTransmission(address); return Wire.endTransmission() == 0; }
 bool regWrite(uint8_t reg, uint8_t value) {
@@ -84,6 +196,16 @@ void micSample() {
 }
 void command(String cmd) {
   cmd.trim();
+  if (cmd.startsWith("remote ")) {
+    String token = cmd.substring(7); token.trim();
+    if (token == "off") { remote_token = ""; Serial.println("Remote messages disabled"); return; }
+    if (token.length() < 16 || token.length() > 64 || token.indexOf(' ') >= 0) {
+      Serial.println("ERROR: token must be 16-64 characters without spaces"); return;
+    }
+    remote_token = token;
+    startRemote();
+    Serial.println("Remote messages enabled; token is held in RAM only"); return;
+  }
   if (cmd.startsWith("wifi ")) {
     String rest = cmd.substring(5); int space = rest.indexOf(' ');
     if (space < 1) { Serial.println("Usage: wifi <ssid> <password-or-dash>"); return; }
@@ -125,7 +247,7 @@ void command(String cmd) {
     Serial.println(setPwm(pca_channel, counts) ? "Servo signal set; verify actual motion" : "ERROR: I2C write failed");
     return;
   }
-  Serial.println("Commands: beep | mic | scan | wifi <ssid> <password-or-dash> | status | ask <url> <text> | servo <socket 1-4> <60-120 degrees> | release");
+  Serial.println("Commands: beep | mic | scan | wifi <ssid> <password-or-dash> | remote <token-or-off> | status | ask <url> <text> | servo <socket 1-4> <60-120 degrees> | release");
 }
 void setup() {
   Serial.begin(115200); Wire.begin(SDA_PIN, SCL_PIN); Wire.setClock(400000);
@@ -134,9 +256,10 @@ void setup() {
   uint8_t oled = present(0x3d) ? 0x3d : (present(0x3c) ? 0x3c : 0);
   if (oled) screen_ok = display.begin(oled);
   Serial.println("Cece bench: SSD1327, ultrasonic, PiicoDev. Firmware does not send servo commands at boot; driver may retain prior outputs.");
-  Serial.println("Commands: beep | mic | scan | wifi <ssid> <password-or-dash> | status | ask <url> <text> | servo <socket 1-4> <60-120 degrees> | release");
+  Serial.println("Commands: beep | mic | scan | wifi <ssid> <password-or-dash> | remote <token-or-off> | status | ask <url> <text> | servo <socket 1-4> <60-120 degrees> | release");
 }
 void loop() {
+  if (remote_started) remote_server.handleClient();
   while (Serial.available()) {
     char c = char(Serial.read());
     if (c == '\n' || c == '\r') { if (line.length()) { command(line); line = ""; } }
@@ -147,6 +270,7 @@ void loop() {
   digitalWrite(TRIG_PIN, LOW); delayMicroseconds(2); digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10); digitalWrite(TRIG_PIN, LOW);
   unsigned long us = pulseIn(ECHO_PIN, HIGH, 30000);
+  last_echo_us = us; last_echo_at = millis();
   Serial.printf("distance: %s %.1f cm; driver: %s\n", us ? "" : "no echo", us / 58.0f, servo_ok ? "found" : "not found");
   if (screen_ok) {
     display.clearDisplay(); display.setTextSize(1); display.setTextColor(SSD1327_WHITE); display.setCursor(0, 0);
