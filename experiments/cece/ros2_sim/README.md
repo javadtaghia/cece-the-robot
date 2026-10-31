@@ -34,7 +34,10 @@ python3 evaluate_gait.py
 Each requested step corresponds to one alternating commanded half-step.
 If no count is specified, motion continues until a stop request. The PC bridge
 accepts requests such as “move forward twenty steps” without a fixed maximum;
-say “stop” to request a stop. It responds once the request has been launched,
+say “stop” to request a stop. Asking to “move forward faster” selects a
+shorter 0.4-second phase instead of 0.8 seconds; this is an experimental
+command rate, not a measured walking speed. Backward and turning gaits are
+not implemented or validated. It responds once the request has been launched,
 not when motion finishes. The stop request applies to the Gazebo gait only.
 
 The evaluation measured all four joints moving and roughly 15 mm of body

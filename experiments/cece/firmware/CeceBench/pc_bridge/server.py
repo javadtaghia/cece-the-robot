@@ -31,12 +31,16 @@ def requested_steps(prompt):
                     "seventy": 70, "eighty": 80, "ninety": 90})
     return sum(numbers[word] for word in re.split(r"[ -]", value))
 
-def start_gait(steps):
+def start_gait(steps, phase_seconds=0.8):
     STOP_FILE.parent.mkdir(exist_ok=True)
     STOP_FILE.unlink(missing_ok=True)
     count = 0 if steps is None else steps
+    partition = os.environ.get("CECE_GZ_PARTITION", "")
+    if partition and not re.fullmatch(r"[A-Za-z0-9_-]+", partition):
+        raise ValueError("Invalid Gazebo partition")
+    prefix = f"export GZ_PARTITION={partition} && " if partition else ""
     process = subprocess.Popen(["wsl", "-d", "Ubuntu", "--", "bash", "-c",
-        f"source /opt/ros/jazzy/setup.bash && exec /usr/bin/python3 walk_controller.py --steps {count}"],
+        f"{prefix}source /opt/ros/jazzy/setup.bash && exec /usr/bin/python3 walk_controller.py --steps {count} --phase-seconds {phase_seconds}"],
         cwd=SIM_DIR,
         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     # Detect immediate launch errors before reporting that the request started.
@@ -131,7 +135,10 @@ def reply(prompt, config):
             if not motion_lock.acquire(blocking=False):
                 return "The simulated gait is already running."
             try:
-                start_gait(steps)
+                if re.search(r"\b(?:fast|faster|quickly)\b", prompt, re.I):
+                    start_gait(steps, 0.4)
+                else:
+                    start_gait(steps)
             except Exception:
                 motion_lock.release()
                 raise

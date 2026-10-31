@@ -9,7 +9,7 @@ This project builds real Arduino ESP32-C3 firmware. It is currently a component 
 - The simulated ESP32 connected to Wokwi Wi-Fi and sent text requests through its private gateway to the PC bridge, receiving responses from Ollama and from OpenAI via AtBots ChatGPT sign-in. It has also retrieved live Sydney weather through the updated bridge. The separate API-key provider has only mocked tests.
 - Wokwi does not emulate the ESP32-C3 I2S peripheral. The firmware contains hardware I2S `mic` and `beep` diagnostics, but the microphone, amplifier and speaker have not been emulated or tested on hardware. Camera, robot-side speech streaming and a validated walking controller remain outstanding. The camera interface and model are not selected.
 
-An experimental laptop push-to-talk application is in `pc_bridge/laptop_voice.py`.
+An experimental laptop conversational voice application is in `pc_bridge/laptop_voice.py`.
 It uses Vosk or faster-whisper for local speech recognition and Windows speech synthesis for
 laptop audio. Recognized text goes through Wokwi serial into the running ESP32
 firmware, which sends the request over Wi-Fi to the PC bridge and displays the
@@ -23,8 +23,10 @@ System.Speech, and a locally downloaded Vosk model. Optionally install
 `faster-whisper` and provide `--whisper-model PATH_TO_CTRANSLATE2_MODEL`
 for the stronger local recognizer. Launch it from the same
 Python environment as AtBots with `python pc_bridge/laptop_voice.py --model
-PATH_TO_VOSK_MODEL --device DEVICE_INDEX`. The Listen button records a short
-utterance; the window offers the available input devices.
+PATH_TO_VOSK_MODEL --device DEVICE_INDEX`. Start conversation listens for each
+utterance and ends it after a pause; Stop conversation stops between turns.
+Recognition is local and the microphone is not monitored while Cece speaks,
+so interruption and full-duplex streaming are not yet supported.
 
 Run the Gazebo world with its four joint controllers as described in
 `../../ros2_sim/README.md`, then start the bridge with `--port 8768

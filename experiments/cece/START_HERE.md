@@ -123,8 +123,9 @@ Device numbers can change; use the name rather than relying on a number.
 
 ## 5. Talk to Cece
 
-1. In the Cece voice window, click **Listen**.
-2. Speak during the next five seconds, then wait for the answer.
+1. In the Cece voice window, click **Start conversation**.
+2. Speak naturally and pause. Cece transcribes after a short silence, answers,
+   then listens for the next turn. Click **Stop conversation** to stop.
 3. Try **“What is the weather?”** Cece retrieves current Sydney weather,
    displays the reply on the Wokwi OLED and speaks through the laptop.
 4. Try **“Move forward 20 steps.”** The PC bridge requests 20 alternating

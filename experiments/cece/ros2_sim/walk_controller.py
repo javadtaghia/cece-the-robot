@@ -47,11 +47,15 @@ def targets(half, phase, t):
         return [hip, sign * a, hip, sign * b]
     return [hip, sign * b, hip, sign * a]
 
-def main(steps=None):
+def main(steps=None, phase_seconds=0.8):
     if steps is None:
         parser = argparse.ArgumentParser()
         parser.add_argument("--steps", type=int, default=0, help="0 runs until stopped")
-        steps = parser.parse_args().steps
+        parser.add_argument("--phase-seconds", type=float, default=0.8, help="Seconds per gait phase; experimental")
+        args = parser.parse_args()
+        steps, phase_seconds = args.steps, args.phase_seconds
+    if not 0.3 <= phase_seconds <= 2.0:
+        raise ValueError("Phase duration must be between 0.3 and 2 seconds")
     if steps < 0:
         raise ValueError("Step count must be nonnegative")
     node = Node()
@@ -71,7 +75,7 @@ def main(steps=None):
             for phase in range(5):
                 start = time.monotonic()
                 while not STOP_FILE.exists():
-                    t = min(1.0, (time.monotonic() - start) / 0.8)
+                    t = min(1.0, (time.monotonic() - start) / phase_seconds)
                     send(targets(half, phase, t))
                     if t >= 1:
                         break

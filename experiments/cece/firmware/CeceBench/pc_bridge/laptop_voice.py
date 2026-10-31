@@ -14,7 +14,7 @@ import serial
 import sounddevice as sd
 from vosk import KaldiRecognizer, Model, SetLogLevel
 
-def record(model, device, seconds, whisper=False, device_name=None):
+def record(model, device, seconds, whisper=False, device_name=None, stop_event=None):
     # Refresh PortAudio's inventory: Windows can renumber devices while the
     # application is open, for example when switching remote audio sessions.
     if device_name:
@@ -43,10 +43,12 @@ def record(model, device, seconds, whisper=False, device_name=None):
     segments = []
     audio_chunks = []
     peak = 0
+    speech_started = False
+    last_voice = None
     with sd.RawInputStream(samplerate=rate, blocksize=4000, dtype="int16",
                            channels=channels, device=device, callback=callback):
-        deadline = time.monotonic() + seconds
-        while time.monotonic() < deadline:
+        deadline = time.monotonic() + seconds if seconds else None
+        while (deadline is None or time.monotonic() < deadline) and not (stop_event and stop_event.is_set()):
             try:
                 block = frames.get(timeout=0.5)
             except queue.Empty:
@@ -59,6 +61,12 @@ def record(model, device, seconds, whisper=False, device_name=None):
                 block = chosen.tobytes()
             peak = max(peak, audioop.max(block, 2))
             block_peak = audioop.max(block, 2)
+            now = time.monotonic()
+            if block_peak >= 300:
+                speech_started = True
+                last_voice = now
+            elif speech_started and last_voice is not None and now - last_voice >= 1.2:
+                break
             if block_peak:
                 block = audioop.mul(block, 2, min(8.0, max(1.0, 6000.0 / block_peak)))
             if rate != 16000:
@@ -67,6 +75,10 @@ def record(model, device, seconds, whisper=False, device_name=None):
                 audio_chunks.append(block)
             elif recognizer.AcceptWaveform(block):
                 segments.append(json.loads(recognizer.Result()).get("text", ""))
+    if stop_event and stop_event.is_set():
+        return "", peak
+    if not speech_started:
+        return "", peak
     if whisper:
         import numpy as np
         audio = np.frombuffer(b"".join(audio_chunks), dtype="<i2").astype(np.float32) / 32768
@@ -122,7 +134,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", required=True)
     parser.add_argument("--device", type=int, default=None)
-    parser.add_argument("--seconds", type=int, default=5)
+    parser.add_argument("--seconds", type=int, default=0, help="Optional maximum recording time; 0 means no limit")
     parser.add_argument("--whisper-model", default=None)
     args = parser.parse_args()
     SetLogLevel(-1)
@@ -134,7 +146,7 @@ def main():
     root = tk.Tk()
     root.title("Cece - laptop voice prototype")
     root.geometry("640x320")
-    status = tk.StringVar(value="Ready. Click Listen, then speak for five seconds.")
+    status = tk.StringVar(value="Ready. Click Start conversation, then speak.")
     heard = tk.StringVar(value="")
     answer = tk.StringVar(value="")
     ttk.Label(root, text="Cece", font=("Segoe UI", 20, "bold")).pack(pady=8)
@@ -154,35 +166,64 @@ def main():
     ttk.Label(root, textvariable=status, wraplength=520).pack(pady=4)
     ttk.Label(root, textvariable=heard, wraplength=520).pack(pady=4)
     ttk.Label(root, textvariable=answer, wraplength=520).pack(pady=4)
-    button = ttk.Button(root, text="Listen")
+    button = ttk.Button(root, text="Start conversation")
     button.pack(pady=12)
+    stop_event = threading.Event()
+    running = False
+
     def update(var, value):
         root.after(0, var.set, value)
+
+    def finished():
+        nonlocal running
+        running = False
+        button.config(text="Start conversation", state="normal")
+
     def work(device, device_name):
         try:
-            update(status, "Listening now...")
-            text, peak = record(model, device, args.seconds, bool(args.whisper_model), device_name)
-            update(heard, "You: " + (text or "(nothing recognized)") + f"   [mic level: {peak}]")
-            if not text:
-                raise ValueError("I did not recognize speech. Check the microphone level and try again.")
-            update(status, "Sending to the simulated ESP32...")
-            response = ask_esp(text)
-            update(answer, "Cece: " + response)
-            update(status, "Speaking through the laptop speaker...")
-            speak(response)
-            update(status, "Ready. Click Listen to speak again.")
+            while not stop_event.is_set():
+                update(status, "Listening... speak when ready.")
+                text, peak = record(model, device, args.seconds, bool(args.whisper_model), device_name, stop_event)
+                if stop_event.is_set():
+                    break
+                if not text:
+                    update(status, "I didn't catch that. Listening again...")
+                    continue
+                update(heard, "You: " + text + f"   [mic level: {peak}]")
+                update(status, "Thinking...")
+                response = ask_esp(text)
+                update(answer, "Cece: " + response)
+                if stop_event.is_set():
+                    break
+                update(status, "Speaking...")
+                speak(response)
+            update(status, "Conversation stopped.")
         except Exception as exc:
             update(status, "Error: " + str(exc))
         finally:
-            root.after(0, lambda: button.config(state="normal"))
-    def listen():
+            root.after(0, finished)
+
+    def toggle():
+        nonlocal running
+        if running:
+            stop_event.set()
+            button.config(text="Stopping...", state="disabled")
+            return
         index = choice.current()
         if index < 0:
             status.set("Choose a microphone first.")
             return
-        button.config(state="disabled")
+        stop_event.clear()
+        running = True
+        button.config(text="Stop conversation")
         threading.Thread(target=work, args=devices[index], daemon=True).start()
-    button.config(command=listen)
+
+    def close():
+        stop_event.set()
+        root.destroy()
+
+    button.config(command=toggle)
+    root.protocol("WM_DELETE_WINDOW", close)
     root.mainloop()
 
 if __name__ == "__main__":
