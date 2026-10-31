@@ -1,0 +1,82 @@
+[
+  {
+    "config": {
+      "crank": 0.006,
+      "shift": 0.015,
+      "rod": 0.05,
+      "half_span": 0.015,
+      "foot_half_width": 0.012,
+      "foot_half_length": 0.023,
+      "frequency": 0.8,
+      "stall": 0.0363,
+      "no_load": 6.807,
+      "friction": 0.65,
+      "shift_enabled": true,
+      "payload_scale": 1.0,
+      "duty_limit": 0.85
+    },
+    "seconds": 12.0,
+    "mass_g": 137.0,
+    "travel_mm": [
+      191.65,
+      -27.14,
+      -3.76
+    ],
+    "max_tilt_deg": 17.52,
+    "after_settle_travel_mm": [
+      180.1,
+      -29.79,
+      0.09
+    ],
+    "support_switches": 1,
+    "single_support_seconds": [
+      3.724999999999943,
+      1.6599999999999866
+    ],
+    "peak_torque_Nm": 0.0363,
+    "rms_torque_Nm": 0.03338,
+    "stall_fraction": 0.003,
+    "closure_error_mm": 0.086,
+    "nonfoot_floor_contacts": [],
+    "upright": true,
+    "hardware_validated": false
+  },
+  {
+    "config": {
+      "crank": 0.006,
+      "shift": 0.015,
+      "rod": 0.05,
+      "half_span": 0.015,
+      "foot_half_width": 0.012,
+      "foot_half_length": 0.023,
+      "frequency": 0.8,
+      "stall": 0.0363,
+      "no_load": 6.807,
+      "friction": 0.65,
+      "shift_enabled": false,
+      "payload_scale": 1.0,
+      "duty_limit": 0.85
+    },
+    "seconds": 0.41,
+    "mass_g": 137.0,
+    "travel_mm": [
+      -2.6,
+      -50.6,
+      -11.74
+    ],
+    "max_tilt_deg": 50.96,
+    "after_settle_travel_mm": null,
+    "support_switches": 1,
+    "single_support_seconds": [
+      0.16000000000000006,
+      0.16000000000000006
+    ],
+    "peak_torque_Nm": 0.0363,
+    "rms_torque_Nm": 0.03458,
+    "stall_fraction": 0.0,
+    "closure_error_mm": 0.043,
+    "nonfoot_floor_contacts": [],
+    "upright": false,
+    "hardware_validated": false
+  }
+]

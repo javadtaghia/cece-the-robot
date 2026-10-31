@@ -1,0 +1,127 @@
+{
+  "assumptions": {
+    "output_torque_limit_Nm": 0.02,
+    "no_load_speed_rad_s": 10.0,
+    "drive": "PD torque command approximates feedback control; encoder not yet specified",
+    "mechanism": "right leg rigid to torso, left leg hinged at hip; single motor hypothesis"
+  },
+  "packaging": {
+    "component_overlap_pairs": [],
+    "outside_cavity": [],
+    "static_envelope_fit_pass": true,
+    "proposed_height_mm": 142,
+    "body_outer_mm": [
+      64,
+      48,
+      64
+    ],
+    "two_AA_mass_g": 48,
+    "estimated_total_mass_g": 116.2,
+    "not_validated": [
+      "Measured purchased component dimensions and connectors",
+      "Mounts, bearings, shaft/coupler and wire routing",
+      "Microphone isolation and speaker enclosure response",
+      "Power conversion, AA voltage sag, motor current and selected motor torque",
+      "Shell split and fasteners",
+      "Detailed curved-surface and moving interference"
+    ]
+  },
+  "trials": [
+    {
+      "mode": "FIXED BENCH",
+      "friction": 0.7,
+      "hip_range_deg": [
+        -13.79,
+        13.79
+      ],
+      "tracking_rms_deg": 1.1,
+      "peak_output_torque_Nm": 0.00053,
+      "time_near_assumed_torque_limit_percent": 0.0,
+      "max_tilt_deg": 0,
+      "travel_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "nonfoot_floor_contacts": [],
+      "remained_upright": true,
+      "motor_hardware_validated": false
+    },
+    {
+      "mode": "FREE FLOOR",
+      "friction": 0.4,
+      "hip_range_deg": [
+        -13.32,
+        14.56
+      ],
+      "tracking_rms_deg": 1.28,
+      "peak_output_torque_Nm": 0.0089,
+      "time_near_assumed_torque_limit_percent": 0.0,
+      "max_tilt_deg": 94.1,
+      "travel_mm": [
+        -54.2,
+        1.5,
+        3.5
+      ],
+      "nonfoot_floor_contacts": [
+        [
+          "body_shell",
+          "floor"
+        ]
+      ],
+      "remained_upright": false,
+      "motor_hardware_validated": false
+    },
+    {
+      "mode": "FREE FLOOR",
+      "friction": 0.7,
+      "hip_range_deg": [
+        -13.32,
+        14.56
+      ],
+      "tracking_rms_deg": 1.28,
+      "peak_output_torque_Nm": 0.00962,
+      "time_near_assumed_torque_limit_percent": 0.0,
+      "max_tilt_deg": 96.8,
+      "travel_mm": [
+        -44.4,
+        1.4,
+        3.5
+      ],
+      "nonfoot_floor_contacts": [
+        [
+          "body_shell",
+          "floor"
+        ]
+      ],
+      "remained_upright": false,
+      "motor_hardware_validated": false
+    },
+    {
+      "mode": "FREE FLOOR",
+      "friction": 1.0,
+      "hip_range_deg": [
+        -13.32,
+        14.56
+      ],
+      "tracking_rms_deg": 1.28,
+      "peak_output_torque_Nm": 0.0099,
+      "time_near_assumed_torque_limit_percent": 0.0,
+      "max_tilt_deg": 97.0,
+      "travel_mm": [
+        -45.1,
+        1.2,
+        3.5
+      ],
+      "nonfoot_floor_contacts": [
+        [
+          "body_shell",
+          "floor"
+        ]
+      ],
+      "remained_upright": false,
+      "motor_hardware_validated": false
+    }
+  ],
+  "walking_validated": false
+}

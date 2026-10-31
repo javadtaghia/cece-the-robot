@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:/Users/user/OneDrive/Documents/ChatGPT/simple_robot/open_otto_reference.FCMacro", line 8, in <module>
+    Import.insert(os.path.join(ROOT,'otto_reference','CAD','OttoDIY_v09.step'),doc.Name)
+OSError: Access violation

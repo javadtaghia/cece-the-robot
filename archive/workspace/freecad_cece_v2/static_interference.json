@@ -1,0 +1,5 @@
+{
+  "method": "Static BRep volume intersection only, in assembled position",
+  "caveats": "Contact, tolerances, wiring, supports, movement, shaft engagement and component fit are not checked.",
+  "overlaps": []
+}

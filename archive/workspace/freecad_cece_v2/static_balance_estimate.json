@@ -1,0 +1,297 @@
+{
+  "scope": "static standing only, both feet flat, level floor, guessed component masses",
+  "total_mass_g": 222.03,
+  "center_of_mass_mm": [
+    0.32,
+    -0.79,
+    68.4
+  ],
+  "both_feet_support_hull_x_mm": [
+    -38,
+    38
+  ],
+  "left_foot_support_x_mm": [
+    -38,
+    -10
+  ],
+  "right_foot_support_x_mm": [
+    10,
+    38
+  ],
+  "minimum_com_shift_toward_left_foot_mm": 10.32,
+  "minimum_com_shift_toward_right_foot_mm": 9.68,
+  "mass_assumptions": "PLA at 1.24 g/cm3, fully solid volumes; guessed hardware masses, including 52 g cells plus holder and 8 g wiring/fasteners",
+  "limitation": "Boundary is zero margin; does not include stability reserve, motor torque, friction, motion, moving contact, cable routing, tolerances or actual weights.",
+  "items": [
+    {
+      "name": "Torso_shell",
+      "mass_g": 34.791,
+      "center_mm": [
+        0.0,
+        -4.37,
+        74.75
+      ]
+    },
+    {
+      "name": "Torso_rear_cover",
+      "mass_g": 7.943,
+      "center_mm": [
+        -0.0,
+        23.2,
+        75.0
+      ]
+    },
+    {
+      "name": "Neck_channel",
+      "mass_g": 1.528,
+      "center_mm": [
+        -0.0,
+        -1.82,
+        115.0
+      ]
+    },
+    {
+      "name": "Neck_rear_strip",
+      "mass_g": 0.5,
+      "center_mm": [
+        0.0,
+        7.2,
+        115.0
+      ]
+    },
+    {
+      "name": "Head_shell",
+      "mass_g": 12.841,
+      "center_mm": [
+        -0.01,
+        -2.23,
+        142.12
+      ]
+    },
+    {
+      "name": "Head_rear_cover",
+      "mass_g": 2.259,
+      "center_mm": [
+        0.0,
+        15.2,
+        142.13
+      ]
+    },
+    {
+      "name": "Antenna",
+      "mass_g": 0.461,
+      "center_mm": [
+        0.0,
+        -0.0,
+        169.8
+      ]
+    },
+    {
+      "name": "Left_foot",
+      "mass_g": 8.567,
+      "center_mm": [
+        -24.0,
+        -7.41,
+        2.91
+      ]
+    },
+    {
+      "name": "Left_leg_blank",
+      "mass_g": 5.257,
+      "center_mm": [
+        -24.0,
+        -0.0,
+        20.73
+      ]
+    },
+    {
+      "name": "Left_arm",
+      "mass_g": 2.484,
+      "center_mm": [
+        -42.0,
+        0.0,
+        75.42
+      ]
+    },
+    {
+      "name": "Right_foot",
+      "mass_g": 8.567,
+      "center_mm": [
+        24.0,
+        -7.41,
+        2.91
+      ]
+    },
+    {
+      "name": "Right_leg_blank",
+      "mass_g": 5.257,
+      "center_mm": [
+        24.0,
+        -0.0,
+        20.73
+      ]
+    },
+    {
+      "name": "Right_arm",
+      "mass_g": 2.484,
+      "center_mm": [
+        42.0,
+        0.0,
+        75.42
+      ]
+    },
+    {
+      "name": "Heart_badge",
+      "mass_g": 0.09,
+      "center_mm": [
+        0.0,
+        -24.5,
+        65.4
+      ]
+    },
+    {
+      "name": "AA_holder_allowance",
+      "mass_g": 52,
+      "center_mm": [
+        0.0,
+        0.0,
+        57.0
+      ]
+    },
+    {
+      "name": "SuperMini_allowance",
+      "mass_g": 5,
+      "center_mm": [
+        20.5,
+        -9.0,
+        98.0
+      ]
+    },
+    {
+      "name": "Driver_allowance",
+      "mass_g": 4,
+      "center_mm": [
+        23.0,
+        0.0,
+        74.0
+      ]
+    },
+    {
+      "name": "Regulator_allowance",
+      "mass_g": 3,
+      "center_mm": [
+        -24.0,
+        13.0,
+        80.5
+      ]
+    },
+    {
+      "name": "Speaker_allowance",
+      "mass_g": 5,
+      "center_mm": [
+        0.0,
+        10.5,
+        138.0
+      ]
+    },
+    {
+      "name": "Amplifier_allowance",
+      "mass_g": 3,
+      "center_mm": [
+        -23.0,
+        0.0,
+        74.0
+      ]
+    },
+    {
+      "name": "OLED_board_allowance",
+      "mass_g": 5,
+      "center_mm": [
+        -0.0,
+        -20.8,
+        84.0
+      ]
+    },
+    {
+      "name": "Microphone_allowance",
+      "mass_g": 1,
+      "center_mm": [
+        16.8,
+        -12.3,
+        135.0
+      ]
+    },
+    {
+      "name": "Left_leg_gearmotor",
+      "mass_g": 10,
+      "center_mm": [
+        -11.0,
+        0.0,
+        35.0
+      ]
+    },
+    {
+      "name": "Right_leg_gearmotor",
+      "mass_g": 10,
+      "center_mm": [
+        11.0,
+        0.0,
+        35.0
+      ]
+    },
+    {
+      "name": "Left_arm_gearmotor",
+      "mass_g": 6,
+      "center_mm": [
+        -27.0,
+        0.0,
+        88.0
+      ]
+    },
+    {
+      "name": "Right_arm_gearmotor",
+      "mass_g": 6,
+      "center_mm": [
+        27.0,
+        0.0,
+        88.0
+      ]
+    },
+    {
+      "name": "Head_gearmotor",
+      "mass_g": 10,
+      "center_mm": [
+        -0.0,
+        0.0,
+        90.0
+      ]
+    },
+    {
+      "name": "LED_eye_L8",
+      "mass_g": 0.5,
+      "center_mm": [
+        -8.0,
+        -15.0,
+        145.0
+      ]
+    },
+    {
+      "name": "LED_eye_8",
+      "mass_g": 0.5,
+      "center_mm": [
+        8.0,
+        -15.0,
+        145.0
+      ]
+    },
+    {
+      "name": "wire_and_fastener_allowance",
+      "mass_g": 8,
+      "center_mm": [
+        0,
+        0,
+        78
+      ]
+    }
+  ]
+}

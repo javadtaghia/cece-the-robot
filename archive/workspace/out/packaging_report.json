@@ -1,0 +1,21 @@
+{
+  "component_overlap_pairs": [],
+  "outside_cavity": [],
+  "static_envelope_fit_pass": true,
+  "proposed_height_mm": 142,
+  "body_outer_mm": [
+    64,
+    48,
+    64
+  ],
+  "two_AA_mass_g": 48,
+  "estimated_total_mass_g": 116.2,
+  "not_validated": [
+    "Measured purchased component dimensions and connectors",
+    "Mounts, bearings, shaft/coupler and wire routing",
+    "Microphone isolation and speaker enclosure response",
+    "Power conversion, AA voltage sag, motor current and selected motor torque",
+    "Shell split and fasteners",
+    "Detailed curved-surface and moving interference"
+  ]
+}

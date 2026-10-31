@@ -1,0 +1,184 @@
+"""CeCe PLA packaging prototype. Run in FreeCAD 1.1; all dimensions mm.
+Regenerate with the dimensions below. Existing project files are untouched.
+This is a housing / fit prototype, NOT a validated walking mechanism.
+"""
+import FreeCAD as App, Part, MeshPart, math, os, json, traceback
+from FreeCAD import Vector as V
+
+ROOT = r'C:\Users\user\OneDrive\Documents\ChatGPT\simple_robot'
+OUT = os.path.join(ROOT, 'freecad_cece_v2')
+os.makedirs(os.path.join(OUT, 'stl'), exist_ok=True)
+WALL = 1.6
+GREEN = (0.29, 0.72, 0.19)
+DARK = (0.035, 0.065, 0.055)
+DOC = App.newDocument('CeCe_Actuator_Study')
+parts = DOC.addObject('App::DocumentObjectGroup','PLA_Parts')
+refs = DOC.addObject('App::DocumentObjectGroup','Component_Allowances')
+detail = DOC.addObject('App::DocumentObjectGroup','Face_Details')
+drives = DOC.addObject('App::DocumentObjectGroup','Actuator_Layout')
+notes = DOC.addObject('App::FeaturePython','Design_Notes')
+for name, value in {
+    'Status':'ACTUATOR LAYOUT STUDY - fit, gait, mounting, electrical design unfinished',
+    'Material':'PLA; 0.4 mm nozzle assumed; 1.6 mm shell walls',
+    'Battery':'2 x AA, horizontal; 58 x 34 x 18 mm holder allowance; measure actual holder',
+    'Controller':'ESP32-C3 Super Mini assumed; verify model and USB position',
+    'Walking':'Two motor-driven hip pivots; weight transfer, control and gait not demonstrated',
+    'Actuators':'Five generic gearmotor envelopes; gearbox, shafts, retainers and fasteners are placeholders',
+    'Fasteners':'Rear panels: M2 clearance 2.4 mm; pilot 1.6 mm, validate on coupon',
+    'Print':'Fit and appearance prototypes; see README before printing',
+}.items():
+    notes.addProperty('App::PropertyString',name,'Prototype');setattr(notes,name,value)
+
+def box(w,d,h,x,y,z):
+    return Part.makeBox(w,d,h,V(x,y,z))
+def cyl(r,h,x,y,z,axis=V(0,0,1)):
+    return Part.makeCylinder(r,h,V(x,y,z),axis)
+def rounded(w,d,h,x,y,z,r=3):
+    # Rounded XY footprint, flat printable ends.
+    s=box(w-2*r,d,h,x+r,y,z).fuse(box(w,d-2*r,h,x,y+r,z))
+    for a in (x+r,x+w-r):
+        for b in (y+r,y+d-r):s=s.fuse(cyl(r,h,a,b,z))
+    return s.removeSplitter()
+def obj(name,shape,group=parts,color=GREEN,role='PLA prototype'):
+    o=DOC.addObject('PartDesign::Feature',name);o.Label=name.replace('_',' ')
+    o.Shape=shape.removeSplitter();group.addObject(o)
+    o.addProperty('App::PropertyString','Purpose','Design');o.Purpose=role
+    o.ViewObject.ShapeColor=color;o.ViewObject.LineColor=(0.12,0.20,0.10)
+    return o
+def screws(shape, xs,zs,back,depth,rad):
+    for x in xs:
+        for z in zs:shape=shape.cut(cyl(rad,depth,x,back,z,V(0,-1,0)))
+    return shape
+
+try:
+    # Torso, open at rear. Front is negative Y.
+    torso=rounded(76,48,62,-38,-24,44)
+    torso=torso.cut(rounded(72.8,47,58.8,-36.4,-22.4,45.6,1.4))
+    # Four connected screw bosses. Keep clear of battery allowance.
+    for x in (-32,32):
+        for z in (50,100):
+            torso=torso.fuse(box(8.5,8,7,29.5 if x>0 else -38,14,z-3.5))
+    torso=screws(torso,(-32,32),(50,100),22.5,9,0.8)
+    # OLED viewing aperture in belly, dimensions depend on actual display.
+    torso=torso.cut(box(23,5,12,-11.5,-25,78))
+    # Both shoulder shafts pass through the side walls.
+    for sx in (-1,1):torso=torso.cut(cyl(2.2,8,35*sx,0,88,V(sx,0,0)))
+    # Neck cable passage.
+    torso=torso.cut(cyl(4,5,0,0,103))
+    obj('Torso_shell',torso)
+    back=box(70.8,1.6,56.8,-35.4,22.4,46.6)
+    back=screws(back,(-32,32),(50,100),25,4,1.2)
+    obj('Torso_rear_cover',back,role='M2 removable cover; print flat')
+
+    # Hollow neck with a flat rear opening closed by a separate plate.
+    neck=box(14,16,18,-7,-8,106).cut(box(10.8,15,20,-5.4,-6.4,105))
+    obj('Neck_channel',neck,role='Cable channel; bond to head and torso after fit check')
+    obj('Neck_rear_strip',box(14,1.6,18,-7,6.4,106),role='Bonded cable-channel cover')
+
+    head=rounded(44,32,36,-22,-16,124,3)
+    head=head.cut(rounded(40.8,32,32.8,-20.4,-14.4,125.6,1.4))
+    # Two 5 mm through-holes for individual LEDs.
+    for x in (-8,8):head=head.cut(cyl(2.6,5,x,-18,145,V(0,1,0)))
+    head=head.cut(cyl(4,5,0,0,123))
+    for x in (-17,17):
+        for z in (129,155):head=head.fuse(box(7.7,6,5.4,14.3 if x>0 else -22,8.4,z-2.7))
+    head=screws(head,(-17,17),(129,155),14.5,7,0.8)
+    # Microphone sound port at cheek.
+    head=head.cut(cyl(1.2,4,14,-18,135,V(0,1,0)))
+    obj('Head_shell',head)
+    hback=box(38.8,1.6,30.8,-19.4,14.4,126.6)
+    hback=screws(hback,(-17,17),(129,155),18,5,1.2)
+    # Speaker exits at the back of the head, keeping the belly for the display.
+    for x in (-6,-3,0,3,6):
+        for z in (135,138,141):hback=hback.cut(cyl(0.9,4,x,17,z,V(0,-1,0)))
+    obj('Head_rear_cover',hback)
+    obj('Antenna',cyl(2,10,0,0,160).fuse(Part.makeSphere(4,V(0,0,172))),role='Decorative; print separately with support and bond')
+
+    for sign,label in ((-1,'Left'),(1,'Right')):
+        x=sign*24
+        foot=rounded(28,44,6,x-14,-29,0,4)
+        # Leg tongue socket: 0.3 mm clearance on each side.
+        foot=foot.cut(box(10.6,12.6,4,x-5.3,-6.3,3))
+        obj(label+'_foot',foot,role='Flat foot prototype; tongue socket fit requires coupon')
+        leg=box(10,12,33,x-5,-6,6).fuse(box(10,12,3,x-5,-6,3))
+        # Crosswise pivot blank, ream after printing.
+        leg=leg.cut(cyl(1.6,14,x-7,0,35,V(1,0,0)))
+        obj(label+'_leg_blank',leg,role='3.2 mm pivot hole; final crank/guide interfaces unfinished')
+        arm=box(7,10,30,sign*42-3.5,-5,61)
+        arm=arm.cut(cyl(2.1,12,sign*36,0,88,V(sign,0,0)))
+        obj(label+'_arm',arm,role='Shoulder pivot bore; final motor shaft coupling and retention unfinished')
+
+    # Heart emblem on the chest: two lobes and a triangular point in XZ plane.
+    p=[V(-6,-25,66),V(0,-25,60),V(6,-25,66),V(-6,-25,66)]
+    heart=Part.Face(Part.makePolygon(p)).extrude(V(0,1,0))
+    for x in (-3,3):heart=heart.fuse(cyl(3.1,1,x,-25,66,V(0,1,0)))
+    obj('Heart_badge',heart,detail)
+    # OLED and LEDs are visual references, excluded from PLA print exports.
+    obj('OLED_glass',box(23,0.5,12,-11.5,-24.1,78),refs,DARK,'Belly display glass preview')
+    for x in (-8,8):
+        obj('LED_eye_'+str(x).replace('-','L'),cyl(2.5,5,x,-17.5,145,V(0,1,0)),detail,(0.1,0.85,0.95),'5 mm LED preview; use suitable resistors and current limits')
+    # Purchased-part envelopes, hidden by default and deliberately NOT mounting geometry.
+    allowances=[
+        ('AA_holder_allowance',box(58,34,18,-29,-17,48)),
+        ('SuperMini_allowance',box(23,18,4,9,-18,96)),
+        ('Driver_allowance',box(18,16,4,14,-8,72)),
+        ('Regulator_allowance',box(20,14,5,-34,6,78)),
+        ('Speaker_allowance',cyl(10,5,0,8,138,V(0,1,0))),
+        ('Amplifier_allowance',box(18,16,4,-32,-8,72)),
+        ('OLED_board_allowance',box(27,3,27,-13.5,-22.3,70.5)),
+        ('Microphone_allowance',box(6,4,10,13.8,-14.3,130)),
+    ]
+    for name,shape in allowances:
+        o=obj(name,shape,refs,(0.6,0.65,0.7),'UNMEASURED envelope; mounts and wiring not final')
+        o.ViewObject.Transparency=70;o.ViewObject.Visibility=False
+    # Motor/gearbox envelopes are conceptual and clearly grouped, so they can
+    # be toggled or made transparent in FreeCAD. Shafts show the rotation axes.
+    metal=(0.60,0.62,0.66); shaft_color=(0.82,0.72,0.27)
+    def actuator(name,shape,role):
+        o=obj(name,shape,drives,metal,role);o.ViewObject.Transparency=8
+        return o
+    for s,label in ((-1,'Left'),(1,'Right')):
+        # One illustrative 18 x 12 x 10 mm geared motor per leg. Output on X.
+        actuator(label+'_leg_gearmotor',box(18,12,10,2 if s>0 else -20,-6,30),
+                 'Concept motor envelope; confirm actual gearbox and shaft before mount design')
+        shaft=cyl(1.5,10,18*s,0,35,V(s,0,0))
+        obj(label+'_leg_output_shaft',shaft,drives,shaft_color,'Illustrative shaft through the leg pivot')
+        # One geared motor per shoulder, mounted inside the body, output to arm.
+        actuator(label+'_arm_gearmotor',box(18,12,10,18 if s>0 else -36,-6,83),
+                 'Shoulder motor envelope; positive shaft engagement and retention not selected')
+        obj(label+'_arm_output_shaft',cyl(1.5,11,35*s,0,88,V(s,0,0)),drives,shaft_color,
+            'Illustrative output shaft; arm coupling unfinished')
+    # Vertical head rotation. Shaft through neck; moving wire loop is required.
+    actuator('Head_gearmotor',box(10,12,24,-5,-6,78),
+             'Vertical head-yaw motor envelope; motor mount, shaft coupling and flexible wire loop unfinished')
+    obj('Head_output_shaft',cyl(1.5,21,0,0,103),drives,shaft_color,'Illustrative head yaw output shaft')
+    DOC.recompute()
+    report={'status':'Actuator and housing study; walking and mechanical packaging not validated','parts':[]}
+    for o in parts.Group+[DOC.getObject('Heart_badge')]:
+        s=o.Shape
+        entry={'name':o.Name,'valid':s.isValid(),'solids':len(s.Solids),'volume_mm3':round(s.Volume,2)}
+        report['parts'].append(entry)
+        if not entry['valid'] or entry['solids']!=1:raise ValueError(str(entry))
+        mesh=MeshPart.meshFromShape(Shape=s,LinearDeflection=0.08,AngularDeflection=0.15,Relative=False)
+        # Rotate each exported part into a useful starting print orientation.
+        # Keep assembly coordinates; slicer can arrange/drop to bed.
+        mesh.write(os.path.join(OUT,'stl',o.Name+'.stl'))
+    report['shell_mass_g_at_1_24']=round(sum(o.Shape.Volume for o in parts.Group)*0.00124,1)
+    with open(os.path.join(OUT,'geometry_checks.json'),'w') as f:json.dump(report,f,indent=2)
+    Gui.activeDocument().activeView().setAnimationEnabled(False) if hasattr(Gui.activeDocument().activeView(),'setAnimationEnabled') else None
+    Gui.activeDocument().activeView().viewFront()
+    Gui.activeDocument().activeView().fitAll()
+    Gui.updateGui()
+    Gui.activeDocument().activeView().saveImage(os.path.join(OUT,'cece_preview.png'),1100,1000,'White')
+    # Cutaway for clear review of the proposed actuator positions.
+    for nm in ('Torso_shell','Head_shell','Neck_channel'):
+        DOC.getObject(nm).ViewObject.Transparency=75
+    Gui.activeDocument().activeView().saveImage(os.path.join(OUT,'cece_actuator_cutaway.png'),1100,1000,'White')
+    for nm in ('Torso_shell','Head_shell','Neck_channel'):
+        DOC.getObject(nm).ViewObject.Transparency=0
+    DOC.recompute()
+    DOC.saveAs(os.path.join(OUT,'CeCe_Actuator_Study.FCStd'))
+    with open(os.path.join(OUT,'build_status.txt'),'w') as f:f.write('SUCCESS')
+except Exception:
+    with open(os.path.join(OUT,'build_status.txt'),'w') as f:f.write(traceback.format_exc())
+    raise

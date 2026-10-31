@@ -1,0 +1,18 @@
+"""Open upstream OttoDIY STEP assembly as a reference in FreeCAD."""
+import FreeCAD as App, Import, os, traceback
+ROOT=r'C:\Users\user\OneDrive\Documents\ChatGPT\simple_robot'
+OUT=os.path.join(ROOT,'otto_freecad_reference')
+os.makedirs(OUT,exist_ok=True)
+try:
+    doc=App.newDocument('Otto_Four_Servo_Reference')
+    Import.insert(os.path.join(ROOT,'otto_reference','CAD','OttoDIY_v09.step'),doc.Name)
+    doc.recompute()
+    view=Gui.activeDocument().activeView()
+    if hasattr(view,'setAnimationEnabled'):view.setAnimationEnabled(False)
+    view.viewAxonometric();view.fitAll();Gui.updateGui()
+    doc.saveAs(os.path.join(OUT,'Otto_Four_Servo_Reference.FCStd'))
+    view.saveImage(os.path.join(OUT,'otto_reference.png'),1200,1000,'White')
+    with open(os.path.join(OUT,'status.txt'),'w') as f:f.write('SUCCESS: %s objects'%len(doc.Objects))
+except Exception:
+    with open(os.path.join(OUT,'status.txt'),'w') as f:f.write(traceback.format_exc())
+    raise

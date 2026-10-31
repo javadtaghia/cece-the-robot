@@ -1,0 +1,72 @@
+"""Produce an independent, laid-out view of every item from component study."""
+import FreeCAD as App, Part, Draft, json, os, math, traceback
+from FreeCAD import Vector
+
+ROOT = r'C:\Users\user\OneDrive\Documents\ChatGPT\simple_robot\freecad_cece_components'
+SOURCE = os.path.join(ROOT,'CeCe_Component_Study.FCStd')
+OUTPUT = os.path.join(ROOT,'CeCe_Separate_Pieces.FCStd')
+try:
+    source = App.openDocument(SOURCE)
+    doc = App.newDocument('CeCe_Separate_Pieces')
+    printed = doc.addObject('App::DocumentObjectGroup','Printed_parts')
+    motor = doc.addObject('App::DocumentObjectGroup','Motor_and_shaft_envelopes')
+    electronic = doc.addObject('App::DocumentObjectGroup','Electronics_envelopes')
+    visual = doc.addObject('App::DocumentObjectGroup','Display_and_LED_references')
+    labels = doc.addObject('App::DocumentObjectGroup','Labels')
+    entries = []
+    for o in source.getObject('PLA_Parts').Group:
+        entries.append((o,printed,'PLA prototype'))
+    entries.append((source.getObject('Heart_badge'),printed,'PLA prototype'))
+    for o in source.getObject('Actuator_Layout').Group:
+        entries.append((o,motor,'Purchased motor / shaft representation'))
+    for o in source.getObject('Component_Allowances').Group:
+        entries.append((o,electronic,'Electronic component envelope'))
+    for o in source.getObject('Face_Details').Group:
+        if o.Name != 'Heart_badge':entries.append((o,visual,'LED representation'))
+
+    columns = 5
+    dx,dy = 92,76
+    manifest = []
+    for i,(item,group,kind) in enumerate(entries):
+        s = item.Shape.copy()
+        # Put the front of thin front-facing panels on the table and turn
+        # tall pieces sideways. Component references are presentation blocks.
+        bb = s.BoundBox
+        if item.Name in ('Torso_shell','Torso_rear_cover','Head_shell','Head_rear_cover','Heart_badge'):
+            s.rotate(Vector(0,0,0),Vector(1,0,0),90)
+        elif bb.ZLength > max(bb.XLength,bb.YLength):
+            s.rotate(Vector(0,0,0),Vector(1,0,0),90)
+        bb = s.BoundBox
+        x=(i%columns)*dx; y=-(i//columns)*dy
+        s.translate(Vector(x-(bb.XMin+bb.XMax)/2, y-(bb.YMin+bb.YMax)/2, -bb.ZMin))
+        target=doc.addObject('PartDesign::Feature','Piece_%02d'% (i+1))
+        target.Label='%02d - %s' % (i+1,item.Label)
+        target.Shape=s; group.addObject(target)
+        target.addProperty('App::PropertyString','SourceName','Details');target.SourceName=item.Name
+        target.addProperty('App::PropertyString','Category','Details');target.Category=kind
+        target.ViewObject.ShapeColor=item.ViewObject.ShapeColor
+        target.ViewObject.LineColor=(0.1,0.17,0.12)
+        target.ViewObject.Transparency=0
+        if not s.isValid() or len(s.Solids)!=len(item.Shape.Solids):
+            raise ValueError('Invalid copied shape: '+item.Name)
+        text=Draft.make_text(['%02d %s'%(i+1,item.Label)],placement=App.Placement(Vector(x-43,y-33,1),App.Rotation()))
+        text.Label='Label %02d'%(i+1)
+        text.ViewObject.FontSize=3.4
+        text.ViewObject.TextColor=(0.1,0.1,0.1)
+        labels.addObject(text)
+        manifest.append({'number':i+1,'name':item.Label,'source_name':item.Name,'category':kind})
+    doc.recompute()
+    App.setActiveDocument(doc.Name)
+    Gui.activeDocument().activeView().setAnimationEnabled(False) if hasattr(Gui.activeDocument().activeView(),'setAnimationEnabled') else None
+    Gui.activeDocument().activeView().viewTop()
+    Gui.activeDocument().activeView().fitAll()
+    Gui.updateGui()
+    doc.recompute()
+    doc.saveAs(OUTPUT)
+    Gui.activeDocument().activeView().saveImage(os.path.join(ROOT,'separate_pieces.png'),1800,2100,'White')
+    with open(os.path.join(ROOT,'separate_pieces_manifest.json'),'w') as f:json.dump(manifest,f,indent=2)
+    with open(os.path.join(ROOT,'separate_status.txt'),'w') as f:f.write('SUCCESS')
+    App.closeDocument(source.Name)
+except Exception:
+    with open(os.path.join(ROOT,'separate_status.txt'),'w') as f:f.write(traceback.format_exc())
+    raise

@@ -1,0 +1,18 @@
+{
+  "radius": 0.055,
+  "hip": 0.075,
+  "rear": 0.014,
+  "gap": 0.034,
+  "foot_length": 0.06,
+  "foot_width": 0.025,
+  "battery_z": 0.032,
+  "battery_y": 0.034,
+  "frequency": 2.5,
+  "duty": 0.4,
+  "limit_deg": 22.0,
+  "stall": 0.0363,
+  "no_load": 6.807,
+  "mass_scale": 1.0,
+  "friction": 0.65,
+  "layout": "outboard"
+}

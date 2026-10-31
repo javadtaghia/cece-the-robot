@@ -1,0 +1,242 @@
+[
+  {
+    "number": 1,
+    "name": "Torso shell",
+    "source_name": "Torso_shell",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 2,
+    "name": "Torso rear cover",
+    "source_name": "Torso_rear_cover",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 3,
+    "name": "Neck channel",
+    "source_name": "Neck_channel",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 4,
+    "name": "Neck rear strip",
+    "source_name": "Neck_rear_strip",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 5,
+    "name": "Head shell",
+    "source_name": "Head_shell",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 6,
+    "name": "Head rear cover",
+    "source_name": "Head_rear_cover",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 7,
+    "name": "Antenna",
+    "source_name": "Antenna",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 8,
+    "name": "Left foot",
+    "source_name": "Left_foot",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 9,
+    "name": "Left leg blank",
+    "source_name": "Left_leg_blank",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 10,
+    "name": "Left arm",
+    "source_name": "Left_arm",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 11,
+    "name": "Right foot",
+    "source_name": "Right_foot",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 12,
+    "name": "Right leg blank",
+    "source_name": "Right_leg_blank",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 13,
+    "name": "Right arm",
+    "source_name": "Right_arm",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 14,
+    "name": "Heart badge",
+    "source_name": "Heart_badge",
+    "category": "PLA prototype"
+  },
+  {
+    "number": 15,
+    "name": "Left leg gearmotor",
+    "source_name": "Left_leg_gearmotor",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 16,
+    "name": "Left leg output shaft",
+    "source_name": "Left_leg_output_shaft",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 17,
+    "name": "Left arm gearmotor",
+    "source_name": "Left_arm_gearmotor",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 18,
+    "name": "Left arm output shaft",
+    "source_name": "Left_arm_output_shaft",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 19,
+    "name": "Right leg gearmotor",
+    "source_name": "Right_leg_gearmotor",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 20,
+    "name": "Right leg output shaft",
+    "source_name": "Right_leg_output_shaft",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 21,
+    "name": "Right arm gearmotor",
+    "source_name": "Right_arm_gearmotor",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 22,
+    "name": "Right arm output shaft",
+    "source_name": "Right_arm_output_shaft",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 23,
+    "name": "Head gearmotor",
+    "source_name": "Head_gearmotor",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 24,
+    "name": "Head output shaft",
+    "source_name": "Head_output_shaft",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 25,
+    "name": "Head shaft extension",
+    "source_name": "Head_shaft_extension",
+    "category": "Purchased motor / shaft representation"
+  },
+  {
+    "number": 26,
+    "name": "OLED glass",
+    "source_name": "OLED_glass",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 27,
+    "name": "AA holder allowance",
+    "source_name": "AA_holder_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 28,
+    "name": "SuperMini allowance",
+    "source_name": "SuperMini_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 29,
+    "name": "Driver allowance",
+    "source_name": "Driver_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 30,
+    "name": "Driver 2 allowance",
+    "source_name": "Driver_2_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 31,
+    "name": "Driver 3 allowance",
+    "source_name": "Driver_3_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 32,
+    "name": "Power boost allowance",
+    "source_name": "Power_boost_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 33,
+    "name": "PWM controller allowance",
+    "source_name": "PWM_controller_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 34,
+    "name": "Regulator allowance",
+    "source_name": "Regulator_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 35,
+    "name": "Speaker allowance",
+    "source_name": "Speaker_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 36,
+    "name": "Amplifier allowance",
+    "source_name": "Amplifier_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 37,
+    "name": "OLED board allowance",
+    "source_name": "OLED_board_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 38,
+    "name": "Microphone allowance",
+    "source_name": "Microphone_allowance",
+    "category": "Electronic component envelope"
+  },
+  {
+    "number": 39,
+    "name": "LED eye L8",
+    "source_name": "LED_eye_L8",
+    "category": "LED representation"
+  },
+  {
+    "number": 40,
+    "name": "LED eye 8",
+    "source_name": "LED_eye_8",
+    "category": "LED representation"
+  }
+]

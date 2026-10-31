@@ -1,0 +1,90 @@
+{
+  "status": "Actuator and housing study; walking and mechanical packaging not validated",
+  "parts": [
+    {
+      "name": "Torso_shell",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 28057.04
+    },
+    {
+      "name": "Torso_rear_cover",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 6405.35
+    },
+    {
+      "name": "Neck_channel",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1232.64
+    },
+    {
+      "name": "Neck_rear_strip",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 403.2
+    },
+    {
+      "name": "Head_shell",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 10355.42
+    },
+    {
+      "name": "Head_rear_cover",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1822.04
+    },
+    {
+      "name": "Antenna",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 371.9
+    },
+    {
+      "name": "Left_foot",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 6908.91
+    },
+    {
+      "name": "Left_leg_blank",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4239.58
+    },
+    {
+      "name": "Left_arm",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2003.02
+    },
+    {
+      "name": "Right_foot",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 6908.91
+    },
+    {
+      "name": "Right_leg_blank",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4239.58
+    },
+    {
+      "name": "Right_arm",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2003.02
+    },
+    {
+      "name": "Heart_badge",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 72.19
+    }
+  ],
+  "shell_mass_g_at_1_24": 92.9
+}

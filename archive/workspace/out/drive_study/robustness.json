@@ -1,0 +1,4578 @@
+[
+  {
+    "config": {
+      "radius": 0.055,
+      "hip": 0.075,
+      "rear": 0.014,
+      "gap": 0.034,
+      "foot_length": 0.06,
+      "foot_width": 0.025,
+      "battery_z": 0.032,
+      "battery_y": 0.034,
+      "frequency": 2.5,
+      "duty": 0.4,
+      "limit_deg": 22.0,
+      "stall": 0.0363,
+      "no_load": 6.807,
+      "mass_scale": 1.0,
+      "friction": 0.65,
+      "layout": "outboard"
+    },
+    "clearance": {
+      "sampled_poses": 81,
+      "worst_separation_mm": 2.0,
+      "overlapping_envelopes_mm": {},
+      "pass_no_interpenetration": true
+    },
+    "cases": [
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          21.88,
+          -9.18,
+          -0.6
+        ],
+        "max_tilt_deg": 24.12,
+        "alternating_support_transitions": 19,
+        "single_support_seconds": [
+          2.029999999999979,
+          2.169999999999976
+        ],
+        "peak_torque_Nm": 0.02128,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.011,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 145.63772943659075
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          3.59,
+          -5.33,
+          -0.51
+        ],
+        "max_tilt_deg": 22.59,
+        "alternating_support_transitions": 6,
+        "single_support_seconds": [
+          1.7899999999999838,
+          1.6149999999999876
+        ],
+        "peak_torque_Nm": 0.02103,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.055,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 103.89203631573923
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          65.33,
+          12.17,
+          -0.45
+        ],
+        "max_tilt_deg": 24.5,
+        "alternating_support_transitions": 35,
+        "single_support_seconds": [
+          2.5299999999999683,
+          2.499999999999969
+        ],
+        "peak_torque_Nm": 0.02682,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.004,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 189.4421751357472
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          43.08,
+          -6.29,
+          -0.59
+        ],
+        "max_tilt_deg": 24.26,
+        "alternating_support_transitions": 26,
+        "single_support_seconds": [
+          2.2399999999999745,
+          2.409999999999971
+        ],
+        "peak_torque_Nm": 0.02647,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.008,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 170.2364186653149
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          21.03,
+          1.1,
+          -0.48
+        ],
+        "max_tilt_deg": 23.82,
+        "alternating_support_transitions": 23,
+        "single_support_seconds": [
+          1.8199999999999832,
+          1.6949999999999859
+        ],
+        "peak_torque_Nm": 0.02129,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.018,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 150.95016461271888
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          -2.6,
+          3.45,
+          -0.6
+        ],
+        "max_tilt_deg": 23.59,
+        "alternating_support_transitions": 3,
+        "single_support_seconds": [
+          1.4249999999999916,
+          1.1649999999999971
+        ],
+        "peak_torque_Nm": 0.02096,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.05,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 92.23776553804306
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          64.64,
+          17.82,
+          -0.57
+        ],
+        "max_tilt_deg": 25.5,
+        "alternating_support_transitions": 58,
+        "single_support_seconds": [
+          2.6149999999999665,
+          2.6649999999999654
+        ],
+        "peak_torque_Nm": 0.02676,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.003,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 185.52722920636856
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          41.24,
+          -5.51,
+          -0.57
+        ],
+        "max_tilt_deg": 24.04,
+        "alternating_support_transitions": 44,
+        "single_support_seconds": [
+          2.0999999999999774,
+          2.2349999999999746
+        ],
+        "peak_torque_Nm": 0.02557,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.008,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 168.87116897510583
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          20.83,
+          5.66,
+          -0.54
+        ],
+        "max_tilt_deg": 21.75,
+        "alternating_support_transitions": 10,
+        "single_support_seconds": [
+          0.8100000000000006,
+          0.8200000000000006
+        ],
+        "peak_torque_Nm": 0.02068,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.027,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 129.30099514042166
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          -4.1,
+          -1.98,
+          -0.58
+        ],
+        "max_tilt_deg": 20.29,
+        "alternating_support_transitions": 0,
+        "single_support_seconds": [
+          0.31000000000000016,
+          0.30500000000000016
+        ],
+        "peak_torque_Nm": 0.02025,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.049,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 86.78695759108062
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          89.75,
+          0.58,
+          -0.58
+        ],
+        "max_tilt_deg": 23.85,
+        "alternating_support_transitions": 56,
+        "single_support_seconds": [
+          1.8949999999999816,
+          1.8849999999999818
+        ],
+        "peak_torque_Nm": 0.02561,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.004,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 219.91895406712047
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          46.33,
+          -7.03,
+          -0.49
+        ],
+        "max_tilt_deg": 24.11,
+        "alternating_support_transitions": 33,
+        "single_support_seconds": [
+          1.3249999999999937,
+          1.309999999999994
+        ],
+        "peak_torque_Nm": 0.02487,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.016,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 173.16889069639956
+      }
+    ],
+    "upright_cases": 12,
+    "walking_screen_cases": 3,
+    "mean_stop_fraction": 0.0,
+    "mean_forward_mm": 34.24999999999999
+  },
+  {
+    "config": {
+      "radius": 0.055,
+      "hip": 0.075,
+      "rear": 0.014,
+      "gap": 0.034,
+      "foot_length": 0.06,
+      "foot_width": 0.025,
+      "battery_z": 0.04,
+      "battery_y": 0.034,
+      "frequency": 2.0,
+      "duty": 0.4,
+      "limit_deg": 16.0,
+      "stall": 0.0363,
+      "no_load": 6.807,
+      "mass_scale": 1.0,
+      "friction": 0.65,
+      "layout": "outboard"
+    },
+    "clearance": {
+      "sampled_poses": 81,
+      "worst_separation_mm": 2.0,
+      "overlapping_envelopes_mm": {},
+      "pass_no_interpenetration": true
+    },
+    "cases": [
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          18.38,
+          12.39,
+          -0.61
+        ],
+        "max_tilt_deg": 37.4,
+        "alternating_support_transitions": 16,
+        "single_support_seconds": [
+          1.9899999999999796,
+          1.8599999999999823
+        ],
+        "peak_torque_Nm": 0.02194,
+        "hard_stop_fraction": 0.007,
+        "near_zero_speed_under_power_fraction": 0.011,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 129.22360530817613
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          -2.61,
+          7.26,
+          -0.57
+        ],
+        "max_tilt_deg": 37.75,
+        "alternating_support_transitions": 2,
+        "single_support_seconds": [
+          1.6649999999999865,
+          1.6149999999999876
+        ],
+        "peak_torque_Nm": 0.02098,
+        "hard_stop_fraction": 0.005,
+        "near_zero_speed_under_power_fraction": 0.053,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 82.66076875752032
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          63.68,
+          53.92,
+          -0.68
+        ],
+        "max_tilt_deg": 37.63,
+        "alternating_support_transitions": 33,
+        "single_support_seconds": [
+          2.6649999999999654,
+          2.4299999999999704
+        ],
+        "peak_torque_Nm": 0.02679,
+        "hard_stop_fraction": 0.008,
+        "near_zero_speed_under_power_fraction": 0.008,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 161.66347879674828
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          45.27,
+          29.95,
+          -0.54
+        ],
+        "max_tilt_deg": 37.19,
+        "alternating_support_transitions": 30,
+        "single_support_seconds": [
+          2.4599999999999698,
+          2.2249999999999748
+        ],
+        "peak_torque_Nm": 0.02652,
+        "hard_stop_fraction": 0.008,
+        "near_zero_speed_under_power_fraction": 0.01,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 155.4217792716279
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          21.24,
+          0.23,
+          -0.63
+        ],
+        "max_tilt_deg": 38.96,
+        "alternating_support_transitions": 41,
+        "single_support_seconds": [
+          1.8499999999999825,
+          1.879999999999982
+        ],
+        "peak_torque_Nm": 0.02097,
+        "hard_stop_fraction": 0.005,
+        "near_zero_speed_under_power_fraction": 0.012,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 145.53651235714116
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          -5.09,
+          -1.48,
+          -0.66
+        ],
+        "max_tilt_deg": 39.36,
+        "alternating_support_transitions": 9,
+        "single_support_seconds": [
+          1.359999999999993,
+          1.3449999999999933
+        ],
+        "peak_torque_Nm": 0.02154,
+        "hard_stop_fraction": 0.01,
+        "near_zero_speed_under_power_fraction": 0.047,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 96.42369829189718
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          84.87,
+          6.83,
+          -0.65
+        ],
+        "max_tilt_deg": 39.08,
+        "alternating_support_transitions": 46,
+        "single_support_seconds": [
+          2.6999999999999647,
+          2.43999999999997
+        ],
+        "peak_torque_Nm": 0.02657,
+        "hard_stop_fraction": 0.009,
+        "near_zero_speed_under_power_fraction": 0.007,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 205.82304074344654
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          42.21,
+          1.87,
+          -0.71
+        ],
+        "max_tilt_deg": 38.84,
+        "alternating_support_transitions": 43,
+        "single_support_seconds": [
+          2.119999999999977,
+          2.1349999999999767
+        ],
+        "peak_torque_Nm": 0.02647,
+        "hard_stop_fraction": 0.007,
+        "near_zero_speed_under_power_fraction": 0.007,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 165.74118836505156
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          36.1,
+          -2.26,
+          -0.52
+        ],
+        "max_tilt_deg": 36.25,
+        "alternating_support_transitions": 37,
+        "single_support_seconds": [
+          1.0050000000000006,
+          0.9850000000000008
+        ],
+        "peak_torque_Nm": 0.02089,
+        "hard_stop_fraction": 0.005,
+        "near_zero_speed_under_power_fraction": 0.018,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 160.4730499624266
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          15.11,
+          -4.7,
+          -0.47
+        ],
+        "max_tilt_deg": 35.7,
+        "alternating_support_transitions": 3,
+        "single_support_seconds": [
+          0.5550000000000004,
+          0.4550000000000003
+        ],
+        "peak_torque_Nm": 0.02106,
+        "hard_stop_fraction": 0.005,
+        "near_zero_speed_under_power_fraction": 0.041,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 104.47691819191142
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          80.76,
+          20.31,
+          -0.66
+        ],
+        "max_tilt_deg": 37.51,
+        "alternating_support_transitions": 45,
+        "single_support_seconds": [
+          1.9299999999999808,
+          1.879999999999982
+        ],
+        "peak_torque_Nm": 0.02788,
+        "hard_stop_fraction": 0.009,
+        "near_zero_speed_under_power_fraction": 0.006,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 195.5971329208946
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          41.99,
+          21.51,
+          -0.7
+        ],
+        "max_tilt_deg": 36.84,
+        "alternating_support_transitions": 42,
+        "single_support_seconds": [
+          1.4449999999999912,
+          1.4849999999999903
+        ],
+        "peak_torque_Nm": 0.02535,
+        "hard_stop_fraction": 0.008,
+        "near_zero_speed_under_power_fraction": 0.008,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 156.49991177716208
+      }
+    ],
+    "upright_cases": 12,
+    "walking_screen_cases": 3,
+    "mean_stop_fraction": 0.007166666666666666,
+    "mean_forward_mm": 36.82583333333334
+  },
+  {
+    "config": {
+      "radius": 0.055,
+      "hip": 0.075,
+      "rear": 0.014,
+      "gap": 0.028,
+      "foot_length": 0.06,
+      "foot_width": 0.025,
+      "battery_z": 0.032,
+      "battery_y": 0.034,
+      "frequency": 1.5,
+      "duty": 0.6,
+      "limit_deg": 22.0,
+      "stall": 0.0363,
+      "no_load": 6.807,
+      "mass_scale": 1.0,
+      "friction": 0.65,
+      "layout": "outboard"
+    },
+    "clearance": {
+      "sampled_poses": 81,
+      "worst_separation_mm": 2.0,
+      "overlapping_envelopes_mm": {},
+      "pass_no_interpenetration": true
+    },
+    "cases": [
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          119.84,
+          102.78,
+          -0.42
+        ],
+        "max_tilt_deg": 32.03,
+        "alternating_support_transitions": 34,
+        "single_support_seconds": [
+          3.0399999999999574,
+          3.114999999999956
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.01,
+        "near_zero_speed_under_power_fraction": 0.008,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 195.64396803717796
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          86.55,
+          84.2,
+          -0.51
+        ],
+        "max_tilt_deg": 30.78,
+        "alternating_support_transitions": 33,
+        "single_support_seconds": [
+          2.959999999999959,
+          2.869999999999961
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.009,
+        "near_zero_speed_under_power_fraction": 0.01,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 172.13976838840637
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          214.53,
+          32.51,
+          -0.27
+        ],
+        "max_tilt_deg": 28.94,
+        "alternating_support_transitions": 31,
+        "single_support_seconds": [
+          3.099999999999956,
+          2.8599999999999612
+        ],
+        "peak_torque_Nm": 0.02809,
+        "hard_stop_fraction": 0.14,
+        "near_zero_speed_under_power_fraction": 0.025,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 232.16607103616755
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          158.99,
+          -127.79,
+          -0.22
+        ],
+        "max_tilt_deg": 30.14,
+        "alternating_support_transitions": 34,
+        "single_support_seconds": [
+          3.3649999999999505,
+          3.344999999999951
+        ],
+        "peak_torque_Nm": 0.03596,
+        "hard_stop_fraction": 0.09,
+        "near_zero_speed_under_power_fraction": 0.005,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 184.05069667619443
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          124.7,
+          97.32,
+          -0.48
+        ],
+        "max_tilt_deg": 28.08,
+        "alternating_support_transitions": 35,
+        "single_support_seconds": [
+          3.1799999999999544,
+          3.1299999999999555
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.009,
+        "near_zero_speed_under_power_fraction": 0.007,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 200.11044862402184
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          66.53,
+          86.95,
+          -0.39
+        ],
+        "max_tilt_deg": 29.16,
+        "alternating_support_transitions": 34,
+        "single_support_seconds": [
+          3.0899999999999563,
+          3.0849999999999564
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.008,
+        "near_zero_speed_under_power_fraction": 0.006,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 151.38726097358142
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          -39.24,
+          -91.09,
+          -0.3
+        ],
+        "max_tilt_deg": 35.59,
+        "alternating_support_transitions": 39,
+        "single_support_seconds": [
+          3.629999999999945,
+          3.5949999999999456
+        ],
+        "peak_torque_Nm": 0.03241,
+        "hard_stop_fraction": 0.11,
+        "near_zero_speed_under_power_fraction": 0.011,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 40.982386430129026
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          153.5,
+          134.04,
+          -0.44
+        ],
+        "max_tilt_deg": 29.85,
+        "alternating_support_transitions": 38,
+        "single_support_seconds": [
+          3.6049999999999454,
+          3.6349999999999447
+        ],
+        "peak_torque_Nm": 0.0363,
+        "hard_stop_fraction": 0.048,
+        "near_zero_speed_under_power_fraction": 0.008,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 181.0401748921435
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          99.12,
+          128.26,
+          -0.46
+        ],
+        "max_tilt_deg": 34.61,
+        "alternating_support_transitions": 33,
+        "single_support_seconds": [
+          2.8349999999999618,
+          2.774999999999963
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.01,
+        "near_zero_speed_under_power_fraction": 0.007,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 161.14576534362214
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          128.8,
+          53.51,
+          -0.49
+        ],
+        "max_tilt_deg": 28.83,
+        "alternating_support_transitions": 33,
+        "single_support_seconds": [
+          2.4349999999999703,
+          2.5149999999999686
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.006,
+        "near_zero_speed_under_power_fraction": 0.004,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 221.7102732447472
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          241.51,
+          -25.75,
+          -0.37
+        ],
+        "max_tilt_deg": 33.06,
+        "alternating_support_transitions": 42,
+        "single_support_seconds": [
+          3.574999999999946,
+          3.6999999999999433
+        ],
+        "peak_torque_Nm": 0.0363,
+        "hard_stop_fraction": 0.091,
+        "near_zero_speed_under_power_fraction": 0.005,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 233.9022688529181
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 1.5,
+          "duty": 0.6,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          -57.87,
+          169.2,
+          -0.51
+        ],
+        "max_tilt_deg": 30.27,
+        "alternating_support_transitions": 38,
+        "single_support_seconds": [
+          3.434999999999949,
+          3.37999999999995
+        ],
+        "peak_torque_Nm": 0.0363,
+        "hard_stop_fraction": 0.037,
+        "near_zero_speed_under_power_fraction": 0.005,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": -14.582921113596612
+      }
+    ],
+    "upright_cases": 12,
+    "walking_screen_cases": 3,
+    "mean_stop_fraction": 0.04733333333333334,
+    "mean_forward_mm": 108.08
+  },
+  {
+    "config": {
+      "radius": 0.055,
+      "hip": 0.075,
+      "rear": 0.006,
+      "gap": 0.028,
+      "foot_length": 0.06,
+      "foot_width": 0.025,
+      "battery_z": 0.032,
+      "battery_y": 0.034,
+      "frequency": 2.5,
+      "duty": 0.6,
+      "limit_deg": 10.0,
+      "stall": 0.0363,
+      "no_load": 6.807,
+      "mass_scale": 1.0,
+      "friction": 0.65,
+      "layout": "outboard"
+    },
+    "clearance": {
+      "sampled_poses": 81,
+      "worst_separation_mm": 2.0,
+      "overlapping_envelopes_mm": {},
+      "pass_no_interpenetration": true
+    },
+    "cases": [
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          127.34,
+          89.55,
+          -0.35
+        ],
+        "max_tilt_deg": 14.09,
+        "alternating_support_transitions": 26,
+        "single_support_seconds": [
+          2.679999999999965,
+          2.2899999999999734
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.051,
+        "near_zero_speed_under_power_fraction": 0.004,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 209.58991767403117
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          80.24,
+          81.74,
+          -0.4
+        ],
+        "max_tilt_deg": 17.34,
+        "alternating_support_transitions": 24,
+        "single_support_seconds": [
+          2.4699999999999696,
+          2.4749999999999694
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.025,
+        "near_zero_speed_under_power_fraction": 0.009,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 172.43251167093524
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          156.28,
+          153.64,
+          -0.37
+        ],
+        "max_tilt_deg": 13.41,
+        "alternating_support_transitions": 10,
+        "single_support_seconds": [
+          2.769999999999963,
+          2.674999999999965
+        ],
+        "peak_torque_Nm": 0.02261,
+        "hard_stop_fraction": 0.287,
+        "near_zero_speed_under_power_fraction": 0.06,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 157.81667086697843
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          138.37,
+          104.48,
+          -0.31
+        ],
+        "max_tilt_deg": 15.65,
+        "alternating_support_transitions": 23,
+        "single_support_seconds": [
+          2.639999999999966,
+          2.5749999999999673
+        ],
+        "peak_torque_Nm": 0.0363,
+        "hard_stop_fraction": 0.192,
+        "near_zero_speed_under_power_fraction": 0.018,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 201.4990643742742
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          70.51,
+          57.52,
+          -0.4
+        ],
+        "max_tilt_deg": 18.38,
+        "alternating_support_transitions": 44,
+        "single_support_seconds": [
+          2.739999999999964,
+          2.5699999999999674
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.038,
+        "near_zero_speed_under_power_fraction": 0.018,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 174.390127796967
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          43.19,
+          48.41,
+          -0.42
+        ],
+        "max_tilt_deg": 17.41,
+        "alternating_support_transitions": 38,
+        "single_support_seconds": [
+          2.579999999999967,
+          2.4649999999999697
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.023,
+        "near_zero_speed_under_power_fraction": 0.036,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 152.02538875178223
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          -9.06,
+          -1.24,
+          -0.33
+        ],
+        "max_tilt_deg": 18.86,
+        "alternating_support_transitions": 36,
+        "single_support_seconds": [
+          3.154999999999955,
+          2.969999999999959
+        ],
+        "peak_torque_Nm": 0.0363,
+        "hard_stop_fraction": 0.22,
+        "near_zero_speed_under_power_fraction": 0.03,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 122.77979873564807
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          86.67,
+          27.19,
+          -0.4
+        ],
+        "max_tilt_deg": 17.14,
+        "alternating_support_transitions": 45,
+        "single_support_seconds": [
+          2.8999999999999604,
+          2.7999999999999625
+        ],
+        "peak_torque_Nm": 0.0363,
+        "hard_stop_fraction": 0.145,
+        "near_zero_speed_under_power_fraction": 0.024,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 206.21839177996995
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          70.96,
+          -14.97,
+          -0.37
+        ],
+        "max_tilt_deg": 17.92,
+        "alternating_support_transitions": 38,
+        "single_support_seconds": [
+          2.1449999999999765,
+          2.034999999999979
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.05,
+        "near_zero_speed_under_power_fraction": 0.037,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 196.3050490839669
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          47.14,
+          32.19,
+          -0.41
+        ],
+        "max_tilt_deg": 17.09,
+        "alternating_support_transitions": 25,
+        "single_support_seconds": [
+          1.5549999999999888,
+          1.5199999999999896
+        ],
+        "peak_torque_Nm": 0.02904,
+        "hard_stop_fraction": 0.023,
+        "near_zero_speed_under_power_fraction": 0.045,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 164.20775091196904
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          81.2,
+          -63.63,
+          -0.4
+        ],
+        "max_tilt_deg": 23.93,
+        "alternating_support_transitions": 52,
+        "single_support_seconds": [
+          2.9849999999999586,
+          2.8949999999999605
+        ],
+        "peak_torque_Nm": 0.0363,
+        "hard_stop_fraction": 0.232,
+        "near_zero_speed_under_power_fraction": 0.031,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 179.8169620618041
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.6,
+          "limit_deg": 10.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          -38.48,
+          -76.67,
+          -0.4
+        ],
+        "max_tilt_deg": 19.19,
+        "alternating_support_transitions": 39,
+        "single_support_seconds": [
+          2.6099999999999666,
+          2.6599999999999655
+        ],
+        "peak_torque_Nm": 0.0363,
+        "hard_stop_fraction": 0.153,
+        "near_zero_speed_under_power_fraction": 0.038,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 55.50663804080244
+      }
+    ],
+    "upright_cases": 12,
+    "walking_screen_cases": 3,
+    "mean_stop_fraction": 0.11991666666666666,
+    "mean_forward_mm": 71.19666666666667
+  },
+  {
+    "config": {
+      "radius": 0.055,
+      "hip": 0.075,
+      "rear": 0.014,
+      "gap": 0.028,
+      "foot_length": 0.06,
+      "foot_width": 0.025,
+      "battery_z": 0.032,
+      "battery_y": 0.034,
+      "frequency": 2.5,
+      "duty": 0.4,
+      "limit_deg": 16.0,
+      "stall": 0.0363,
+      "no_load": 6.807,
+      "mass_scale": 1.0,
+      "friction": 0.65,
+      "layout": "outboard"
+    },
+    "clearance": {
+      "sampled_poses": 81,
+      "worst_separation_mm": 2.0,
+      "overlapping_envelopes_mm": {},
+      "pass_no_interpenetration": true
+    },
+    "cases": [
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          17.69,
+          4.56,
+          -0.54
+        ],
+        "max_tilt_deg": 22.41,
+        "alternating_support_transitions": 32,
+        "single_support_seconds": [
+          2.4849999999999692,
+          2.44499999999997
+        ],
+        "peak_torque_Nm": 0.02113,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.011,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 146.4415719059214
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          1.1,
+          1.91,
+          -0.5
+        ],
+        "max_tilt_deg": 19.84,
+        "alternating_support_transitions": 10,
+        "single_support_seconds": [
+          1.919999999999981,
+          1.8399999999999828
+        ],
+        "peak_torque_Nm": 0.01962,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.057,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 112.21236793154644
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          34.94,
+          -35.07,
+          -0.55
+        ],
+        "max_tilt_deg": 24.05,
+        "alternating_support_transitions": 48,
+        "single_support_seconds": [
+          3.004999999999958,
+          3.159999999999955
+        ],
+        "peak_torque_Nm": 0.02488,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.008,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 147.79225814334043
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          31.61,
+          -17.84,
+          -0.6
+        ],
+        "max_tilt_deg": 22.0,
+        "alternating_support_transitions": 46,
+        "single_support_seconds": [
+          2.6649999999999654,
+          2.544999999999968
+        ],
+        "peak_torque_Nm": 0.02595,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.008,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 153.88875267768756
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          21.07,
+          -14.73,
+          -0.54
+        ],
+        "max_tilt_deg": 22.89,
+        "alternating_support_transitions": 48,
+        "single_support_seconds": [
+          2.1049999999999773,
+          2.1449999999999765
+        ],
+        "peak_torque_Nm": 0.02059,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.015,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 144.55327859663663
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          2.6,
+          5.1,
+          -0.59
+        ],
+        "max_tilt_deg": 22.13,
+        "alternating_support_transitions": 13,
+        "single_support_seconds": [
+          1.2899999999999945,
+          1.3499999999999932
+        ],
+        "peak_torque_Nm": 0.01962,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.076,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 117.20573022151974
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          58.44,
+          -22.62,
+          -0.6
+        ],
+        "max_tilt_deg": 24.5,
+        "alternating_support_transitions": 56,
+        "single_support_seconds": [
+          3.2749999999999524,
+          3.144999999999955
+        ],
+        "peak_torque_Nm": 0.02445,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.005,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 177.3338515201284
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          17.08,
+          17.23,
+          -0.5
+        ],
+        "max_tilt_deg": 23.83,
+        "alternating_support_transitions": 54,
+        "single_support_seconds": [
+          2.634999999999966,
+          2.6549999999999656
+        ],
+        "peak_torque_Nm": 0.02564,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.01,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 138.93693582031125
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          28.47,
+          0.57,
+          -0.59
+        ],
+        "max_tilt_deg": 19.83,
+        "alternating_support_transitions": 21,
+        "single_support_seconds": [
+          1.035,
+          1.1549999999999974
+        ],
+        "peak_torque_Nm": 0.01939,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.03,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 160.26109594729863
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          5.21,
+          -0.46,
+          -0.58
+        ],
+        "max_tilt_deg": 22.21,
+        "alternating_support_transitions": 3,
+        "single_support_seconds": [
+          0.39500000000000024,
+          0.38500000000000023
+        ],
+        "peak_torque_Nm": 0.01865,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.069,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 102.09607144604679
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          72.75,
+          36.08,
+          -0.57
+        ],
+        "max_tilt_deg": 22.19,
+        "alternating_support_transitions": 56,
+        "single_support_seconds": [
+          2.489999999999969,
+          2.3849999999999714
+        ],
+        "peak_torque_Nm": 0.02384,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.006,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 185.83516100947747
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.014,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.032,
+          "battery_y": 0.034,
+          "frequency": 2.5,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.88,
+          0.0,
+          44.75
+        ],
+        "travel_mm": [
+          26.18,
+          34.34,
+          -0.57
+        ],
+        "max_tilt_deg": 21.84,
+        "alternating_support_transitions": 50,
+        "single_support_seconds": [
+          1.639999999999987,
+          1.6349999999999871
+        ],
+        "peak_torque_Nm": 0.02312,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.013,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 140.28062350844635
+      }
+    ],
+    "upright_cases": 12,
+    "walking_screen_cases": 1,
+    "mean_stop_fraction": 0.0,
+    "mean_forward_mm": 26.428333333333338
+  },
+  {
+    "config": {
+      "radius": 0.055,
+      "hip": 0.075,
+      "rear": 0.01,
+      "gap": 0.028,
+      "foot_length": 0.06,
+      "foot_width": 0.025,
+      "battery_z": 0.04,
+      "battery_y": 0.034,
+      "frequency": 2.0,
+      "duty": 0.4,
+      "limit_deg": 22.0,
+      "stall": 0.0363,
+      "no_load": 6.807,
+      "mass_scale": 1.0,
+      "friction": 0.65,
+      "layout": "outboard"
+    },
+    "clearance": {
+      "sampled_poses": 81,
+      "worst_separation_mm": 2.0,
+      "overlapping_envelopes_mm": {},
+      "pass_no_interpenetration": true
+    },
+    "cases": [
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          25.41,
+          -2.43,
+          -0.58
+        ],
+        "max_tilt_deg": 27.01,
+        "alternating_support_transitions": 32,
+        "single_support_seconds": [
+          2.3199999999999728,
+          2.2799999999999736
+        ],
+        "peak_torque_Nm": 0.02055,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.006,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 153.39652426257737
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          13.82,
+          -6.55,
+          -0.52
+        ],
+        "max_tilt_deg": 25.91,
+        "alternating_support_transitions": 19,
+        "single_support_seconds": [
+          1.8049999999999835,
+          1.9349999999999807
+        ],
+        "peak_torque_Nm": 0.02118,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.03,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 138.18068220413159
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          39.37,
+          -40.35,
+          -0.41
+        ],
+        "max_tilt_deg": 32.58,
+        "alternating_support_transitions": 43,
+        "single_support_seconds": [
+          2.7499999999999636,
+          3.0699999999999568
+        ],
+        "peak_torque_Nm": 0.02524,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.004,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 146.16107952965993
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          39.6,
+          -29.35,
+          -0.53
+        ],
+        "max_tilt_deg": 30.92,
+        "alternating_support_transitions": 35,
+        "single_support_seconds": [
+          2.539999999999968,
+          2.724999999999964
+        ],
+        "peak_torque_Nm": 0.0256,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.006,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 152.56321045716328
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          15.38,
+          -4.64,
+          -0.32
+        ],
+        "max_tilt_deg": 26.94,
+        "alternating_support_transitions": 39,
+        "single_support_seconds": [
+          2.0999999999999774,
+          2.1399999999999766
+        ],
+        "peak_torque_Nm": 0.02184,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.019,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 142.28273228611891
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          14.26,
+          -1.75,
+          -0.47
+        ],
+        "max_tilt_deg": 25.76,
+        "alternating_support_transitions": 27,
+        "single_support_seconds": [
+          1.644999999999987,
+          1.544999999999989
+        ],
+        "peak_torque_Nm": 0.02008,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.047,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 143.08408718653666
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          59.25,
+          29.36,
+          -0.58
+        ],
+        "max_tilt_deg": 28.53,
+        "alternating_support_transitions": 47,
+        "single_support_seconds": [
+          3.064999999999957,
+          3.054999999999957
+        ],
+        "peak_torque_Nm": 0.02621,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.007,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 173.15724901587305
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          53.54,
+          -3.06,
+          -0.53
+        ],
+        "max_tilt_deg": 27.37,
+        "alternating_support_transitions": 45,
+        "single_support_seconds": [
+          2.6049999999999667,
+          2.589999999999967
+        ],
+        "peak_torque_Nm": 0.02529,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.006,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 181.06096849581093
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          25.88,
+          -11.67,
+          -0.54
+        ],
+        "max_tilt_deg": 27.51,
+        "alternating_support_transitions": 29,
+        "single_support_seconds": [
+          1.0399999999999998,
+          1.2099999999999962
+        ],
+        "peak_torque_Nm": 0.01931,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.026,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 149.04260926377512
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          -1.57,
+          2.98,
+          -0.51
+        ],
+        "max_tilt_deg": 26.74,
+        "alternating_support_transitions": 11,
+        "single_support_seconds": [
+          0.5000000000000003,
+          0.5100000000000003
+        ],
+        "peak_torque_Nm": 0.01894,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.057,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 108.24326910000138
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          96.04,
+          9.43,
+          -0.52
+        ],
+        "max_tilt_deg": 31.74,
+        "alternating_support_transitions": 45,
+        "single_support_seconds": [
+          2.3249999999999726,
+          2.3799999999999715
+        ],
+        "peak_torque_Nm": 0.0239,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.008,
+        "upright": true,
+        "walking_screen_pass": true,
+        "hardware_validated": false,
+        "score": 218.62944062751689
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.01,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 2.0,
+          "duty": 0.4,
+          "limit_deg": 22.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -1.22,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          40.62,
+          30.39,
+          -0.55
+        ],
+        "max_tilt_deg": 28.49,
+        "alternating_support_transitions": 41,
+        "single_support_seconds": [
+          1.7449999999999848,
+          1.729999999999985
+        ],
+        "peak_torque_Nm": 0.02455,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.016,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 154.02560035702848
+      }
+    ],
+    "upright_cases": 12,
+    "walking_screen_cases": 1,
+    "mean_stop_fraction": 0.0,
+    "mean_forward_mm": 35.13333333333333
+  },
+  {
+    "config": {
+      "radius": 0.055,
+      "hip": 0.075,
+      "rear": 0.006,
+      "gap": 0.028,
+      "foot_length": 0.06,
+      "foot_width": 0.025,
+      "battery_z": 0.04,
+      "battery_y": 0.034,
+      "frequency": 3.0,
+      "duty": 0.4,
+      "limit_deg": 16.0,
+      "stall": 0.0363,
+      "no_load": 6.807,
+      "mass_scale": 1.0,
+      "friction": 0.65,
+      "layout": "outboard"
+    },
+    "clearance": {
+      "sampled_poses": 81,
+      "worst_separation_mm": 2.0,
+      "overlapping_envelopes_mm": {},
+      "pass_no_interpenetration": true
+    },
+    "cases": [
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          27.59,
+          -7.4,
+          -0.44
+        ],
+        "max_tilt_deg": 20.4,
+        "alternating_support_transitions": 10,
+        "single_support_seconds": [
+          1.8549999999999824,
+          1.9399999999999806
+        ],
+        "peak_torque_Nm": 0.0203,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.033,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 135.73013464069228
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          11.14,
+          5.23,
+          -0.48
+        ],
+        "max_tilt_deg": 19.06,
+        "alternating_support_transitions": 3,
+        "single_support_seconds": [
+          1.7749999999999841,
+          1.684999999999986
+        ],
+        "peak_torque_Nm": 0.01938,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.068,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 106.90350006680639
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          45.43,
+          22.13,
+          -0.49
+        ],
+        "max_tilt_deg": 25.14,
+        "alternating_support_transitions": 42,
+        "single_support_seconds": [
+          2.774999999999963,
+          2.734999999999964
+        ],
+        "peak_torque_Nm": 0.02477,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.004,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 164.31044385552934
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          31.94,
+          38.15,
+          -0.34
+        ],
+        "max_tilt_deg": 21.39,
+        "alternating_support_transitions": 18,
+        "single_support_seconds": [
+          2.2499999999999742,
+          1.9499999999999804
+        ],
+        "peak_torque_Nm": 0.02525,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.028,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 140.31286654207463
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          14.16,
+          16.15,
+          -0.45
+        ],
+        "max_tilt_deg": 19.33,
+        "alternating_support_transitions": 14,
+        "single_support_seconds": [
+          1.8599999999999823,
+          1.7199999999999853
+        ],
+        "peak_torque_Nm": 0.01984,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.067,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 126.35156850463798
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          3.43,
+          0.83,
+          -0.44
+        ],
+        "max_tilt_deg": 19.04,
+        "alternating_support_transitions": 2,
+        "single_support_seconds": [
+          1.3949999999999922,
+          1.264999999999995
+        ],
+        "peak_torque_Nm": 0.01866,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.092,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 99.40621193747522
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          53.32,
+          19.79,
+          -0.42
+        ],
+        "max_tilt_deg": 21.58,
+        "alternating_support_transitions": 53,
+        "single_support_seconds": [
+          2.639999999999966,
+          2.5699999999999674
+        ],
+        "peak_torque_Nm": 0.02622,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.036,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 174.79728766921315
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          21.9,
+          28.97,
+          -0.45
+        ],
+        "max_tilt_deg": 24.08,
+        "alternating_support_transitions": 33,
+        "single_support_seconds": [
+          2.1349999999999767,
+          2.0999999999999774
+        ],
+        "peak_torque_Nm": 0.0284,
+        "hard_stop_fraction": 0.001,
+        "near_zero_speed_under_power_fraction": 0.052,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 137.7841136409191
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          16.85,
+          3.85,
+          -0.36
+        ],
+        "max_tilt_deg": 18.93,
+        "alternating_support_transitions": 5,
+        "single_support_seconds": [
+          0.5600000000000004,
+          0.5100000000000003
+        ],
+        "peak_torque_Nm": 0.02053,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.058,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 117.34804111537156
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          -2.55,
+          -3.89,
+          -0.42
+        ],
+        "max_tilt_deg": 17.14,
+        "alternating_support_transitions": 0,
+        "single_support_seconds": [
+          0.2050000000000001,
+          0.24000000000000013
+        ],
+        "peak_torque_Nm": 0.01804,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.074,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 88.65594136900874
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          7.75,
+          -9.4,
+          -0.4
+        ],
+        "max_tilt_deg": 23.69,
+        "alternating_support_transitions": 48,
+        "single_support_seconds": [
+          1.6149999999999876,
+          1.7099999999999855
+        ],
+        "peak_torque_Nm": 0.02395,
+        "hard_stop_fraction": 0.118,
+        "near_zero_speed_under_power_fraction": 0.057,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 133.57040202559853
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.028,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.04,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          49.09
+        ],
+        "travel_mm": [
+          15.86,
+          -18.74,
+          -0.47
+        ],
+        "max_tilt_deg": 21.63,
+        "alternating_support_transitions": 17,
+        "single_support_seconds": [
+          0.8900000000000007,
+          0.8150000000000006
+        ],
+        "peak_torque_Nm": 0.02553,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.051,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 131.83445221318982
+      }
+    ],
+    "upright_cases": 12,
+    "walking_screen_cases": 0,
+    "mean_stop_fraction": 0.009916666666666666,
+    "mean_forward_mm": 20.56833333333333
+  },
+  {
+    "config": {
+      "radius": 0.055,
+      "hip": 0.075,
+      "rear": 0.006,
+      "gap": 0.034,
+      "foot_length": 0.06,
+      "foot_width": 0.025,
+      "battery_z": 0.048,
+      "battery_y": 0.034,
+      "frequency": 3.0,
+      "duty": 0.4,
+      "limit_deg": 16.0,
+      "stall": 0.0363,
+      "no_load": 6.807,
+      "mass_scale": 1.0,
+      "friction": 0.65,
+      "layout": "outboard"
+    },
+    "clearance": {
+      "sampled_poses": 81,
+      "worst_separation_mm": 2.0,
+      "overlapping_envelopes_mm": {},
+      "pass_no_interpenetration": true
+    },
+    "cases": [
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 7.46,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          -26.36,
+          -15.59,
+          -3.5
+        ],
+        "max_tilt_deg": 55.15,
+        "alternating_support_transitions": 9,
+        "single_support_seconds": [
+          1.1449999999999976,
+          1.2949999999999944
+        ],
+        "peak_torque_Nm": 0.02367,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.021,
+        "upright": false,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": -38.22085284899299
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          3.53,
+          -2.01,
+          -0.5
+        ],
+        "max_tilt_deg": 32.7,
+        "alternating_support_transitions": 0,
+        "single_support_seconds": [
+          1.5699999999999885,
+          1.5249999999999895
+        ],
+        "peak_torque_Nm": 0.02224,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.068,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 89.44335583761689
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 5.5,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          -9.04,
+          2.87,
+          -3.97
+        ],
+        "max_tilt_deg": 55.14,
+        "alternating_support_transitions": 16,
+        "single_support_seconds": [
+          1.074999999999999,
+          1.0499999999999996
+        ],
+        "peak_torque_Nm": 0.02615,
+        "hard_stop_fraction": 0.005,
+        "near_zero_speed_under_power_fraction": 0.012,
+        "upright": false,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": -0.527261369728371
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.4,
+          "layout": "outboard"
+        },
+        "seconds": 4.4,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          -33.04,
+          -7.47,
+          -4.26
+        ],
+        "max_tilt_deg": 55.91,
+        "alternating_support_transitions": 8,
+        "single_support_seconds": [
+          0.6950000000000005,
+          0.8000000000000006
+        ],
+        "peak_torque_Nm": 0.02588,
+        "hard_stop_fraction": 0.005,
+        "near_zero_speed_under_power_fraction": 0.013,
+        "upright": false,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": -43.14441234372503
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 7.82,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          -32.19,
+          -7.19,
+          -3.18
+        ],
+        "max_tilt_deg": 55.55,
+        "alternating_support_transitions": 11,
+        "single_support_seconds": [
+          1.0499999999999996,
+          0.9150000000000007
+        ],
+        "peak_torque_Nm": 0.02022,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.042,
+        "upright": false,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": -36.00855930591354
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          10.07,
+          1.13,
+          -0.47
+        ],
+        "max_tilt_deg": 35.21,
+        "alternating_support_transitions": 5,
+        "single_support_seconds": [
+          1.264999999999995,
+          1.1899999999999966
+        ],
+        "peak_torque_Nm": 0.02041,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.069,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 105.42238413209076
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 9.975,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          18.53,
+          2.43,
+          -3.21
+        ],
+        "max_tilt_deg": 55.27,
+        "alternating_support_transitions": 38,
+        "single_support_seconds": [
+          2.2249999999999748,
+          2.0999999999999774
+        ],
+        "peak_torque_Nm": 0.02524,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.02,
+        "upright": false,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 35.2091266328961
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 0.65,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          54.57,
+          4.97,
+          -0.37
+        ],
+        "max_tilt_deg": 33.0,
+        "alternating_support_transitions": 32,
+        "single_support_seconds": [
+          2.0099999999999794,
+          1.9499999999999804
+        ],
+        "peak_torque_Nm": 0.02484,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.034,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 178.87901616444827
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          19.54,
+          -14.56,
+          -0.39
+        ],
+        "max_tilt_deg": 36.77,
+        "alternating_support_transitions": 7,
+        "single_support_seconds": [
+          0.6100000000000004,
+          0.6600000000000005
+        ],
+        "peak_torque_Nm": 0.0206,
+        "hard_stop_fraction": 0.015,
+        "near_zero_speed_under_power_fraction": 0.049,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 111.54774152916404
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.029039999999999996,
+          "no_load": 5.4456,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 8.53,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          -41.01,
+          0.09,
+          -2.67
+        ],
+        "max_tilt_deg": 55.04,
+        "alternating_support_transitions": 0,
+        "single_support_seconds": [
+          0.18500000000000008,
+          0.18000000000000008
+        ],
+        "peak_torque_Nm": 0.01948,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.059,
+        "upright": false,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": -63.0680233158862
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.0,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 4.715,
+        "total_mass_g": 116.0,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          -26.95,
+          -6.01,
+          -5.14
+        ],
+        "max_tilt_deg": 56.21,
+        "alternating_support_transitions": 14,
+        "single_support_seconds": [
+          0.5900000000000004,
+          0.5200000000000004
+        ],
+        "peak_torque_Nm": 0.0251,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.023,
+        "upright": false,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": -24.44032592625758
+      },
+      {
+        "config": {
+          "radius": 0.055,
+          "hip": 0.075,
+          "rear": 0.006,
+          "gap": 0.034,
+          "foot_length": 0.06,
+          "foot_width": 0.025,
+          "battery_z": 0.048,
+          "battery_y": 0.034,
+          "frequency": 3.0,
+          "duty": 0.4,
+          "limit_deg": 16.0,
+          "stall": 0.0363,
+          "no_load": 6.8069999999999995,
+          "mass_scale": 1.2,
+          "friction": 1.0,
+          "layout": "outboard"
+        },
+        "seconds": 12.0,
+        "total_mass_g": 139.2,
+        "initial_com_mm": [
+          -0.57,
+          0.0,
+          53.44
+        ],
+        "travel_mm": [
+          46.52,
+          3.34,
+          -0.5
+        ],
+        "max_tilt_deg": 33.28,
+        "alternating_support_transitions": 18,
+        "single_support_seconds": [
+          1.0250000000000001,
+          1.0399999999999998
+        ],
+        "peak_torque_Nm": 0.02441,
+        "hard_stop_fraction": 0.0,
+        "near_zero_speed_under_power_fraction": 0.035,
+        "upright": true,
+        "walking_screen_pass": false,
+        "hardware_validated": false,
+        "score": 167.5371550707867
+      }
+    ],
+    "upright_cases": 5,
+    "walking_screen_cases": 0,
+    "mean_stop_fraction": 0.0020833333333333333,
+    "mean_forward_mm": -1.319166666666666
+  }
+]

@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.FCBak
+*.kicad_prl
+.env
+.venv/
+*.log

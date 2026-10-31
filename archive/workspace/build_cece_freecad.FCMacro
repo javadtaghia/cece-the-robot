@@ -1,0 +1,149 @@
+"""CeCe PLA packaging prototype. Run in FreeCAD 1.1; all dimensions mm.
+Regenerate with the dimensions below. Existing project files are untouched.
+This is a housing / fit prototype, NOT a validated walking mechanism.
+"""
+import FreeCAD as App, Part, MeshPart, math, os, json, traceback
+from FreeCAD import Vector as V
+
+ROOT = r'C:\Users\user\OneDrive\Documents\ChatGPT\simple_robot'
+OUT = os.path.join(ROOT, 'freecad_cece')
+os.makedirs(os.path.join(OUT, 'stl'), exist_ok=True)
+WALL = 1.6
+GREEN = (0.29, 0.72, 0.19)
+DARK = (0.035, 0.065, 0.055)
+DOC = App.newDocument('CeCe_PLA_Prototype')
+parts = DOC.addObject('App::DocumentObjectGroup','PLA_Parts')
+refs = DOC.addObject('App::DocumentObjectGroup','Component_Allowances')
+detail = DOC.addObject('App::DocumentObjectGroup','Face_Details')
+notes = DOC.addObject('App::FeaturePython','Design_Notes')
+for name, value in {
+    'Status':'HOUSING PROTOTYPE ONLY - walking linkage and exact mounts unfinished',
+    'Material':'PLA; 0.4 mm nozzle assumed; 1.6 mm shell walls',
+    'Battery':'2 x AA, horizontal; 58 x 34 x 18 mm holder allowance; measure actual holder',
+    'Controller':'ESP32-C3 Super Mini assumed; verify model and USB position',
+    'Walking':'Two leg pivot blanks; crank, bearings, orientation guides and weight shift not engineered',
+    'Fasteners':'Rear panels: M2 clearance 2.4 mm; pilot 1.6 mm, validate on coupon',
+    'Print':'Fit and appearance prototypes; see README before printing',
+}.items():
+    notes.addProperty('App::PropertyString',name,'Prototype');setattr(notes,name,value)
+
+def box(w,d,h,x,y,z):
+    return Part.makeBox(w,d,h,V(x,y,z))
+def cyl(r,h,x,y,z,axis=V(0,0,1)):
+    return Part.makeCylinder(r,h,V(x,y,z),axis)
+def rounded(w,d,h,x,y,z,r=3):
+    # Rounded XY footprint, flat printable ends.
+    s=box(w-2*r,d,h,x+r,y,z).fuse(box(w,d-2*r,h,x,y+r,z))
+    for a in (x+r,x+w-r):
+        for b in (y+r,y+d-r):s=s.fuse(cyl(r,h,a,b,z))
+    return s.removeSplitter()
+def obj(name,shape,group=parts,color=GREEN,role='PLA prototype'):
+    o=DOC.addObject('PartDesign::Feature',name);o.Label=name.replace('_',' ')
+    o.Shape=shape.removeSplitter();group.addObject(o)
+    o.addProperty('App::PropertyString','Purpose','Design');o.Purpose=role
+    o.ViewObject.ShapeColor=color;o.ViewObject.LineColor=(0.12,0.20,0.10)
+    return o
+def screws(shape, xs,zs,back,depth,rad):
+    for x in xs:
+        for z in zs:shape=shape.cut(cyl(rad,depth,x,back,z,V(0,-1,0)))
+    return shape
+
+try:
+    # Torso, open at rear. Front is negative Y.
+    torso=rounded(76,48,62,-38,-24,44)
+    torso=torso.cut(rounded(72.8,47,58.8,-36.4,-22.4,45.6,1.4))
+    # Four connected screw bosses. Keep clear of battery allowance.
+    for x in (-32,32):
+        for z in (50,100):
+            torso=torso.fuse(box(8.5,8,7,29.5 if x>0 else -38,14,z-3.5))
+    torso=screws(torso,(-32,32),(50,100),22.5,9,0.8)
+    # Speaker grille; small holes rather than a large unsupported opening.
+    for x in (-8,-4,0,4,8):
+        for z in (78,82,86):torso=torso.cut(cyl(1,4,x,-25,z,V(0,1,0)))
+    # Neck cable passage.
+    torso=torso.cut(cyl(4,5,0,0,103))
+    obj('Torso_shell',torso)
+    back=box(70.8,1.6,56.8,-35.4,22.4,46.6)
+    back=screws(back,(-32,32),(50,100),25,4,1.2)
+    obj('Torso_rear_cover',back,role='M2 removable cover; print flat')
+
+    # Hollow neck with a flat rear opening closed by a separate plate.
+    neck=box(14,16,18,-7,-8,106).cut(box(10.8,15,20,-5.4,-6.4,105))
+    obj('Neck_channel',neck,role='Cable channel; bond to head and torso after fit check')
+    obj('Neck_rear_strip',box(14,1.6,18,-7,6.4,106),role='Bonded cable-channel cover')
+
+    head=rounded(44,32,36,-22,-16,124,3)
+    head=head.cut(rounded(40.8,32,32.8,-20.4,-14.4,125.6,1.4))
+    # OLED viewing opening, not the board outline.
+    head=head.cut(box(23,5,12,-11.5,-18,140))
+    head=head.cut(cyl(4,5,0,0,123))
+    for x in (-17,17):
+        for z in (129,155):head=head.fuse(box(7.7,6,5.4,14.3 if x>0 else -22,8.4,z-2.7))
+    head=screws(head,(-17,17),(129,155),14.5,7,0.8)
+    # Microphone sound port at cheek.
+    head=head.cut(cyl(1.2,4,14,-18,135,V(0,1,0)))
+    obj('Head_shell',head)
+    hback=box(38.8,1.6,30.8,-19.4,14.4,126.6)
+    hback=screws(hback,(-17,17),(129,155),18,5,1.2)
+    obj('Head_rear_cover',hback)
+    obj('Antenna',cyl(2,10,0,0,160).fuse(Part.makeSphere(4,V(0,0,172))),role='Decorative; print separately with support and bond')
+
+    for sign,label in ((-1,'Left'),(1,'Right')):
+        x=sign*24
+        foot=rounded(28,44,6,x-14,-29,0,4)
+        # Leg tongue socket: 0.3 mm clearance on each side.
+        foot=foot.cut(box(10.6,12.6,4,x-5.3,-6.3,3))
+        obj(label+'_foot',foot,role='Flat foot prototype; tongue socket fit requires coupon')
+        leg=box(10,12,33,x-5,-6,6).fuse(box(10,12,3,x-5,-6,3))
+        # Crosswise pivot blank, ream after printing.
+        leg=leg.cut(cyl(1.6,14,x-7,0,35,V(1,0,0)))
+        obj(label+'_leg_blank',leg,role='3.2 mm pivot hole; final crank/guide interfaces unfinished')
+        arm=box(7,10,30,sign*43-3.5,-5,62)
+        obj(label+'_arm',arm,role='Decorative arm; attachment bracket unfinished')
+
+    # Heart emblem on the chest: two lobes and a triangular point in XZ plane.
+    p=[V(-6,-25,66),V(0,-25,60),V(6,-25,66),V(-6,-25,66)]
+    heart=Part.Face(Part.makePolygon(p)).extrude(V(0,1,0))
+    for x in (-3,3):heart=heart.fuse(cyl(3.1,1,x,-25,66,V(0,1,0)))
+    obj('Heart_badge',heart,detail)
+    # OLED glass and eye preview are visual references, excluded from print exports.
+    obj('OLED_glass',box(23,0.5,12,-11.5,-16.1,140),refs,DARK,'Display face preview')
+    for x in (-5,5):obj('Eye_'+str(x).replace('-','L'),box(3,0.2,5,x-1.5,-16.35,144),detail,(0.1,0.85,0.95),'Rendered OLED pixels; not a printed part')
+    # Purchased-part envelopes, hidden by default and deliberately NOT mounting geometry.
+    allowances=[
+        ('AA_holder_allowance',box(58,34,18,-29,-17,48)),
+        ('N20_motor_allowance',box(26,12,10,-13,6,72)),
+        ('SuperMini_allowance',box(23,18,4,-11.5,-1,96)),
+        ('Driver_allowance',box(18,16,4,14,-8,89)),
+        ('Regulator_allowance',box(20,14,5,-33,-5,88)),
+        ('Speaker_allowance',cyl(14,5,0,-22.3,82,V(0,1,0))),
+        ('Amplifier_allowance',box(20,16,4,-10,1,88)),
+        ('OLED_board_allowance',box(27,3,27,-13.5,-14.3,129)),
+        ('Microphone_allowance',box(6,4,10,13.8,-14.3,130)),
+    ]
+    for name,shape in allowances:
+        o=obj(name,shape,refs,(0.6,0.65,0.7),'UNMEASURED envelope; mounts and wiring not final')
+        o.ViewObject.Transparency=70;o.ViewObject.Visibility=False
+    DOC.recompute()
+    report={'status':'Housing / packaging prototype, not validated walker','parts':[]}
+    for o in parts.Group+[DOC.getObject('Heart_badge')]:
+        s=o.Shape
+        entry={'name':o.Name,'valid':s.isValid(),'solids':len(s.Solids),'volume_mm3':round(s.Volume,2)}
+        report['parts'].append(entry)
+        if not entry['valid'] or entry['solids']!=1:raise ValueError(str(entry))
+        mesh=MeshPart.meshFromShape(Shape=s,LinearDeflection=0.08,AngularDeflection=0.15,Relative=False)
+        # Rotate each exported part into a useful starting print orientation.
+        # Keep assembly coordinates; slicer can arrange/drop to bed.
+        mesh.write(os.path.join(OUT,'stl',o.Name+'.stl'))
+    report['shell_mass_g_at_1_24']=round(sum(o.Shape.Volume for o in parts.Group)*0.00124,1)
+    with open(os.path.join(OUT,'geometry_checks.json'),'w') as f:json.dump(report,f,indent=2)
+    Gui.activeDocument().activeView().viewAxonometric()
+    Gui.activeDocument().activeView().fitAll()
+    Gui.activeDocument().activeView().setAnimationEnabled(False) if hasattr(Gui.activeDocument().activeView(),'setAnimationEnabled') else None
+    Gui.activeDocument().activeView().saveImage(os.path.join(OUT,'cece_preview.png'),1100,1000,'White')
+    DOC.recompute()
+    DOC.saveAs(os.path.join(OUT,'CeCe_PLA_Prototype.FCStd'))
+    with open(os.path.join(OUT,'build_status.txt'),'w') as f:f.write('SUCCESS')
+except Exception:
+    with open(os.path.join(OUT,'build_status.txt'),'w') as f:f.write(traceback.format_exc())
+    raise

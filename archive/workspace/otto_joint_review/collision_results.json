@@ -1,0 +1,20 @@
+{
+  "pivot_estimate_mm": [
+    25.5,
+    0,
+    -71.5
+  ],
+  "axis": "Y",
+  "overlap_mm3_by_degrees": {
+    "-20": 0.0,
+    "-15": 0.0,
+    "-10": 0.0,
+    "-5": 0.0,
+    "0": 0.0,
+    "5": 0.0,
+    "10": 0.0,
+    "15": 0.0,
+    "20": 0.0
+  },
+  "limitations": "Servo, horn, screws, print tolerances, physical forces and other joints are excluded."
+}

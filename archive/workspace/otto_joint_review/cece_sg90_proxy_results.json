@@ -1,0 +1,62 @@
+{
+  "status": "INCONCLUSIVE; ASSUMED SG90 SHAPES; NOT PRINT VALIDATION",
+  "source_dimensions_mm": [
+    23,
+    12.2,
+    29
+  ],
+  "assumptions": "Body, shaft, turret and horn geometry/placement are provisional and do not represent verified purchased components. Screw not modelled. Proxy horn is a cylinder, not supplier horn. Estimate pivot only.",
+  "neutral_overlap_mm3": {
+    "body_vs_leg": 0.0,
+    "body_vs_foot": 0.0,
+    "turret_vs_leg": 261.203,
+    "horn_vs_foot": 10.281
+  },
+  "angles": {
+    "-20": {
+      "leg_vs_foot": 0.0,
+      "body_vs_foot": 0.0,
+      "turret_vs_foot": 0.0
+    },
+    "-15": {
+      "leg_vs_foot": 0.0,
+      "body_vs_foot": 0.0,
+      "turret_vs_foot": 0.0
+    },
+    "-10": {
+      "leg_vs_foot": 0.0,
+      "body_vs_foot": 0.0,
+      "turret_vs_foot": 0.0
+    },
+    "-5": {
+      "leg_vs_foot": 0.0,
+      "body_vs_foot": 0.0,
+      "turret_vs_foot": 0.0
+    },
+    "0": {
+      "leg_vs_foot": 0.0,
+      "body_vs_foot": 0.0,
+      "turret_vs_foot": 0.0
+    },
+    "5": {
+      "leg_vs_foot": 0.0,
+      "body_vs_foot": 0.0,
+      "turret_vs_foot": 0.0
+    },
+    "10": {
+      "leg_vs_foot": 0.0,
+      "body_vs_foot": 0.0,
+      "turret_vs_foot": 0.0
+    },
+    "15": {
+      "leg_vs_foot": 0.0,
+      "body_vs_foot": 0.0,
+      "turret_vs_foot": 0.0
+    },
+    "20": {
+      "leg_vs_foot": 0.0,
+      "body_vs_foot": 0.0,
+      "turret_vs_foot": 0.0
+    }
+  }
+}

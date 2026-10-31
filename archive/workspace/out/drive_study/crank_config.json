@@ -1,0 +1,15 @@
+{
+  "crank": 0.006,
+  "shift": 0.015,
+  "rod": 0.05,
+  "half_span": 0.015,
+  "foot_half_width": 0.012,
+  "foot_half_length": 0.023,
+  "frequency": 0.8,
+  "stall": 0.0363,
+  "no_load": 6.807,
+  "friction": 0.65,
+  "shift_enabled": true,
+  "payload_scale": 1.0,
+  "duty_limit": 0.85
+}

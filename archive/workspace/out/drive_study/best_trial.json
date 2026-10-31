@@ -1,0 +1,61 @@
+{
+  "motor_model": "continuous_affine_back_emf_v2",
+  "config": {
+    "radius": 0.055,
+    "hip": 0.075,
+    "rear": 0.01,
+    "gap": 0.034,
+    "foot_length": 0.06,
+    "foot_width": 0.025,
+    "battery_z": 0.032,
+    "battery_y": 0.034,
+    "frequency": 2.0,
+    "duty": 0.55,
+    "limit_deg": 22.0,
+    "stall": 0.0363,
+    "no_load": 6.807,
+    "mass_scale": 1.0,
+    "friction": 0.65,
+    "layout": "outboard",
+    "audio_low": true,
+    "realistic_hardware": true,
+    "bias": 0
+  },
+  "seconds": 12.0,
+  "total_mass_g": 116.0,
+  "initial_com_mm": [
+    -1.13,
+    2.35,
+    41.05
+  ],
+  "travel_mm": [
+    97.61,
+    61.14,
+    -0.39
+  ],
+  "max_tilt_deg": 27.82,
+  "alternating_support_transitions": 28,
+  "single_support_seconds": [
+    2.0899999999999777,
+    3.37999999999995
+  ],
+  "peak_torque_Nm": 0.028,
+  "hard_stop_fraction": 0.007,
+  "near_zero_speed_under_power_fraction": 0.005,
+  "upright": true,
+  "walking_screen_pass": false,
+  "hardware_validated": false,
+  "score": 195.91540547109724,
+  "final_yaw_deg": 64.74,
+  "max_entire_foot_clearance_mm": [
+    0.4,
+    0.3
+  ],
+  "mean_contact_tangent_speed_mm_s": 18.72,
+  "clearance": {
+    "sampled_poses": 81,
+    "worst_separation_mm": 2.0,
+    "overlapping_envelopes_mm": {},
+    "pass_no_interpenetration": true
+  }
+}
