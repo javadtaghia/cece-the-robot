@@ -174,6 +174,23 @@ def main():
     controls_status = tk.StringVar(value="Simulation test gaits: feet slide; physical walking is unverified.")
     ttk.Label(controls, textvariable=controls_status).grid(row=3, column=0, columnspan=3)
 
+    auto_watch = threading.Event()
+
+    def watch_autonomy():
+        while auto_watch.is_set():
+            try:
+                with urllib.request.urlopen("http://127.0.0.1:8768/status", timeout=3) as result:
+                    data = json.load(result)
+                root.after(0, controls_status.set, "Autonomous: " + data["message"])
+                if not data["autonomous_running"]:
+                    auto_watch.clear()
+                    break
+            except Exception as exc:
+                root.after(0, controls_status.set, "Autonomous status unavailable: " + str(exc))
+                auto_watch.clear()
+                break
+            time.sleep(1.5)
+
     def command_motion(command):
         def send():
             try:
@@ -183,6 +200,12 @@ def main():
                 with urllib.request.urlopen(request, timeout=15) as result:
                     message = result.read().decode("utf-8")
                 root.after(0, controls_status.set, message)
+                if command == "start autonomous" and message.startswith("Autonomous simulation requested"):
+                    if not auto_watch.is_set():
+                        auto_watch.set()
+                        threading.Thread(target=watch_autonomy, daemon=True).start()
+                elif command == "stop":
+                    auto_watch.clear()
             except Exception as exc:
                 root.after(0, controls_status.set, "Movement unavailable: " + str(exc))
         threading.Thread(target=send, daemon=True).start()
@@ -244,6 +267,7 @@ def main():
         threading.Thread(target=work, args=devices[index], daemon=True).start()
 
     def close():
+        auto_watch.clear()
         stop_event.set()
         root.destroy()
 

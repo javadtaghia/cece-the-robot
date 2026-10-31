@@ -13,6 +13,7 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 motion_lock = threading.Lock()
+autonomy_process = None
 SIM_DIR = Path(__file__).resolve().parents[3] / "ros2_sim"
 STOP_FILE = SIM_DIR / "generated" / ".cece_stop"
 AUTO_STOP = SIM_DIR / "generated" / ".cece_auto_stop"
@@ -58,6 +59,7 @@ def start_gait(steps, phase_seconds=0.8, direction="forward"):
     threading.Thread(target=watch, daemon=True).start()
 
 def start_autonomy():
+    global autonomy_process
     STOP_FILE.parent.mkdir(exist_ok=True)
     STOP_FILE.unlink(missing_ok=True)
     AUTO_STOP.unlink(missing_ok=True)
@@ -73,6 +75,7 @@ def start_autonomy():
     except Exception:
         log.close()
         raise
+    autonomy_process = process
     def watch():
         try:
             process.wait()
@@ -195,6 +198,30 @@ def reply(prompt, config):
     return ollama_answer(prompt, config.model)
 
 class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        if self.path != "/status":
+            self.send_error(404)
+            return
+        process = autonomy_process
+        running = process is not None and process.poll() is None
+        message = "Autonomous simulation stopped."
+        if process is not None:
+            try:
+                lines = (STOP_FILE.parent / "autonomous.log").read_text(encoding="utf-8", errors="replace").splitlines()
+                messages = [line for line in lines if line.startswith(("Waiting for camera", "Clear ", "Obstacle ", "No clear route", "Autonomous simulation stopped"))]
+                if messages:
+                    message = messages[-1]
+                if not running and message != "Autonomous simulation stopped":
+                    message = "Autonomous simulation ended. Last status: " + message
+            except OSError:
+                message = "Waiting for autonomous status." if running else message
+        data = json.dumps({"autonomous_running": running, "message": message}).encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
     def do_POST(self):
         if self.path != "/ask":
             self.send_error(404)

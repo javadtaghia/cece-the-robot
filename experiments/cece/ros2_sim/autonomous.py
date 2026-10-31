@@ -60,13 +60,18 @@ def main():
     node.subscribe(Image, "/cece/camera/image", state.image)
     threading.Thread(target=state.watchdog, daemon=True).start()
     blocked_turns = 0
+    waiting = True
     print("Waiting for camera and range sensor", flush=True)
     try:
         while not AUTO_STOP.exists():
             distance = state.reading()
             if distance is None:
+                if not waiting:
+                    print("Waiting for camera and range sensor", flush=True)
+                    waiting = True
                 time.sleep(0.2)
                 continue
+            waiting = False
             if distance < CLEARANCE_M:
                 blocked_turns += 1
                 if blocked_turns > 8:
