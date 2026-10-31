@@ -36,8 +36,9 @@ If no count is specified, motion continues until a stop request. The PC bridge
 accepts requests such as “move forward twenty steps” without a fixed maximum;
 say “stop” to request a stop. Asking to “move forward faster” selects a
 shorter 0.4-second phase instead of 0.8 seconds; this is an experimental
-command rate, not a measured walking speed. Backward and turning gaits are
-not implemented or validated. It responds once the request has been launched,
+command rate, not a measured walking speed. Backward and turning joint sequences are experimental; in Gazebo tests they
+produced opposite displacement and opposite rotation, respectively. They have
+not established physical walking or reliable navigation. It responds once the request has been launched,
 not when motion finishes. The stop request applies to the Gazebo gait only.
 
 The evaluation measured all four joints moving and roughly 15 mm of body
@@ -72,7 +73,10 @@ The generated Gazebo world publishes a 320 × 240 camera image on
 `/cece/range_scan`. The assumed forward direction is -Y and needs physical
 verification. The range model is lidar-style geometry, not an HC-SR04
 electrical, acoustic or firmware simulation. The camera and range topics were
-observed publishing in a headless test. They are not connected to the ESP32,
-the interface, navigation, or an obstacle avoidance controller. Autonomous
-motion is disabled until perception, stopping, and turning are integrated and
-validated.
+observed publishing in a headless test. The PC-side autonomous experiment checks that the camera stream is live and
+uses the range scan to stop forward commands and try a left turn when an
+obstacle is within 0.5 m. It stops if sensor messages go stale and stops after
+eight blocked turns. The camera is not used for visual obstacle recognition.
+The range model and controller do not run in ESP32 firmware. One headless
+scenario with an obstacle approximately 0.25 m ahead was tested; this is not
+a general obstacle avoidance or physical safety validation.

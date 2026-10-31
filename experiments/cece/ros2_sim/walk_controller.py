@@ -23,7 +23,7 @@ def edge_angle(roll):
             return min(28.0, y0 + fraction * (y1 - y0))
     return min(28.0, EDGE[-1][1])
 
-def targets(half, phase, t):
+def targets(half, phase, t, direction="forward"):
     # Slow, bounded test gait adapted from the existing Bullet experiment.
     ease = t * t * (3 - 2 * t)
     left_stance = half % 2 == 0
@@ -43,17 +43,36 @@ def targets(half, phase, t):
     else:
         roll = 12 * (1 - ease)
         a, b, hip = roll, edge_angle(roll), end
+    if direction == "backward":
+        left_hip, right_hip = -hip, -hip
+    elif direction in ("left", "right"):
+        turn_sign = -1 if direction == "left" else 1
+        if phase == 0 and half == 0:
+            stance_hip, swing_hip = -10 * ease, 10 * ease
+        elif phase < 2:
+            stance_hip, swing_hip = -10, 10
+        elif phase == 2:
+            stance_hip, swing_hip = -10 + 20 * ease, 10 - 20 * ease
+        else:
+            stance_hip, swing_hip = 10, -10
+        if left_stance:
+            left_hip, right_hip = turn_sign * stance_hip, turn_sign * swing_hip
+        else:
+            left_hip, right_hip = turn_sign * swing_hip, turn_sign * stance_hip
+    else:
+        left_hip, right_hip = hip, hip
     if left_stance:
-        return [hip, sign * a, hip, sign * b]
-    return [hip, sign * b, hip, sign * a]
+        return [left_hip, sign * a, right_hip, sign * b]
+    return [left_hip, sign * b, right_hip, sign * a]
 
-def main(steps=None, phase_seconds=0.8):
+def main(steps=None, phase_seconds=0.8, direction="forward"):
     if steps is None:
         parser = argparse.ArgumentParser()
         parser.add_argument("--steps", type=int, default=0, help="0 runs until stopped")
         parser.add_argument("--phase-seconds", type=float, default=0.8, help="Seconds per gait phase; experimental")
+        parser.add_argument("--direction", choices=("forward", "backward", "left", "right"), default="forward")
         args = parser.parse_args()
-        steps, phase_seconds = args.steps, args.phase_seconds
+        steps, phase_seconds, direction = args.steps, args.phase_seconds, args.direction
     if not 0.3 <= phase_seconds <= 2.0:
         raise ValueError("Phase duration must be between 0.3 and 2 seconds")
     if steps < 0:
@@ -76,7 +95,7 @@ def main(steps=None, phase_seconds=0.8):
                 start = time.monotonic()
                 while not STOP_FILE.exists():
                     t = min(1.0, (time.monotonic() - start) / phase_seconds)
-                    send(targets(half, phase, t))
+                    send(targets(half, phase, t, direction))
                     if t >= 1:
                         break
                     time.sleep(.05)

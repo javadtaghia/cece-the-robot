@@ -15,6 +15,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 motion_lock = threading.Lock()
 SIM_DIR = Path(__file__).resolve().parents[3] / "ros2_sim"
 STOP_FILE = SIM_DIR / "generated" / ".cece_stop"
+AUTO_STOP = SIM_DIR / "generated" / ".cece_auto_stop"
 
 def requested_steps(prompt):
     match = re.search(r"\b(\d+|(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)(?:[ -](?:one|two|three|four|five|six|seven|eight|nine))?)\s+steps?\b", prompt, re.I)
@@ -31,16 +32,18 @@ def requested_steps(prompt):
                     "seventy": 70, "eighty": 80, "ninety": 90})
     return sum(numbers[word] for word in re.split(r"[ -]", value))
 
-def start_gait(steps, phase_seconds=0.8):
+def start_gait(steps, phase_seconds=0.8, direction="forward"):
     STOP_FILE.parent.mkdir(exist_ok=True)
     STOP_FILE.unlink(missing_ok=True)
     count = 0 if steps is None else steps
+    if direction not in ("forward", "backward", "left", "right"):
+        raise ValueError("Invalid simulation direction")
     partition = os.environ.get("CECE_GZ_PARTITION", "")
     if partition and not re.fullmatch(r"[A-Za-z0-9_-]+", partition):
         raise ValueError("Invalid Gazebo partition")
     prefix = f"export GZ_PARTITION={partition} && " if partition else ""
     process = subprocess.Popen(["wsl", "-d", "Ubuntu", "--", "bash", "-c",
-        f"{prefix}source /opt/ros/jazzy/setup.bash && exec /usr/bin/python3 walk_controller.py --steps {count} --phase-seconds {phase_seconds}"],
+        f"{prefix}source /opt/ros/jazzy/setup.bash && exec /usr/bin/python3 walk_controller.py --steps {count} --phase-seconds {phase_seconds} --direction {direction}"],
         cwd=SIM_DIR,
         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     # Detect immediate launch errors before reporting that the request started.
@@ -53,6 +56,31 @@ def start_gait(steps, phase_seconds=0.8):
         finally:
             motion_lock.release()
     threading.Thread(target=watch, daemon=True).start()
+
+def start_autonomy():
+    STOP_FILE.parent.mkdir(exist_ok=True)
+    STOP_FILE.unlink(missing_ok=True)
+    AUTO_STOP.unlink(missing_ok=True)
+    partition = os.environ.get("CECE_GZ_PARTITION", "")
+    if partition and not re.fullmatch(r"[A-Za-z0-9_-]+", partition):
+        raise ValueError("Invalid Gazebo partition")
+    prefix = f"export GZ_PARTITION={partition} && " if partition else ""
+    log = (STOP_FILE.parent / "autonomous.log").open("w", encoding="utf-8")
+    try:
+        process = subprocess.Popen(["wsl", "-d", "Ubuntu", "--", "bash", "-c",
+            f"{prefix}source /opt/ros/jazzy/setup.bash && exec /usr/bin/python3 autonomous.py"],
+            cwd=SIM_DIR, stdout=log, stderr=subprocess.STDOUT)
+    except Exception:
+        log.close()
+        raise
+    def watch():
+        try:
+            process.wait()
+        finally:
+            log.close()
+            motion_lock.release()
+    threading.Thread(target=watch, daemon=True).start()
+
 
 def json_request(url, *, payload=None, headers=None, timeout=30):
     data = None if payload is None else json.dumps(payload).encode("utf-8")
@@ -123,12 +151,25 @@ def reply(prompt, config):
         if not motion_lock.locked():
             return "The simulated gait is not running."
         STOP_FILE.parent.mkdir(exist_ok=True)
+        AUTO_STOP.touch()
         STOP_FILE.touch()
-        return "Stopping the simulated gait."
-    if re.search(r"\b(?:walk|move|step|forward|backward)\b", prompt, re.I):
+        return "Stopping simulated motion."
+    if re.search(r"\b(?:autonomous|autonomy)\b", prompt, re.I):
+        if not getattr(config, "sim_motion", False):
+            return "Autonomous mode is available only in simulation."
+        if not motion_lock.acquire(blocking=False):
+            return "The simulated gait is already running."
+        try:
+            start_autonomy()
+        except Exception:
+            motion_lock.release()
+            raise
+        return "Autonomous simulation requested; waiting for sensor data."
+    if re.search(r"\b(?:walk|move|step|turn|forward|backward)\b", prompt, re.I):
         if getattr(config, "sim_motion", False):
-            if re.search(r"\b(?:backward|backwards|back|left|right)\b", prompt, re.I):
-                return "Only the forward test gait is available in simulation."
+            direction = next((d for pattern, d in ((r"\b(?:backward|backwards|back)\b", "backward"),
+                (r"\bleft\b", "left"), (r"\bright\b", "right"))
+                if re.search(pattern, prompt, re.I)), "forward")
             steps = requested_steps(prompt)
             if steps is not None and steps < 1:
                 return "Please ask for at least one step."
@@ -136,14 +177,14 @@ def reply(prompt, config):
                 return "The simulated gait is already running."
             try:
                 if re.search(r"\b(?:fast|faster|quickly)\b", prompt, re.I):
-                    start_gait(steps, 0.4)
+                    start_gait(steps, 0.4, direction)
                 else:
-                    start_gait(steps)
+                    start_gait(steps, direction=direction)
             except Exception:
                 motion_lock.release()
                 raise
-            return (f"Requested {steps} simulated steps." if steps is not None
-                    else "Moving in simulation until you say stop.")
+            return (f"Requested {steps} simulated {direction} steps." if steps is not None
+                    else f"Moving {direction} in simulation until you say stop.")
         return "I cannot walk yet. My motors need calibration and a tested gait."
     if re.search(r"\b(?:weather|temperature|forecast)\b", prompt, re.I):
         return get_weather(config.city, config.latitude, config.longitude)

@@ -1,4 +1,5 @@
 """Measure Gazebo model and joint motion during one experimental gait."""
+import argparse
 import json
 import math
 import threading
@@ -29,6 +30,9 @@ def on_poses(msg):
                 foot_heights[pose.name].append(pose.position.z)
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--direction", choices=("forward", "backward", "left", "right"), default="forward")
+    args = parser.parse_args()
     node = Node()
     node.subscribe(Model, "/world/cece_starter_room/model/cece_prototype/joint_state", on_state)
     node.subscribe(Pose_V, "/world/cece_starter_room/dynamic_pose/info", on_poses)
@@ -41,7 +45,7 @@ def main():
         samples.append(first)
         for values in foot_heights.values():
             values.clear()
-    walk_controller.main(steps=2)
+    walk_controller.main(steps=2, direction=args.direction)
     time.sleep(1)
     with lock:
         rows = list(samples)
@@ -49,6 +53,9 @@ def main():
     final = rows[-1]
     names = walk_controller.NAMES
     result = {
+        "direction": args.direction,
+        "start_orientation_xyzw": first["q"],
+        "end_orientation_xyzw": final["q"],
         "samples": len(rows),
         "displacement_m": [final[k] - first[k] for k in ("x", "y", "z")],
         "joint_range_degrees": {

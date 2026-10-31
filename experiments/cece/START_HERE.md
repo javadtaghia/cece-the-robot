@@ -161,6 +161,9 @@ To finish, close the voice window, the Wokwi simulator tab and the Gazebo
 window, then press **Ctrl+C** in the bridge and Gazebo PowerShell windows.
 
 The voice window also has Gazebo movement buttons. Forward requests two test
-half-steps; Stop requests the PC bridge to stop. Back and turns display that
-they are not implemented. Buttons send directly to the local simulation bridge,
-not through the ESP32. Autonomous obstacle avoidance is not yet available.
+half-steps; Stop requests the PC bridge to stop. Back, Left and Right request experimental simulation-only joint sequences.
+The Autonomous button starts a prototype that uses the Gazebo range scan to
+try to turn away from a nearby obstacle and checks for a live camera feed.
+It does not interpret the camera image or guarantee avoidance. Press Stop to
+end motion. Buttons send directly to the local simulation bridge, not through
+the ESP32. None of these controls drive physical hardware.

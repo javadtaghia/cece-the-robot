@@ -171,7 +171,7 @@ def main():
     button.pack(pady=12)
     controls = ttk.LabelFrame(root, text="Gazebo movement (experimental)")
     controls.pack(pady=6)
-    controls_status = tk.StringVar(value="Forward is a test gait; other directions are not ready.")
+    controls_status = tk.StringVar(value="Simulation test gaits: feet slide; physical walking is unverified.")
     ttk.Label(controls, textvariable=controls_status).grid(row=3, column=0, columnspan=3)
 
     def command_motion(command):
@@ -188,11 +188,11 @@ def main():
         threading.Thread(target=send, daemon=True).start()
 
     ttk.Button(controls, text="Forward", command=lambda: command_motion("move forward 2 steps")).grid(row=0, column=1, padx=4, pady=2)
-    ttk.Button(controls, text="Left (not ready)", command=lambda: command_motion("move left 2 steps")).grid(row=1, column=0, padx=4, pady=2)
+    ttk.Button(controls, text="Left", command=lambda: command_motion("move left 2 steps")).grid(row=1, column=0, padx=4, pady=2)
     ttk.Button(controls, text="Stop", command=lambda: command_motion("stop")).grid(row=1, column=1, padx=4, pady=2)
-    ttk.Button(controls, text="Right (not ready)", command=lambda: command_motion("move right 2 steps")).grid(row=1, column=2, padx=4, pady=2)
-    ttk.Button(controls, text="Back (not ready)", command=lambda: command_motion("move backward 2 steps")).grid(row=2, column=1, padx=4, pady=2)
-    ttk.Button(root, text="Autonomous obstacle avoidance: unavailable", state="disabled").pack(pady=4)
+    ttk.Button(controls, text="Right", command=lambda: command_motion("move right 2 steps")).grid(row=1, column=2, padx=4, pady=2)
+    ttk.Button(controls, text="Back", command=lambda: command_motion("move backward 2 steps")).grid(row=2, column=1, padx=4, pady=2)
+    ttk.Button(root, text="Start autonomous simulation", command=lambda: command_motion("start autonomous")).pack(pady=4)
     stop_event = threading.Event()
     running = False
 
