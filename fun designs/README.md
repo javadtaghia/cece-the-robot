@@ -1,3 +1,3 @@
 # Fun designs
 
-- [Samsung T5 MacBook holder](samsung_t5_monitor_holder/README.md) — prototype with a loose 6 mm side opening and a top-left support ledge; real-laptop fit and load remain unverified.
+- [Samsung T5 one-piece MacBook holder](samsung_t5_monitor_holder/README.md) — lightweight prototype with loose side hooks and a top-edge ledge. Real-laptop fit and load are unverified.

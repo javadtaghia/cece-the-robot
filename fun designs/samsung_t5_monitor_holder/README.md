@@ -1,63 +1,62 @@
-# Samsung T5 holder — 13-inch MacBook Air M2, prototype
+# Samsung T5 one-piece MacBook holder — prototype
 
-A ventilated sleeve holds the Samsung T5 behind the screen, with its USB-C end
-at the open top. The upper clip has a **top-edge ledge**: hang it on the
-MacBook's top-left corner so the ledge carries the holder's weight. The lower
-clip locates the holder along the left side. The design does not depend on the
-side clips gripping the screen to resist downward sliding.
+This design is **one print**: an open skeleton sleeve, two right-angle side
+hooks and a top-edge ledge. No screws or separate clips are needed. The T5
+slides in from the top; its USB-C end stays at the open end of the sleeve.
+Position the upper hook at the **top-left corner** of the laptop display.
 
-## Dimensions and safety
+## Current files
 
-- User-measured display lid thickness: **4 mm**.
-- User-measured left black border: **7 mm**.
-- Side hook opening: **6 mm**, leaving 2 mm total clearance around the lid.
-- Nominal front-hook overlap: **3 mm**, leaving 4 mm to the reported picture
-  boundary before measurement, printer and placement errors.
-- The top ledge extends 18 mm along the top edge and spans the nominal 4 mm
-  lid depth. Position the **upper clip at the very top-left corner**; the
-  sleeve extends about 13 mm above the lid in this arrangement.
+- `T5_One_Piece_Holder_PROTOTYPE.stl`: the single print file.
+- `Samsung_T5_One_Piece_Prototype.FCStd`: FreeCAD assembly. It contains one
+  printable solid plus separate SSD and lid **reference-only** envelopes.
+- `build_one_piece.py` and `one_piece_geometry_report.json`: generator and
+  recorded geometry checks. Earlier multi-piece studies are in
+  `previous_multi_piece/`; they are not used by this design.
 
-A loose side gap avoids an intentional squeeze on the front and back, but the
-weight **must still bear on the lid's top edge**. The real corner curvature,
-protective padding, local load, cable pull, print strength and lid/hinge load
-have not been tested. The design does not establish that attaching it is safe
-for the laptop. Use a thin soft protective pad on the top contact if suitable;
-check that padding does not force the front hook against the glass. Remove the
-holder before closing the laptop.
+## Fit and retention
 
-The geometric reference lid is a rectangular approximation, not the MacBook's
-actual CAD. The CAD check found no overlap in the nominal pose and found a
-36 mm³ collision if the upper hook is moved 0.5 mm downward, indicating a
-positive stop in that simplified model. It is not a strength, friction,
-printer-tolerance or real-laptop fit test.
+The user measured the lid as 4 mm thick and the black border as 7 mm wide. The
+side hook opening is 6 mm, giving 2 mm of total clearance. The front hook
+extends 3 mm over the border, leaving a nominal 4 mm to the picture boundary.
+Actual placement, printing tolerances, rounded lid edges and padding can change
+those clearances.
 
-## Print files
+The top ledge rests on the upper edge and provides a positive stop against
+sliding down; the design does not rely on the loose side hooks squeezing the
+screen. The ledge will still put the weight of the SSD, holder and cable on
+the lid edge. No design carrying weight there can guarantee zero pressure.
+The side hooks can also disengage if the holder rotates or is pulled away;
+real-world retention and safe loading are unverified. Remove the holder before
+closing the laptop.
 
-- `T5_holder_print_1_PROVISIONAL.stl`: one SSD sleeve.
-- `Lower_side_hook_print_1_PROVISIONAL.stl`: one lower side-positioning hook.
-- `Upper_corner_support_print_1_PROVISIONAL.stl`: one upper hook with top ledge.
-- `Samsung_T5_Holder_Assembly_PROVISIONAL.FCStd`: FreeCAD assembly, including
-  simplified lid and SSD references. `build_holder.py` regenerates the parts;
-  `geometry_report.json` records the nominal checks.
+The SSD envelope fits without a modeled collision; the part is one valid CAD
+solid and the STL is a single closed manifold. Against a simplified rectangular
+lid, a 0.5 mm downward movement makes the top ledge intersect the lid reference,
+showing a stop in this idealized geometry. These checks do **not** establish a
+safe real-laptop fit, screen protection, adequate strength or USB cable fit.
+Inspect and test the unloaded part without forcing it before considering use
+with the SSD. The top-left corner shape and cable strain remain to be checked.
 
-The hooks attach to the sleeve with two M3 bolts and nuts, not included. Inspect
-the slicer preview: the upper ledge is cantilevered in the supplied print
-orientation and will likely need support beneath it; the small horizontal bolt
-holes may also need attention. Print the sleeve flat on its back. No printer
-profile, physical fit or loaded part has been validated. Do not trust the SSD
-to this prototype until the contact, retention and strength have been checked;
-test initial fit without the SSD and without forcing any part.
+## Printing
 
-The SSD geometry uses Samsung's published **74 × 57.3 × 10.5 mm** dimensions;
-USB plug size and clearance remain unverified. [Samsung specifications](https://www.samsung.com/uk/memory-storage/portable-ssd/portable-ssd-t5-1tb-black-mu-pa1t0b-eu/).
+The export is oriented on its long side (about 24.3 × 80.0 × 67.3 mm). Inspect
+the slicer preview; the side hooks, frame and top ledge can need supports in
+that orientation. No support profile or physical print has been verified.
+The solid CAD volume is about 7.70 cm³, or **9.6 g if fully solid PLA at
+1.24 g/cm³**. Actual filament will differ and support material is additional.
+The rails are deliberately light, so layer orientation and strength matter.
 
-## Regenerate for different measurements
+Source dimensions: [Samsung T5 specifications](https://www.samsung.com/uk/memory-storage/portable-ssd/portable-ssd-t5-1tb-black-mu-pa1t0b-eu/).
 
-From this folder on this PC, with FreeCAD 1.1 installed:
+## Regenerate
+
+On this Windows PC with FreeCAD 1.1, run from this directory:
 
 ```powershell
-& 'C:\Program Files\FreeCAD 1.1\bin\python.exe' .\build_holder.py --monitor-thickness 4 --bezel-overlap 3 --padding-clearance 2
+& 'C:\Program Files\FreeCAD 1.1\bin\python.exe' .\build_one_piece.py --lid 4 --opening 6 --overlap 3
 ```
 
-`padding-clearance` is the **total extra jaw space**, so 4 + 2 = 6 mm. Values
-must be rechecked against the actual edge and any padding before use.
+The generation script exports the print STL and FreeCAD geometry. On a newly
+generated FreeCAD file, toggle the printable part and references visible if
+FreeCAD initially hides them; reference objects must not be sent to the printer.
