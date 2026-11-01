@@ -1,2 +1,5 @@
 /results/*
 !/results/.gitkeep
+/generated/
+/20??-??-??T*.png
+/*.FCStd.*

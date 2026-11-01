@@ -1,0 +1,16 @@
+{
+  "samples": 10282,
+  "observation_wall_seconds": 12,
+  "joint_motion_range_deg": {
+    "left_hip": 34.883304178041826,
+    "left_ankle": 46.27665136221078,
+    "right_hip": 35.548210313374696,
+    "right_ankle": 43.245323090253464
+  },
+  "model_position_displacement_mm": [
+    -195.393610410688,
+    -183.72397890510328,
+    0.42499662246936465
+  ],
+  "scope": "Observed Gazebo joint/state messages; no foot-contact, lift-and-land or speed-ratio acceptance test"
+}

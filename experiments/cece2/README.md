@@ -155,6 +155,39 @@ validation for the current implementation.
 
 ## Gazebo trial
 
+### Separate Cece 2 viewing scene
+
+`Cece2_Assembly.FCStd` is a coloured FreeCAD inspection assembly of the retained
+mechanism, with the Cece 2 profile recorded in its model tree.
+`show_cece2.FCMacro` recreates that view without overwriting Cece's CAD.
+
+In Ubuntu/WSL, launch a separate Gazebo scene from the repository root:
+
+```bash
+bash experiments/cece2/run_view.sh
+```
+
+Then, in another Ubuntu/WSL terminal at the repository root:
+
+```bash
+bash experiments/cece2/walk_view.sh 40
+```
+
+This uses the isolated `cece2_view` transport partition, model `cece2` and
+world `cece2_room`. Its ankle stops allow the 34.248° edge-transfer target
+(the old scene clipped it at 30°), and its velocity limit is set to the
+assumed 500°/s no-load upper bound. Motor effort stays at 0.08 N·m. These
+are scene assumptions; Gazebo's PID and simple box colliders differ from the
+Bullet study. `gazebo_view_check.json` records all four joints moving during
+the live view. The observed position moved sideways as well as forward;
+straight-line walking and the 10× result are **not** established in Gazebo.
+
+`Cece2_FreeCAD_Front.png` and `Cece2_Gazebo_View.png` are captures of these
+views, not fabricated concept images. The Gazebo service utilities focus the
+camera and capture the actual rendered view.
+
+### Using the existing Cece world instead
+
 Start and reset the existing world using `../cece/START_HERE.md`, then stop the
 old gait controller. In the Ubuntu/WSL terminal, using the same `GZ_PARTITION`
 as Gazebo:
