@@ -1,0 +1,108 @@
+{
+  "profile": {
+    "name": "cece2_candidate",
+    "hip_deg": 15.0,
+    "roll_deg": 12.0,
+    "phase_durations_s": [
+      0.14,
+      0.06,
+      0.2,
+      0.06,
+      0.1
+    ],
+    "command_hz": 50.0
+  },
+  "cases": [
+    {
+      "name": "selected_240",
+      "speed_mm_s": 22.632,
+      "lifts": 40,
+      "fell": false,
+      "max_tilt_deg": 12.08,
+      "max_tracking_error_deg": 13.63,
+      "stance_drift_mm": 1.79,
+      "contact_slip_integral_mm": 3.225,
+      "stance_airborne_s": 0.0,
+      "screen_pass": true
+    },
+    {
+      "name": "selected_480",
+      "speed_mm_s": 22.356,
+      "lifts": 40,
+      "fell": false,
+      "max_tilt_deg": 12.05,
+      "max_tracking_error_deg": 14.28,
+      "stance_drift_mm": 1.97,
+      "contact_slip_integral_mm": 3.467,
+      "stance_airborne_s": 0.0,
+      "screen_pass": true
+    },
+    {
+      "name": "selected_low_friction",
+      "speed_mm_s": 20.116,
+      "lifts": 40,
+      "fell": false,
+      "max_tilt_deg": 12.17,
+      "max_tracking_error_deg": 13.63,
+      "stance_drift_mm": 1.82,
+      "contact_slip_integral_mm": 7.594,
+      "stance_airborne_s": 0.0,
+      "screen_pass": true
+    },
+    {
+      "name": "selected_60g_payload",
+      "speed_mm_s": 22.893,
+      "lifts": 40,
+      "fell": false,
+      "max_tilt_deg": 12.2,
+      "max_tracking_error_deg": 13.62,
+      "stance_drift_mm": 1.73,
+      "contact_slip_integral_mm": 2.568,
+      "stance_airborne_s": 0.0,
+      "screen_pass": true
+    },
+    {
+      "name": "selected_torque_060",
+      "speed_mm_s": 22.931,
+      "lifts": 39,
+      "fell": false,
+      "max_tilt_deg": 12.11,
+      "max_tracking_error_deg": 13.64,
+      "stance_drift_mm": 1.79,
+      "contact_slip_integral_mm": 3.25,
+      "stance_airborne_s": 0.0,
+      "screen_pass": false
+    },
+    {
+      "name": "selected_torque_040",
+      "speed_mm_s": 23.202,
+      "lifts": 0,
+      "fell": false,
+      "max_tilt_deg": 12.12,
+      "max_tracking_error_deg": 18.99,
+      "stance_drift_mm": 1.17,
+      "contact_slip_integral_mm": 1.307,
+      "stance_airborne_s": 0.0,
+      "screen_pass": false
+    },
+    {
+      "name": "selected_speed_350",
+      "speed_mm_s": 22.528,
+      "lifts": 40,
+      "fell": false,
+      "max_tilt_deg": 12.13,
+      "max_tracking_error_deg": 14.71,
+      "stance_drift_mm": 2.33,
+      "contact_slip_integral_mm": 3.411,
+      "stance_airborne_s": 0.0,
+      "screen_pass": false
+    }
+  ],
+  "source_sha256": {
+    "simulate.py": "cea11b7d6edec92af02037642fd2d0c3e575bbf342980e150bafd415a21b6d34",
+    "gait.py": "40cf1e14796cfbf3a6b5c245c32bc17c65f304ee0b03e04b995a938990059b7d"
+  },
+  "hardware_approved": false,
+  "gazebo_measured": false,
+  "acceptance": "40/40 lift-and-land, no fall, stance origin drift <=2 mm, no stance flight. Integrated contact slip is also reported, not assumed zero."
+}

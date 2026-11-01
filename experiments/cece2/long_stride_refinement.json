@@ -1,0 +1,154 @@
+[
+  {
+    "name": "long_stride_0_240",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.18,
+      0.1,
+      0.36,
+      0.1,
+      0.18
+    ],
+    "physics_hz": 240,
+    "speed_mm_s": 22.522,
+    "fell": false,
+    "lifts": 40,
+    "stance_drift_mm": 3.19,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "long_stride_0_480",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.18,
+      0.1,
+      0.36,
+      0.1,
+      0.18
+    ],
+    "physics_hz": 480,
+    "speed_mm_s": 20.893,
+    "fell": false,
+    "lifts": 40,
+    "stance_drift_mm": 4.97,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": false
+  },
+  {
+    "name": "long_stride_1_240",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.16,
+      0.08,
+      0.36,
+      0.08,
+      0.16
+    ],
+    "physics_hz": 240,
+    "speed_mm_s": 25.066,
+    "fell": false,
+    "lifts": 40,
+    "stance_drift_mm": 3.03,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "long_stride_1_480",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.16,
+      0.08,
+      0.36,
+      0.08,
+      0.16
+    ],
+    "physics_hz": 480,
+    "speed_mm_s": 23.087,
+    "fell": false,
+    "lifts": 40,
+    "stance_drift_mm": 4.93,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "long_stride_2_240",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.2,
+      0.08,
+      0.32,
+      0.08,
+      0.2
+    ],
+    "physics_hz": 240,
+    "speed_mm_s": 23.636,
+    "fell": false,
+    "lifts": 40,
+    "stance_drift_mm": 3.5,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "long_stride_2_480",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.2,
+      0.08,
+      0.32,
+      0.08,
+      0.2
+    ],
+    "physics_hz": 480,
+    "speed_mm_s": 22.207,
+    "fell": false,
+    "lifts": 40,
+    "stance_drift_mm": 4.66,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "long_stride_3_240",
+    "hip_deg": 20,
+    "phase_durations_s": [
+      0.16,
+      0.08,
+      0.28,
+      0.08,
+      0.16
+    ],
+    "physics_hz": 240,
+    "speed_mm_s": 22.351,
+    "fell": false,
+    "lifts": 40,
+    "stance_drift_mm": 2.73,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "long_stride_3_480",
+    "hip_deg": 20,
+    "phase_durations_s": [
+      0.16,
+      0.08,
+      0.28,
+      0.08,
+      0.16
+    ],
+    "physics_hz": 480,
+    "speed_mm_s": 20.414,
+    "fell": false,
+    "lifts": 40,
+    "stance_drift_mm": 4.26,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": false
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "name": "balanced_0_240",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.12,
+      0.12,
+      0.32,
+      0.12,
+      0.12
+    ],
+    "physics_hz": 240,
+    "speed_mm_s": 26.068,
+    "fell": false,
+    "lifts": 40,
+    "contact_slip_mm": 4.349,
+    "stance_drift_mm": 2.81,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "balanced_0_480",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.12,
+      0.12,
+      0.32,
+      0.12,
+      0.12
+    ],
+    "physics_hz": 480,
+    "speed_mm_s": 18.441,
+    "fell": false,
+    "lifts": 33,
+    "contact_slip_mm": 12.169,
+    "stance_drift_mm": 10.42,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": false
+  },
+  {
+    "name": "balanced_1_240",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.14,
+      0.1,
+      0.36,
+      0.1,
+      0.14
+    ],
+    "physics_hz": 240,
+    "speed_mm_s": 24.699,
+    "fell": false,
+    "lifts": 40,
+    "contact_slip_mm": 4.293,
+    "stance_drift_mm": 3.12,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "balanced_1_480",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.14,
+      0.1,
+      0.36,
+      0.1,
+      0.14
+    ],
+    "physics_hz": 480,
+    "speed_mm_s": 22.274,
+    "fell": false,
+    "lifts": 40,
+    "contact_slip_mm": 8.659,
+    "stance_drift_mm": 4.55,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "balanced_2_240",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.16,
+      0.08,
+      0.36,
+      0.08,
+      0.16
+    ],
+    "physics_hz": 240,
+    "speed_mm_s": 25.066,
+    "fell": false,
+    "lifts": 40,
+    "contact_slip_mm": 4.435,
+    "stance_drift_mm": 3.03,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "balanced_2_480",
+    "hip_deg": 25,
+    "phase_durations_s": [
+      0.16,
+      0.08,
+      0.36,
+      0.08,
+      0.16
+    ],
+    "physics_hz": 480,
+    "speed_mm_s": 23.087,
+    "fell": false,
+    "lifts": 40,
+    "contact_slip_mm": 8.566,
+    "stance_drift_mm": 4.93,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "balanced_3_240",
+    "hip_deg": 20,
+    "phase_durations_s": [
+      0.12,
+      0.1,
+      0.24,
+      0.1,
+      0.12
+    ],
+    "physics_hz": 240,
+    "speed_mm_s": 24.676,
+    "fell": false,
+    "lifts": 40,
+    "contact_slip_mm": 4.085,
+    "stance_drift_mm": 2.95,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": true
+  },
+  {
+    "name": "balanced_3_480",
+    "hip_deg": 20,
+    "phase_durations_s": [
+      0.12,
+      0.1,
+      0.24,
+      0.1,
+      0.12
+    ],
+    "physics_hz": 480,
+    "speed_mm_s": 18.721,
+    "fell": false,
+    "lifts": 33,
+    "contact_slip_mm": 10.485,
+    "stance_drift_mm": 11.5,
+    "stance_airborne_s": 0.0,
+    "screen_pass": false,
+    "ten_x_speed": false
+  }
+]

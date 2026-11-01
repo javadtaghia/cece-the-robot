@@ -1,0 +1,26 @@
+{
+  "nominal_comparisons": [
+    {
+      "physics_hz": 240,
+      "baseline_mm_s": 2.197125,
+      "cece2_mm_s": 22.63153181390767,
+      "speed_ratio": 10.300520823306671,
+      "candidate_lifts": 40,
+      "candidate_fell": false
+    },
+    {
+      "physics_hz": 480,
+      "baseline_mm_s": 2.1783124999999997,
+      "cece2_mm_s": 22.35580140072266,
+      "speed_ratio": 10.262899102274199,
+      "candidate_lifts": 40,
+      "candidate_fell": false
+    }
+  ],
+  "physical_walk_verified": false,
+  "leg_geometry_changed": false,
+  "main_cece_preserved": true,
+  "selected_validation": "selected_validation.json",
+  "source_cece1_sha256": "d7dd40ddb833411338af94cacacf034c4e33a17fa9f617f0a82bb6c45de792b5",
+  "scope": "Matched Bullet model comparisons with assumed actuators and contacts; not measured hardware or Gazebo performance."
+}
