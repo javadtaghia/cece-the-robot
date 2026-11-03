@@ -1,0 +1,20 @@
+{
+  "board": "Arduino Due (Programming Port)",
+  "port": "COM10",
+  "fqbn": "arduino:sam:arduino_due_x_dbg",
+  "sketch": "DueCeceFourServoWalk/DueCeceFourServoWalk.ino",
+  "compiled": true,
+  "compile_flash_bytes": 27592,
+  "uploaded": true,
+  "banner_verified": "CECE4_WALK_V6",
+  "help_verified": true,
+  "stop_response_verified": true,
+  "mapping_confirmed_by_user": true,
+  "right_motor_directions_reversed": [
+    2,
+    4
+  ],
+  "movement_command_sent": false,
+  "physical_walking_verified": false,
+  "left_stopped": true
+}

@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-03",
+  "board": "Arduino Due (Programming Port)",
+  "port": "COM10",
+  "fqbn": "arduino:sam:arduino_due_x_dbg",
+  "sketch": "DuePair34TestV5/DuePair34TestV5.ino",
+  "compiled": true,
+  "compile_flash_bytes": 27512,
+  "uploaded": true,
+  "firmware_banner_confirmed": "DUE_PAIR34_V5_DIRECT_START",
+  "serial_help_query_verified": true,
+  "serial_stop_response_verified": true,
+  "movement_command_sent": false,
+  "physical_motion_verified": false,
+  "left_stopped": true,
+  "monitor_baud": 115200
+}

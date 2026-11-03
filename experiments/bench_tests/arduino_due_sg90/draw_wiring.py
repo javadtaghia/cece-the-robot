@@ -1,0 +1,48 @@
+"""Render the direct-signal, separate-power Arduino Due bench wiring."""
+from pathlib import Path
+from PIL import Image, ImageDraw, ImageFont
+HERE=Path(__file__).resolve().parent
+im=Image.new('RGB',(1640,1060),'white');d=ImageDraw.Draw(im)
+font_root=Path('C:/Windows/Fonts')
+def font(size,bold=False):
+    return ImageFont.truetype(str(font_root/('arialbd.ttf' if bold else 'arial.ttf')),size)
+ink='#172b3a';red='#c62d39';brown='#794522';orange='#d9760d';gray='#eaf0f4'
+def text(x,y,s,size=22,color=ink,bold=False):d.text((x,y),s,font=font(size,bold),fill=color)
+def line(points,color,width=6):d.line(points,fill=color,width=width,joint='curve')
+def dot(x,y,color):d.ellipse((x-6,y-6,x+6,y+6),fill=color)
+def box(bounds):d.rounded_rectangle(bounds,radius=16,fill=gray,outline=ink,width=3)
+text(65,30,'Arduino Due + four SG90 servos',40,bold=True)
+text(65,86,'Bench test: direct 3.3 V control signals, separate regulated 5 V servo power',24)
+box((150,160,490,250));text(175,178,'PC / USB',28,bold=True)
+text(175,215,'Programming Port on Due',21)
+line([(320,250),(320,320)],'#496578',7)
+box((150,320,490,815));text(175,337,'ARDUINO DUE',28,bold=True)
+text(175,379,'USB powered',21)
+text(175,412,'GPIO outputs: 3.3 V',21)
+box((800,140,1250,265));text(825,157,'REGULATED 5.0 V SUPPLY',25,bold=True)
+text(825,195,'Use your UBEC set to 5 V',22)
+text(825,229,'Existing 5 A UBEC suits this test',20)
+line([(1250,175),(1365,175),(1365,747)],red)
+text(1270,125,'+5 V',23,red,True)
+line([(1250,235),(1500,235),(1500,900)],brown)
+text(1385,195,'GND / negative',20,brown,True)
+for i,pin in enumerate((6,7,8,9)):
+    y=450+i*105
+    box((900,y-35,1230,y+43))
+    text(1000,y-24,f'SG90 #{i+1}',24,bold=True)
+    text(173,y-10,f'D{pin}',24,bold=True)
+    line([(240,y),(490,y),(900,y)],orange)
+    text(530,y-29,'Orange: signal',22,orange)
+    text(915,y+5,'signal',17,orange)
+    line([(1230,y-18),(1365,y-18)],red);dot(1365,y-18,red)
+    line([(1230,y+22),(1500,y+22)],brown);dot(1500,y+22,brown)
+    text(1243,y-46,'Red',18,red)
+    text(1243,y+28,'Brown',18,brown)
+text(173,779,'GND',22,bold=True)
+line([(280,815),(280,900),(1500,900)],brown)
+dot(1500,900,brown)
+text(570,862,'COMMON GROUND',23,brown,True)
+text(65,946,'Keep servo power wires on the external supply; do not run four-servo current through the Due.',22,bold=True)
+text(65,982,'Due 3V3 and 5V pins are NOT connected to the servo red wires in this test.',23,red,True)
+text(65,1025,'Dots mark connected junctions. Crossing lines without a dot are not connected.',18)
+im.save(HERE/'Due_Four_SG90_Wiring.png')

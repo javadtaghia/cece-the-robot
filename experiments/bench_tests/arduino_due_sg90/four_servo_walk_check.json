@@ -1,0 +1,57 @@
+{
+  "hardware_mapping_confirmed_by_user": true,
+  "motors": [
+    {
+      "number": 1,
+      "pin": 6,
+      "joint": "left_hip",
+      "direction": 1,
+      "pulse_range_us": [
+        1350,
+        1650
+      ]
+    },
+    {
+      "number": 2,
+      "pin": 7,
+      "joint": "right_hip",
+      "direction": -1,
+      "pulse_range_us": [
+        1350,
+        1650
+      ]
+    },
+    {
+      "number": 3,
+      "pin": 8,
+      "joint": "left_ankle",
+      "direction": 1,
+      "pulse_range_us": [
+        1157,
+        1620
+      ]
+    },
+    {
+      "number": 4,
+      "pin": 9,
+      "joint": "right_ankle",
+      "direction": -1,
+      "pulse_range_us": [
+        1157,
+        1620
+      ]
+    }
+  ],
+  "reference_hz": 50,
+  "output_hz": 50,
+  "time_scale": 2,
+  "first_half_step_s": 1.12,
+  "steady_cycle_s": 2.24,
+  "full_reference_amplitude": true,
+  "max_node_error_deg": 0.00497667638484689,
+  "max_interpolation_error_deg": 1.2370000000005117,
+  "cycles_checked": 10,
+  "physical_joint_calibration_verified": false,
+  "physical_walking_verified": false,
+  "source_sha256": "40cf1e14796cfbf3a6b5c245c32bc17c65f304ee0b03e04b995a938990059b7d"
+}

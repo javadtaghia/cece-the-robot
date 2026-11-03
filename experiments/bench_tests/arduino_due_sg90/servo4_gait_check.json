@@ -1,0 +1,17 @@
+{
+  "joint": "right_ankle",
+  "joint_index_zero_based": 3,
+  "bench_signal_pin": "Due D9",
+  "sample_hz": 50.0,
+  "cycle_seconds": 1.12,
+  "samples_per_cycle": 56,
+  "nominal_offset_deg": [
+    -12.0,
+    34.25
+  ],
+  "max_command_export_error_deg": 0.004976676384839784,
+  "reference_comparison_cycles": 10,
+  "pulse_mapping": "1500 us + offset_degrees * 10 us/degree; uncalibrated hardware assumption",
+  "physical_servo_tracking_verified": false,
+  "source_gait_sha256": "40cf1e14796cfbf3a6b5c245c32bc17c65f304ee0b03e04b995a938990059b7d"
+}

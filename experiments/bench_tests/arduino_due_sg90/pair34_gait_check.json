@@ -1,0 +1,40 @@
+{
+  "mode": "reduced paired-ankle bench test, not full walking",
+  "pins": {
+    "3": "Due D8, assumed left foot",
+    "4": "Due D9, assumed right foot"
+  },
+  "reference_joint_indices": [
+    1,
+    3
+  ],
+  "reference_samples": 56,
+  "reference_gain": 0.35,
+  "time_scale": 2,
+  "output_hz": 50,
+  "full_cycle_seconds": 2.24,
+  "pulse_ranges_us": [
+    [
+      1380,
+      1542
+    ],
+    [
+      1458,
+      1620
+    ]
+  ],
+  "nominal_offset_ranges_deg": [
+    [
+      -11.987499999999999,
+      4.199999999999999
+    ],
+    [
+      -4.199999999999999,
+      11.987499999999999
+    ]
+  ],
+  "max_reference_interpolation_error_deg": 0.43295000000008343,
+  "cycles_checked": 5,
+  "physical_motion_verified": false,
+  "source_sha256": "40cf1e14796cfbf3a6b5c245c32bc17c65f304ee0b03e04b995a938990059b7d"
+}
