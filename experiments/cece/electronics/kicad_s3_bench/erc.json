@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-07T23:50:00+1100",
+    "kicad_version": "8.0.5",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/05b5fa1a-3fbb-4dac-96e5-db36fd83686a",
+            "violations": []
+        }
+    ],
+    "source": "Cece_USB_Bench_Wiring.kicad_sch"
+}

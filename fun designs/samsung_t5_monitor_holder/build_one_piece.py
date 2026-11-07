@@ -16,12 +16,12 @@ def box(x, y, z, dx, dy, dz):
     return Part.makeBox(dx, dy, dz, V(x, y, z))
 
 def build(thickness, opening, bezel_overlap, top_opening, top_overlap):
-    if not 2 <= thickness < opening <= thickness + 4:
-        raise ValueError('Opening must be larger than lid thickness by at most 4 mm')
+    if not 2 <= thickness <= opening <= thickness + 4:
+        raise ValueError('Opening must be at least the lid thickness and at most 4 mm larger')
     if not 1 <= bezel_overlap <= 5 or not 1 <= top_overlap <= 5:
         raise ValueError('Front overlaps must be 1–5 mm')
-    if not thickness < top_opening <= thickness + 6:
-        raise ValueError('Top opening must be larger than lid thickness by at most 6 mm')
+    if not thickness <= top_opening <= thickness + 6:
+        raise ValueError('Top opening must be at least the lid thickness and at most 6 mm larger')
     width, length, back, wall = 63.5, 80.0, 2.4, 2.5
     cavity_top = back + 11.5
     front_z = -opening
@@ -64,12 +64,20 @@ def build(thickness, opening, bezel_overlap, top_opening, top_overlap):
     for part in parts[1:]:
         holder = holder.fuse(part)
     holder = holder.removeSplitter()
+    # Access window centered on a long side of the SSD. It also leaves the
+    # loading end open. Plug-housing dimensions are provisional.
+    usb_window = box(width-3.3, 28, -0.2, 3.8, 24, 16.4)
+    holder = holder.cut(usb_window).removeSplitter()
     if not holder.isValid() or len(holder.Solids) != 1:
         raise RuntimeError('One-piece holder must be a valid single solid')
 
     ssd = box(3.1, 3.1, back, 57.3, 74, 10.5)
     lid = box(0, screen_top-140, -thickness, 250, 140, thickness)
     ssd_collision = holder.common(ssd).Volume
+    # Proxy for a 20 x 14 mm plug body projecting from the SSD's long edge;
+    # compare against the real connector before relying on this clearance.
+    plug_proxy = box(60.4, 30.1, 0.65, 15, 20, 14)
+    plug_collision = holder.common(plug_proxy).Volume
     lid_collision = holder.common(lid).Volume
     dropped = holder.copy()
     dropped.translate(V(0, -0.5, 0))
@@ -79,9 +87,16 @@ def build(thickness, opening, bezel_overlap, top_opening, top_overlap):
         probe = pad.copy()
         probe.translate(V(0, -0.5, 0))
         top_stops.append(probe.common(lid).Volume)
-    if ssd_collision > 1e-5 or lid_collision > 1e-5 or min(top_stops) < 1e-5:
+    if ssd_collision > 1e-5 or plug_collision > 1e-5 or lid_collision > 1e-5 or min(top_stops) < 1e-5:
         raise RuntimeError('SSD, lid or either top stop geometry check failed')
 
+    # A viewer in front looks in the +Z direction with +Y upward: screen-right
+    # is -X. Mirror the earlier layout so the hooks are on viewer-left.
+    holder = holder.mirror(V(0, 0, 0), V(1, 0, 0))
+    ssd = ssd.mirror(V(0, 0, 0), V(1, 0, 0))
+    lid = lid.mirror(V(0, 0, 0), V(1, 0, 0))
+    if not holder.isValid() or len(holder.Solids) != 1:
+        raise RuntimeError('Mirrored holder is not a valid single solid')
     doc = App.newDocument('Samsung_T5_One_Piece_Holder')
     for name, shape in [('Holder_one_piece_PRINT', holder),
                         ('SSD_reference_do_not_print', ssd),
@@ -92,7 +107,7 @@ def build(thickness, opening, bezel_overlap, top_opening, top_overlap):
     doc.saveAs(str(HERE / 'Samsung_T5_One_Piece_Prototype.FCStd'))
     # Orient on its long side. Some overhangs remain: inspect slicer support.
     printable = holder.copy()
-    printable.rotate(V(0, 0, 0), V(0, 1, 0), -90)
+    printable.rotate(V(0, 0, 0), V(0, 1, 0), 90)
     printable.translate(V(0, 0, -printable.BoundBox.ZMin))
     mesh = MeshPart.meshFromShape(Shape=printable, LinearDeflection=0.08,
                                   AngularDeflection=0.35, Relative=False)
@@ -107,6 +122,10 @@ def build(thickness, opening, bezel_overlap, top_opening, top_overlap):
         'nominal_front_hook_overlap_mm': bezel_overlap,
         'nominal_margin_to_active_screen_mm': 7-bezel_overlap,
         'ssd_intersection_volume_mm3': ssd_collision,
+        'usb_access_window_mm': [24, 16],
+        'usb_plug_proxy_cross_section_mm': [20, 14],
+        'usb_plug_proxy_intersection_mm3': plug_collision,
+        'mount_side': 'left when viewing the screen from the front',
         'lid_proxy_intersection_volume_mm3': lid_collision,
         'side_hook_count': len(hook_positions), 'top_hook_count': len(top_stops),
         'top_hook_opening_mm': top_opening, 'top_bezel_width_reported_mm': 7,
@@ -127,9 +146,9 @@ def build(thickness, opening, bezel_overlap, top_opening, top_overlap):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--lid', type=float, default=4)
-    parser.add_argument('--opening', type=float, default=6)
+    parser.add_argument('--opening', type=float, default=4)
     parser.add_argument('--overlap', type=float, default=3)
-    parser.add_argument('--top-opening', type=float, default=6)
+    parser.add_argument('--top-opening', type=float, default=4)
     parser.add_argument('--top-overlap', type=float, default=5)
     args = parser.parse_args()
     build(args.lid, args.opening, args.overlap, args.top_opening, args.top_overlap)

@@ -5,3 +5,7 @@ __pycache__/
 .env
 .venv/
 *.log
+experiments/bench_tests/**/build/
+*.kicad_sch.lck
+*.kicad_pcb.lck
+~*.lck

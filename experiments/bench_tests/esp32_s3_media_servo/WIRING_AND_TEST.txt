@@ -1,0 +1,113 @@
+Cece: XIAO ESP32-S3 Sense + PiicoDev CE09181 + four SG90 servos
+
+FIRST BENCH TEST: TWO SEPARATE POSITIVE POWER SUPPLIES, COMMON GROUND
+
+PC USB-C ------------------------> XIAO ESP32-S3 USB-C
+XIAO 3V3 --------------------------------> PiicoDev logic 3V3
+XIAO GND --------------------------------> PiicoDev logic GND
+XIAO D4 / GPIO5 --------------------------> PiicoDev SDA
+XIAO D5 / GPIO6 --------------------------> PiicoDev SCL
+
+Dualsky 2S battery -> Pololu Mini PB Reverse switch -> Hobbywing UBEC INPUT
+Battery + / red -------------------------------> switch VIN
+Switch VOUT -----------------------------------> UBEC IN +
+Battery - / black ------------------------------> switch GND and UBEC IN -
+
+SWITCH: POLOLU MINI PUSHBUTTON POWER SWITCH WITH REVERSE VOLTAGE PROTECTION
+This is the LV #2808 / POLOLU-2808 ordered for this prototype. Follow the PCB
+VIN/VOUT/GND labels, not an assumed left-to-right pin position.
+Press its onboard button once for on, again for off. Leave ON, OFF, CTRL and
+external-button control pads unconnected for this manual test.
+The switch goes BEFORE the UBEC; it does not set the UBEC output voltage.
+The ESP remains on while powered by PC USB even when this switch is off.
+Later, with the ESP powered from a downstream UBEC branch and USB unplugged,
+the button switches the battery-powered robot together.
+Reverse-voltage protection is not a charger, fuse or LiPo low-voltage cutoff.
+The electronic switch does not provide complete electrical isolation when
+off. Unplug the battery before rewiring, for a jam, or before charging.
+
+UBEC OUTPUT: SET TO 5.0 V AND MEASURE BEFORE CONNECTING
+UBEC OUT + / red -------------------------------> PiicoDev servo power 5V
+UBEC OUT - / black -----------------------------> PiicoDev servo power GND/GNDPWR
+
+Place a 1000uF / 25V electrolytic capacitor close to the servo power input:
+capacitor + to the 5V rail; capacitor negative/striped side to GND/GNDPWR.
+
+The PiicoDev board connects logic GND and servo-power GND on the PCB.
+The logic GND cable therefore joins ESP ground to the UBEC ground.
+Route servo supply current through the power breakout and power wires, not
+through the thin PiicoDev signal cable, ESP board, or breadboard contacts.
+During this USB-powered ESP test, DO NOT connect UBEC OUT + to the XIAO.
+
+PIICODEV CONNECTION OPTIONS
+For logic, use its labelled GND/3V3/SDA/SCL breakout OR the PiicoDev breadboard
+adapter and cable. Follow labels; do not infer connector order from wire colours.
+For motor power, use its labelled 5V/GND power breakout (J6/J7 on published Rev10).
+Use suitable soldered headers/pigtails or terminals and insulate joints.
+The two PiicoDev USB-C connectors share the servo rail. Never connect a PC or
+USB power supply there at the same time as UBEC power.
+Do not connect the raw 2S battery to PiicoDev 5V, ESP 5V, ESP 3V3 or ESP BAT.
+
+SERVO PLUGS
+Brown/black -> GND. Red -> 5V. Orange/yellow -> signal/PWM.
+Confirm the actual servo lead colours and PCB silk before applying power.
+Socket 1: left hip/body servo; internal PCA9685 channel 3.
+Socket 2: right hip/body servo; internal channel 2.
+Socket 3: left foot servo; internal channel 1.
+Socket 4: right foot servo; internal channel 0.
+Both address switches OFF: I2C address 0x44.
+No direct ESP-to-servo signal wires are used with this controller.
+The Sense camera/microphone stay connected as before; GPIO5/6 are free.
+
+TEST SEQUENCE
+1. Unplug USB and battery before wiring. Support the robot and remove horn
+   loads for first centering: 1500 us is an assumed electrical centre, not
+   a measured physical zero. A newly enabled servo can move significantly.
+2. Connect the logic wiring only. Leave battery/motor power disconnected.
+3. Connect ESP USB, upload S3MediaServo/S3MediaServo.ino with XIAO_ESP32S3,
+   Hardware CDC + JTAG, USB CDC Enabled, 8MB flash, OPI PSRAM.
+4. Open Cece's existing phone page. Wi-Fi configuration uses the same saved
+   settings as S3PhoneMedia. Rescan should detect the controller at 0x44.
+   Detection tests logic communication only; it does not prove motor power.
+5. With the controller disconnected from the UBEC output, set UBEC to 5.0V.
+   Connect battery to UBEC input; measure OUT + to OUT - with a multimeter.
+   Disconnect battery, connect the verified 5V output to the driver, reconnect.
+6. Plug in one unloaded servo. Check supply polarity. Confirm the page's
+   measured-5V/unloaded checkbox, then press that socket's test button.
+7. Each test sends centre, then a smooth 1400..1600 us movement, returns to
+   centre, and disables its signal after about 1.9 seconds. It does not walk.
+8. Test each servo separately, then repeat with all four plugged in, one at a
+   time. Run camera + microphone streams while repeating the tests.
+9. Check voltage at the servo board during movement. A multimeter can miss
+   short dips; resets/video dropouts need a power/connection investigation.
+10. STOP disables PWM signals; it is not a battery disconnect. Unplug the
+    battery if a servo binds or communication fails.
+11. Disconnect battery after the bench test. This firmware has no battery
+    voltage sensing or automatic LiPo low-voltage cutoff.
+
+BATTERY-ONLY OPERATION (AFTER THE USB-POWERED TEST WORKS)
+Disconnect the PC USB cable. Keep the 5V UBEC branch to the servo controller.
+A separate UBEC 5V branch may power XIAO 5V through a series 1N5819 Schottky:
+UBEC +5V -> diode unbanded end -> diode banded end -> XIAO 5V.
+UBEC ground -> XIAO GND. Keep logic 3V3 supplied by the XIAO regulator.
+Do not reconnect a normal powered PC USB cable while this external 5V branch
+is connected. A USB/external power-mux or verified isolation design is needed
+for convenient simultaneous operation; the single diode is not a complete mux.
+Check the voltage at XIAO 5V under Wi-Fi/camera load after the diode drop.
+
+CHARGING: CHARGER MODEL STILL UNCONFIRMED
+The Hobbywing UBEC is NOT a charger. XIAO's onboard charger is for a single
+3.7V lithium cell; it cannot charge the Dualsky 7.4V 2S pack.
+Use a charger specified for 2S LiPo balance charging (8.4V full pack voltage).
+For an adjustable compatible charger, 0.5A is a conservative initial current
+for this 550mAh pack, subject to the battery/charger instructions.
+Disconnect the battery from the robot for this prototype charging procedure.
+Charger main/balance-port connections depend on its exact model and the
+battery plugs. Do not guess them or connect a bare USB socket to the battery.
+
+REFERENCES
+https://core-electronics.com.au/piicodev-servo-driver.html
+https://raw.githubusercontent.com/CoreElectronics/CE-PiicoDev-Servo-Driver/main/Documents/piicodev-servo-driver-schematic.pdf
+https://www.hobbywingdirect.com/products/ubec-5a-air
+https://www.pololu.com/product/2808
+https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/

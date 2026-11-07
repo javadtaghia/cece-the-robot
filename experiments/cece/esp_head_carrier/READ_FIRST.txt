@@ -1,0 +1,30 @@
+CECE ESP BOARD CRADLE - SIZE TEST, NOT FINAL HEAD MOUNT
+
+Measurements supplied by user:
+PCB 21.3 x 12.8 mm; length including USB socket 23.2 mm;
+total camera stack thickness 23.6 mm.
+
+One closed solid, 25.2 x 16.2 x 5.4 mm, with an open USB end.
+Nominal side clearance is 0.3 mm per side. Solid PLA estimate 0.63 g;
+actual filament use must be obtained from the slicer.
+
+Optional small size test: flat base on bed, PLA, 0.2 mm layers,
+two walls, 10% infill. Supports should not be required; inspect the slicer.
+Do not print the reference box in the FreeCAD file.
+
+Inspect the real PCB before resting it on the 0.5 mm edge shelves.
+Underside space of 3 mm and edge support positions are assumptions.
+There are NO retaining clips or head-gripping tabs in this test part.
+Do not force in the ESP or use this loose test cradle in a moving robot.
+
+To finish the removable push-fit head carrier we still need:
+- Inside photo of printed Cece head with ultrasonic board installed.
+- Exact head STL or internal dimensions and camera-hole position.
+- Real board/lens/USB arrangement; lens centre offset is unknown.
+
+Existing head and robot files have not been changed.
+build_test_cradle.py regenerates FreeCAD, STL and geometry checks.
+
+Current assembly: Cece_Head_ESP_Assembly.FCStd
+Current carrier: Cece_ESP_Side_Carrier_CANDIDATE.stl
+Use cece_mount_checks.json for validation scope. The size-test cradle is superseded.

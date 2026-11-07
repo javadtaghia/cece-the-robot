@@ -1,0 +1,51 @@
+Cece ESP32-S3 Sense: camera and microphone to a phone
+
+Hardware
+- Seeed XIAO ESP32-S3 with the Sense camera/microphone expansion board attached.
+- USB data cable and PC or USB power supply. No other robot boards are required.
+- Disconnect USB before fitting the Sense board or reseating the camera ribbon.
+
+Upload
+Open S3PhoneMedia/S3PhoneMedia.ino in Arduino IDE.
+Board: XIAO_ESP32S3 (Espressif ESP32 core 3.3.12).
+Port: the board's current USB port (COM4 on the first test).
+USB Mode: Hardware CDC and JTAG. USB CDC On Boot: Enabled.
+Flash: 8 MB. PSRAM: OPI PSRAM.
+Upload and open Serial Monitor at 115200 baud.
+
+Connect to home Wi-Fi
+1. Read SETUP_SSID, SETUP_PASSWORD and SETUP_URL from Serial Monitor.
+   Send the single letter i to display them again.
+2. On your phone, join the Cece-Setup-xxxxxx Wi-Fi using that password.
+   Choose to stay connected if the phone says this network has no internet.
+3. In Safari or Chrome, type http://192.168.4.1/ directly into the address bar.
+4. Expand Connect Cece to home Wi-Fi. Enter your 2.4 GHz Wi-Fi name/password.
+5. Tap Save and connect. The page shows the home-network IP when connected.
+6. Switch your phone back to that same home Wi-Fi and open http://<shown IP>/.
+   The PC Serial Monitor also prints PHONE_URL when the ESP joins the network.
+7. Tap Start camera, then Listen to robot mic. Turn up the phone's media volume.
+   Speak near the robot microphone, not near the phone.
+
+What this tests
+The ESP captures real camera JPEGs and 16 kHz mono microphone PCM.
+The phone displays MJPEG video and plays microphone audio using Web Audio.
+The ESP runs the server; the laptop is only needed for initial upload/setup.
+Wi-Fi settings survive restart. Passwords are not stored in the source files.
+The setup Wi-Fi remains available for changing networks.
+This local test serves one active video listener and one audio listener.
+Picture and sound streams run independently; this is not a synchronized AV recording.
+
+Troubleshooting
+- No camera/mic: check that this is the Sense version with its add-on board attached.
+- No home-network connection: verify SSID/password and 2.4 GHz availability.
+- Phone cannot reach ESP: avoid guest Wi-Fi or client isolation, use the printed IP.
+- No sound: tap Listen (browsers require this), raise media volume, keep page foreground.
+- A 5 GHz phone connection is fine if the router bridges it to the ESP's 2.4 GHz LAN.
+- USB command c returns binary camera data and a returns binary microphone PCM;
+  use verify_hardware.py for these commands, not a text-only serial terminal.
+- Stop phone streams and close Serial Monitor before running verify_hardware.py.
+
+Sources
+https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/
+https://wiki.seeedstudio.com/xiao_esp32s3_sense_mic/
+https://github.com/espressif/arduino-esp32/tree/3.3.12/libraries/ESP32/examples/Camera/CameraWebServer

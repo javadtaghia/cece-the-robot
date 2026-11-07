@@ -1,2 +1,0 @@
-Schematic vs PCB net comparison
-PASS: all assigned pads match.

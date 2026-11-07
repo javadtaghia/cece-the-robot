@@ -1,0 +1,34 @@
+{
+  "status": "SIZE TEST ONLY; NOT A FITTED OR RETAINED HEAD MOUNT",
+  "user_measurements_mm": {
+    "pcb_length": 21.3,
+    "pcb_width": 12.8,
+    "overall_length_with_USB": 23.2,
+    "total_stack_thickness": 23.6
+  },
+  "cradle_overall_mm": [
+    25.2,
+    16.2,
+    5.4
+  ],
+  "valid_solid": true,
+  "solid_count": 1,
+  "closed_mesh": true,
+  "volume_mm3": 509.52,
+  "solid_PLA_estimate_g_at_1_24": 0.63,
+  "print": {
+    "orientation": "flat perimeter base on build plate",
+    "material": "PLA",
+    "layer_mm": 0.2,
+    "walls": 2,
+    "infill_percent": 10,
+    "supports": "none expected; verify in slicer"
+  },
+  "not_verified": [
+    "actual PCB underside and edge component clearance",
+    "PCB material thickness and camera lens offset",
+    "Otto head variant, inner dimensions, camera opening",
+    "ultrasonic board location and cable space",
+    "retention; this open size gauge has no clips or head tabs"
+  ]
+}

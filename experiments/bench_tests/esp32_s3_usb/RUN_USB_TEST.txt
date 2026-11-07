@@ -1,0 +1,16 @@
+Cece ESP32-S3 USB hello world
+
+1. Connect only the XIAO ESP32-S3 / Sense to the PC using a USB data cable.
+2. Open S3Hello/S3Hello.ino in Arduino IDE.
+3. Select board: esp32 > XIAO_ESP32S3.
+4. Select the board's USB serial port (COM4 during the first test).
+5. Tools > USB Mode: Hardware CDC and JTAG.
+6. Tools > USB CDC On Boot: Enabled.
+7. Tools > PSRAM: OPI PSRAM. Flash size: 8 MB.
+8. Upload, then open Serial Monitor at 115200 baud.
+
+Expected output, once a second:
+Hello world! Cece ESP32-S3 is running.
+
+No other circuit boards, servos or external power are needed.
+Close Serial Monitor before running verify_usb.py or using another serial terminal.

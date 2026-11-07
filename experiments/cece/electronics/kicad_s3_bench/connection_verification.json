@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "revision": "1.1",
+  "checks": [
+    "/BATTERY_PLUS",
+    "/SWITCHED_BAT_PLUS",
+    "/ESP_5V",
+    "Net-(D1-PadA)",
+    "/I2C_SDA",
+    "/I2C_SCL",
+    "/3V3_LOGIC",
+    "four servo signals and power",
+    "UBEC powers JP1",
+    "JP1 OUT to diode A, diode K to ESP 5V",
+    "USB VBUS shares ESP 5V: remove JP1 before plugging USB",
+    "BAT+ unused",
+    "capacitor polarity"
+  ],
+  "physical_hardware_tested": false,
+  "charger_pinout_verified": false
+}

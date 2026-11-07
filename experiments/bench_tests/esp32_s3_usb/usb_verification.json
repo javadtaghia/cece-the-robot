@@ -1,0 +1,21 @@
+{
+  "checked_at_utc": "2026-11-07T07:49:06.502438+00:00",
+  "port": "COM4",
+  "baud": 115200,
+  "board": "Seeed XIAO ESP32-S3 / Sense",
+  "fqbn": "esp32:esp32:XIAO_ESP32S3:USBMode=hwcdc,CDCOnBoot=default,PSRAM=opi",
+  "expected_line": "Hello world! Cece ESP32-S3 is running.",
+  "matching_lines": 8,
+  "observed_lines": [
+    "Hello world! Cece ESP32-S3 is running.",
+    "Hello world! Cece ESP32-S3 is running.",
+    "Hello world! Cece ESP32-S3 is running.",
+    "Hello world! Cece ESP32-S3 is running.",
+    "Hello world! Cece ESP32-S3 is running.",
+    "Hello world! Cece ESP32-S3 is running.",
+    "Hello world! Cece ESP32-S3 is running.",
+    "Hello world! Cece ESP32-S3 is running."
+  ],
+  "passed": true,
+  "scope": "Physical board USB serial hello world"
+}

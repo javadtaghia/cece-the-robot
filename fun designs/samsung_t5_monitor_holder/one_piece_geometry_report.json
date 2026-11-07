@@ -1,18 +1,28 @@
 {
-  "measured_lid_thickness_mm": 4.0,
+  "measured_lid_thickness_mm": 4,
   "user_measured_black_bezel_width_mm": 7,
-  "side_hook_opening_mm": 6.0,
-  "nominal_total_clearance_mm": 2.0,
-  "nominal_front_hook_overlap_mm": 3.0,
-  "nominal_margin_to_active_screen_mm": 4.0,
+  "side_hook_opening_mm": 4,
+  "nominal_total_clearance_mm": 0,
+  "nominal_front_hook_overlap_mm": 3,
+  "nominal_margin_to_active_screen_mm": 4,
   "ssd_intersection_volume_mm3": 0.0,
+  "usb_access_window_mm": [
+    24,
+    16
+  ],
+  "usb_plug_proxy_cross_section_mm": [
+    20,
+    14
+  ],
+  "usb_plug_proxy_intersection_mm3": 0.0,
+  "mount_side": "left when viewing the screen from the front",
   "lid_proxy_intersection_volume_mm3": 0.0,
   "side_hook_count": 2,
   "top_hook_count": 2,
-  "top_hook_opening_mm": 6.0,
+  "top_hook_opening_mm": 4,
   "top_bezel_width_reported_mm": 7,
-  "top_front_hook_overlap_mm": 5.0,
-  "downward_0p5mm_interference_mm3": 62.99999999999997,
+  "top_front_hook_overlap_mm": 5,
+  "downward_0p5mm_interference_mm3": 62.99999999999995,
   "top_hook_interference_each_mm3": [
     36.0,
     27.0
@@ -20,10 +30,10 @@
   "solid_count": 1,
   "mesh_watertight": true,
   "mesh_components": 1,
-  "volume_mm3": 8681.315999999999,
-  "solid_pla_mass_estimate_g_at_1p24": 10.76483184,
+  "volume_mm3": 7920.25599999999,
+  "solid_pla_mass_estimate_g_at_1p24": 9.821117439999988,
   "print_bbox_mm": [
-    24.30000000000001,
+    22.30000000000001,
     80.0,
     67.3
   ],

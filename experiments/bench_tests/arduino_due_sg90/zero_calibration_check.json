@@ -1,0 +1,19 @@
+{
+  "sketch": "DueZeroCalibration/DueZeroCalibration.ino",
+  "fqbn": "arduino:sam:arduino_due_x_dbg",
+  "compiled": true,
+  "uploaded": false,
+  "physical_zero_measurements_available": false,
+  "walking_firmware_modified": false,
+  "direction_settings_modified": false,
+  "user_horn_change": "physically repositioned the white horn-to-foot pieces, not a reported software direction change",
+  "video_observation": "Assembly held inverted with both feet unloaded; repeated ankle roll and leg yaw visible.",
+  "video_cannot_establish": [
+    "encoder or potentiometer failure",
+    "correct calibrated joint signs",
+    "neutral offsets",
+    "angle accuracy",
+    "loaded walking"
+  ],
+  "next_required_measurement": "Upright physical zero for each joint and observed direction of one small raw positive-pulse test"
+}

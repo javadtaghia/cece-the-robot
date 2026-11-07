@@ -1,4 +1,4 @@
-# Cece on Otto: consolidated prototype
+# Cece: consolidated robot project
 
 **Want to run the current Windows simulation?** Start with
 [the step-by-step ROS 2, Gazebo and voice guide](START_HERE.md).
@@ -24,19 +24,17 @@ need a one-ankle physical check before a final Cece print.
 
 **Status: DEVELOPMENT ONLY. Not ready for final printing or battery operation.**
 
-The goal is a fixed-head four-servo Otto with HC-SR04, LED face, 128x32 OLED,
+The earlier prototype used four SG90 servos with HC-SR04, LED face, 128x32 OLED,
 INMP441 microphone, MAX98357 amplifier, 28 mm speaker, ESP32-C3 Super Mini,
 PiicoDev 4-channel servo board and 2S LiPo. This folder supersedes the unrelated
-Cece and Otto variants only for this experiment; it does not replace them.
+earlier variants only for that experiment; it is not the active print source.
 
 1. `parts/`: candidate STL components for test fitting. Head uses ultrasonic
    openings and two relocated LED holes. Body has the OLED opening. Faceplate,
    body, legs, feet, and OLED frame are separate. The generic frame and speaker
    mount are not proven to fit the selected boards and cable connectors.
-   STL geometry uses original OttoDIY v09 as source. The regenerated head and
-   body are derived from https://github.com/Open-Hardware-Leaders/OttoDIY at
-   commit 8cf3e784c734981c50143cfddde18a68685bcea3; see upstream LICENSE and
-   attribution/redistribution requirements, especially before commercial use.
+   Those legacy reference files have been removed. Use the current Cece
+   assembly specified by the repository AGENTS.md instead of this old workflow.
 2. `simulation/cece_four_servo.gif` and `result.json`: new 10-second physics
    simulation with four actuators and fixed head. Visual shell is the modified
    head/body. Simplified boxes set contacts and mass; electronics, faceplate,

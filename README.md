@@ -18,8 +18,8 @@ hardware repository. It is an independent repository, not a GitHub fork.
 | ESP32-C3 firmware, modeled OLED and Wokwi circuit | [CeceBench](experiments/cece/firmware/CeceBench/README.md) |
 | ROS 2, Gazebo room, gait and measurements | [ROS / Gazebo study](experiments/cece/ros2_sim/README.md) |
 | Bullet walking experiments, assumptions and recordings | [Bullet gait study](experiments/cece/bullet_gait/README.md) |
-| Electronics and wiring | [wiring draft](experiments/cece/electronics/WIRING_DRAFT.md), [legacy KiCad studies](archive/workspace/Otto_PCB_Prototype/README.md) |
-| Earlier Otto-based references and experiments | [Otto studies](experiments/otto/README.md), [older workspace files](archive/workspace/README.md) |
+| Electronics and wiring | [battery-powered ESP wiring](experiments/cece/electronics/kicad_s3_bench/Cece_USB_Bench_Wiring.kicad_sch), [wiring draft](experiments/cece/electronics/WIRING_DRAFT.md) |
+| Current ESP head carrier and full Cece assembly | [Cece head mounting study](experiments/cece/esp_head_carrier/Cece_Head_ESP_Assembly.FCStd) |
 | Fun designs and accessories | [Fun designs](fun%20designs/README.md) |
 | Third-party sources and license notes | [Notices](THIRD_PARTY_NOTICES.md) |
 
@@ -39,6 +39,7 @@ checkout is `workspace/cece_the_robot_repo` and the separately installed tools
 remain under `workspace/tools`. Some older analysis scripts use a separately
 installed `workspace/cece_mesh_deps`; see the [Bullet reproduction notes](experiments/cece/bullet_gait/README.md).
 
-The historical studies have intentionally been preserved, including superseded
-parts and automatic FreeCAD backup documents. Use the latest study's own notes
-to understand a file's status; a draft file name is not a final print release.
+Cece is the only active design. Legacy reference-robot files have been removed
+from the working folders. Use AGENTS.md for the authoritative Cece geometry.
+Current studies retain their individual validation limits; a draft filename
+does not establish physical fit or a final print release.

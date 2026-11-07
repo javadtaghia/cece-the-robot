@@ -1,0 +1,21 @@
+{
+  "checked_at_utc": "2026-11-07T08:27:21.043853+00:00",
+  "port": "COM4",
+  "camera_passed": true,
+  "microphone_data_passed": true,
+  "phone_wifi_playback_tested": false,
+  "status": "STATUS CECE_S3_PHONE_MEDIA_V1 camera=OK sensor=0x3660 microphone=OK psram_bytes=8388608 wifi=NOT_CONNECTED",
+  "camera": {
+    "width": 320,
+    "height": 240,
+    "jpeg_bytes": 3275,
+    "format": "JPEG"
+  },
+  "microphone": {
+    "sample_rate": 16000,
+    "samples": 16000,
+    "peak": 258,
+    "rms_without_dc": 109.273,
+    "nonzero_samples": 15971
+  }
+}

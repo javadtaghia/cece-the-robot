@@ -1,0 +1,1 @@
+(sym_lib_table (version 7) (lib (name "CeceModules") (type "KiCad") (uri "${KIPRJMOD}/CeceModules.kicad_sym") (options "") (descr "Cece module wiring symbols")))

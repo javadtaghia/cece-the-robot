@@ -6,6 +6,15 @@ to the servos, as requested. Servo power remains a separate regulated 5.0 V.
 The SG90 seller does not publish its signal-high threshold; this test checks
 whether these specific units respond to 3.3 V control signals.
 
+## Zero and direction calibration
+
+If horn alignment or hip movement looks wrong, first see `ZERO_CALIBRATION.md`.
+The standalone single-file `DueZeroCalibration/DueZeroCalibration.ino` was
+compiled for the Programming Port, but was not uploaded automatically. It
+checks one joint at a time and does not replace the gait or assume horn
+re-indexing reverses a motor. The video-review frames remain local and are
+excluded from Git.
+
 ## Four-servo forward-gait candidate — V6
 
 `DueCeceFourServoWalk/DueCeceFourServoWalk.ino` is the current single-file

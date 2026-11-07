@@ -1,0 +1,23 @@
+{
+  "checked_at_utc": "2026-11-07T09:16:25.322147+00:00",
+  "port": "COM4",
+  "camera_passed": true,
+  "microphone_data_passed": true,
+  "phone_wifi_playback_tested": false,
+  "status": "STATUS CECE_S3_MEDIA_SERVO_V1 camera=OK sensor=0x3660 microphone=OK psram_bytes=8388608 wifi=NOT_CONNECTED",
+  "camera": {
+    "width": 320,
+    "height": 240,
+    "jpeg_bytes": 3931,
+    "format": "JPEG"
+  },
+  "microphone": {
+    "sample_rate": 16000,
+    "samples": 16000,
+    "peak": 578,
+    "rms_without_dc": 176.074,
+    "nonzero_samples": 15961
+  },
+  "servo_controller_status": "SERVO_DRIVER address=0x44 found=NO outputs=NOT_CONFIRMED",
+  "servo_movement_tested": false
+}
