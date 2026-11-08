@@ -26,8 +26,11 @@ merely to remove a historical identifier. User-facing outputs remain Cece only.
 
 ## Fit claims
 
-Measured PCB dimensions: 21.3 x 12.8 mm; overall length including USB socket
-23.2 mm; total camera stack thickness 23.6 mm. Camera offset, component layout,
-PCB thickness and exact installed sensor placement are not yet measured.
+Latest user correction (8 November 2026): ESP module length 21.3 mm retained,
+width 17-18 mm (use 18 mm for clearance) and thickness 4.5 mm. This replaces
+the earlier 12.8 mm width and assumed 1.6 mm thickness. Overall USB length
+23.2 mm was previously measured. Earlier 23.6 mm stack depth needs reconciling
+with the updated module; lens offset, component layout, bare PCB thickness
+and exact installed sensor placement are not yet measured.
 Label assumptions clearly; do not claim physical fit or camera visibility
 solely from a bounding-box model or zero-volume intersection test.
