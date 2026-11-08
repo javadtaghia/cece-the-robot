@@ -44,3 +44,11 @@ Keep the camera-pressure flap separate in purpose from the stiff wall supports.
 The requested 7 mm centreward and 2 mm upward correction is implemented
 relative to R8. Camera offsets remain inferred; do not describe the proxy
 alignment as measured physical fit.
+
+## Latest carrier revision
+
+R10 follows the marked physical-part photo: A means front-to-back depth,
+not vertical rail spacing. Rail depth is 12.4 mm (+2), usable channel depth
+is 7.1 mm (+2), and the 18.6 mm vertical opening is unchanged. B is relieved
+flush to the main crossbar at Z=50.7; keep the camera flap root ahead of
+that relief. R9 and earlier revisions remain preserved.

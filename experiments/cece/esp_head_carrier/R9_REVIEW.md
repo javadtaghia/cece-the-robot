@@ -1,6 +1,6 @@
 # Cece carrier R9 review
 
-Supersedes the prepared R8 print. R8 was not sent after the cutter error; the user subsequently confirmed the fault cleared and the plate empty, then requested these geometry changes. Prior revisions are retained.
+Supersedes R8. Bambu Studio subsequently showed the R8 job completed; its earlier send status was recorded incorrectly. Prior revisions are retained.
 
 - Cradle moves 7 mm toward the head centre (-X from the R8 position), and 2 mm upward. Wall contact locations remain fixed.
 - USB orientation reversed: USB leads into the far end (-X); the antenna end (+X) stays open for insertion.
@@ -15,4 +15,4 @@ One valid solid, closed STL. Both side plates are explicitly checked as complete
 
 Camera location is inferred from the requested fit correction and placed at the existing aperture for review. It is not independent evidence of physical alignment. The module is 21.3 x 18 x 4.5 mm; lens offset relative to its centre is provisionally -3 mm in X and -4 mm in Z. Component layout, cable dimensions, clear edge lands, ribbon route, flap preload and stiffness need a physical check. Do not force the stiffer wall plates into the head.
 
-Open Cece_Head_ESP_Assembly_R9.FCStd for review; Cece_ESP_Side_Carrier_R9_PREVIEW.stl is the single printed carrier. R9 has not been sliced or sent to print.
+Open Cece_Head_ESP_Assembly_R9.FCStd for review; Cece_ESP_Side_Carrier_R9_PREVIEW.stl is the single printed carrier. R9 was sliced and sent to the H2S on 8 November 2026, with the plate checked empty by camera. Saved project: Cece_ESP_Support_R9_Light_PLA_TEST_FIT.3mf. Settings: PLA, 0.2 mm layers, 2 walls, 10% infill, tree supports restricted to critical regions and the build plate. Estimate: 4.01 g including supports, 20 min 7 sec. The job was accepted and starting; completion was not observed in that check.
