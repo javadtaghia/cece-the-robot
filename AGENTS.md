@@ -56,3 +56,7 @@ that relief. R9 and earlier revisions remain preserved.
 R11 adds an open 22.3 x 7.1 mm slot through the marked upper cap over the
 board channel for pin access. Keep this opening clear of the flap root.
 Actual pin geometry remains unmeasured; do not claim physical pin clearance.
+
+R12 extends the R11 opening downward to Z=48.0 and 2 mm rearward,
+removing the marked ledge beside the upper board edge. A 2.45 mm deep rear
+rail remains; nominal board-to-rail clearance there is 2.3 mm.
