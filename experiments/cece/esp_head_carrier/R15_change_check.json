@@ -1,0 +1,13 @@
+{
+  "added": {
+    "volume_mm3": 132.28199999999995,
+    "x_min": -15.15,
+    "x_max": -9.6
+  },
+  "removed": {
+    "volume_mm3": 80.46300000000066,
+    "x_min": -11.15,
+    "x_max": -8.149999999999999
+  },
+  "component_positions_unchanged": true
+}

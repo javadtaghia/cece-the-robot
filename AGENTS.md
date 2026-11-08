@@ -65,3 +65,9 @@ R13 replaces the straight central rail with a U-shaped route around the
 board. Preserve the empty former rail span and 6.45 mm board-to-rear-span
 gap. The new route clears the source prototype-board component allowance;
 do not revert to a straight bar crossing the marked access area.
+
+R15 is current. Screenshot-right means negative X in the supplied view.
+Move that shoulder from X=-10.15 to -13.15 (3 mm outward). Inner face
+X=-11.15 gives 3.5 mm nominal side clearance. Opposite shoulder remains
+X=16.15. Keep the front return joining the cradle outside the board access
+zone. R14 was an unpublished opposite-end trial; use R15, not R14.
