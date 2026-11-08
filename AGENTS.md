@@ -34,3 +34,13 @@ with the updated module; lens offset, component layout, bare PCB thickness
 and exact installed sensor placement are not yet measured.
 Label assumptions clearly; do not claim physical fit or camera visibility
 solely from a bounding-box model or zero-volume intersection test.
+
+## Current ESP carrier direction
+
+R9 uses USB-first insertion: USB at the far/leading end (-X), antenna at
+the open entry end (+X). Both wall plates must be solid, matching sections
+without loading windows; R9 uses 2 mm thickness and a 6 mm deep crossbar.
+Keep the camera-pressure flap separate in purpose from the stiff wall supports.
+The requested 7 mm centreward and 2 mm upward correction is implemented
+relative to R8. Camera offsets remain inferred; do not describe the proxy
+alignment as measured physical fit.
