@@ -52,3 +52,7 @@ not vertical rail spacing. Rail depth is 12.4 mm (+2), usable channel depth
 is 7.1 mm (+2), and the 18.6 mm vertical opening is unchanged. B is relieved
 flush to the main crossbar at Z=50.7; keep the camera flap root ahead of
 that relief. R9 and earlier revisions remain preserved.
+
+R11 adds an open 22.3 x 7.1 mm slot through the marked upper cap over the
+board channel for pin access. Keep this opening clear of the flap root.
+Actual pin geometry remains unmeasured; do not claim physical pin clearance.
