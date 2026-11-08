@@ -1,0 +1,17 @@
+Cece ESP support R4 - requested 5 mm lift, review only
+
+ESP PCB, USB socket, camera proxies, cradle and central crossbar are raised
+5 mm relative to R3. Side grip contact positions remain at their existing
+height; stepped crossbar ends clear the rounded inner head shoulders.
+The 18 mm opening, 4 mm backing and 20 mm side grips remain.
+
+NOT READY TO PRINT WITH THE EXISTING HEAD:
+- Raised cradle intersects the head upper wall (116.65 mm3 modeled overlap).
+- Raised camera lens intersects the head front (53.9541 mm3 modeled overlap).
+- Camera centre moves from z=38 to z=43 mm; existing opening remains z=38 mm.
+- Intersections are separate red review solids in the assembly.
+- No overlap with ultrasonic PCB or transducers.
+
+Camera geometry and exact installed component positions remain provisional.
+No changes to the head have been made. R4 has not been sent to the printer.
+Earlier revisions are preserved. The R4 STL is REVIEW ONLY.

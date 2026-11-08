@@ -1,0 +1,83 @@
+{
+  "source": "../no_led_mouth/Cece_No_LED_Mouth_Assembly.FCStd",
+  "status": "REVIEW REQUIRED: raised camera alignment with existing head opening",
+  "camera_centre_xyz_mm": [
+    0,
+    -40,
+    43
+  ],
+  "raised_board_cradle_crossbar_mm": 5.0,
+  "head_collision_components": [
+    "ESP_Side_Bridge",
+    "ESP_Camera_Lens"
+  ],
+  "nominal_head_inner_span_mm": 80.8,
+  "carrier_contact_span_mm": 81.1,
+  "requested_dimensions_mm": {
+    "opening": 18.0,
+    "backing": 4.0,
+    "crossbar_height": 2.4,
+    "crossbar_depth": 4.0,
+    "side_grip_height": 20.0
+  },
+  "removed": "USB-end vertical backing rail",
+  "revision": "Board, cradle and crossbar raised 5 mm; stepped ends retain existing side grip contact height",
+  "solid_PLA_estimate_g": 2.19,
+  "valid_single_solid": true,
+  "closed_mesh": true,
+  "overlaps_mm3": {
+    "ESP_Side_Bridge_vs_HC_SR04_PCB": 0.0,
+    "ESP_Side_Bridge_vs_HC_SR04_Left_Can": 0.0,
+    "ESP_Side_Bridge_vs_HC_SR04_Right_Can": 0.0,
+    "ESP_Side_Bridge_vs_head": 128.7559,
+    "ESP_PCB_vs_HC_SR04_PCB": 0.0,
+    "ESP_PCB_vs_HC_SR04_Left_Can": 0.0,
+    "ESP_PCB_vs_HC_SR04_Right_Can": 0.0,
+    "ESP_PCB_vs_head": 0.0,
+    "ESP_USB_Socket_vs_HC_SR04_PCB": 0.0,
+    "ESP_USB_Socket_vs_HC_SR04_Left_Can": 0.0,
+    "ESP_USB_Socket_vs_HC_SR04_Right_Can": 0.0,
+    "ESP_USB_Socket_vs_head": 0.0,
+    "ESP_Camera_Housing_vs_HC_SR04_PCB": 0.0,
+    "ESP_Camera_Housing_vs_HC_SR04_Left_Can": 0.0,
+    "ESP_Camera_Housing_vs_HC_SR04_Right_Can": 0.0,
+    "ESP_Camera_Housing_vs_head": 0.0,
+    "ESP_Camera_Lens_vs_HC_SR04_PCB": 0.0,
+    "ESP_Camera_Lens_vs_HC_SR04_Left_Can": 0.0,
+    "ESP_Camera_Lens_vs_HC_SR04_Right_Can": 0.0,
+    "ESP_Camera_Lens_vs_head": 53.9541,
+    "ESP_Stack_Envelope_vs_HC_SR04_PCB": 0.0,
+    "ESP_Stack_Envelope_vs_HC_SR04_Left_Can": 0.0,
+    "ESP_Stack_Envelope_vs_HC_SR04_Right_Can": 0.0,
+    "carrier_excluding_contact_pads_vs_head": 116.65,
+    "camera_centre_ray_vs_head": 0.8042,
+    "camera_centre_ray_vs_ultrasonic_PCB": 0.0
+  },
+  "sensor_clearances_mm": {
+    "ESP_Side_Bridge_vs_HC_SR04_PCB": 10.4,
+    "ESP_Side_Bridge_vs_HC_SR04_Left_Can": 12.861,
+    "ESP_Side_Bridge_vs_HC_SR04_Right_Can": 13.056,
+    "ESP_PCB_vs_HC_SR04_PCB": 12.1,
+    "ESP_PCB_vs_HC_SR04_Left_Can": 14.538,
+    "ESP_PCB_vs_HC_SR04_Right_Can": 14.538,
+    "ESP_USB_Socket_vs_HC_SR04_PCB": 14.5,
+    "ESP_USB_Socket_vs_HC_SR04_Left_Can": 24.7,
+    "ESP_USB_Socket_vs_HC_SR04_Right_Can": 16.514,
+    "ESP_Camera_Housing_vs_HC_SR04_PCB": 17.121,
+    "ESP_Camera_Housing_vs_HC_SR04_Left_Can": 15.564,
+    "ESP_Camera_Housing_vs_HC_SR04_Right_Can": 15.564,
+    "ESP_Camera_Lens_vs_HC_SR04_PCB": 20.094,
+    "ESP_Camera_Lens_vs_HC_SR04_Left_Can": 19.525,
+    "ESP_Camera_Lens_vs_HC_SR04_Right_Can": 19.525,
+    "ESP_Stack_Envelope_vs_HC_SR04_PCB": 12.1,
+    "ESP_Stack_Envelope_vs_HC_SR04_Left_Can": 14.225,
+    "ESP_Stack_Envelope_vs_HC_SR04_Right_Can": 14.225
+  },
+  "limits": [
+    "PCB outline and stack bounds measured; lens offset, USB geometry and housing are provisional.",
+    "Ultrasonic placement from current Cece CAD; installed placement not measured.",
+    "Nominal 0.15 mm contact per side; actual insertion force, fatigue and grip untested.",
+    "PCB positive retention, cables, antenna and insertion path remain unverified.",
+    "Current assembly head selected by project rule; printed head must match this source."
+  ]
+}
