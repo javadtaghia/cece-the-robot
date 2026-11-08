@@ -1,0 +1,28 @@
+Cece ESP support revision R2
+
+Requested changes:
+- Vertical opening: 18.0 mm clear between the horizontal cradle rails.
+- Backing and long crossbar depth: 4.0 mm.
+- USB-end vertical backing rail removed (the upright marked with a cross).
+- Long crossbar centre height: 20.0 mm, confirmed by the user.
+- Raised crossbar end corners relieved to clear the rounded inner head.
+- Head-contact fingers retain their previous placement and nominal fit.
+
+Outputs:
+Cece_ESP_Side_Carrier_R2_TEST_FIT.stl: support only, one connected closed mesh.
+Cece_Head_ESP_Assembly_R2.FCStd: assembly with head and reference electronics.
+Cece_Assembly_With_ESP_R2.png: assembly preview.
+build_cece_mount_R2.py: reproducible FreeCAD geometry and checks.
+cece_mount_R2_checks.json: clearance results and limitations.
+
+The previous support and print project are preserved. The previous print
+project contains the earlier geometry; use the R2 STL for a new slice.
+No new print job was sent for R2.
+
+Verification:
+Valid single solid and closed STL. No unintended overlap with the current
+head; only the previously designed flexible contact pads overlap the head.
+Minimum modeled clearance to ultrasonic PCB: 5.4 mm.
+Solid PLA mass estimate: 8.13 g; slicer mass depends on print settings.
+Physical insertion, PCB retention and cable clearance still require a fit
+check. Internal ESP features and installed sensor positions are provisional.
