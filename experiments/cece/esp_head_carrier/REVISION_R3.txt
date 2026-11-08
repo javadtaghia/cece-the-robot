@@ -1,0 +1,17 @@
+Cece ESP support R3 - preview before printing
+
+Corrected interpretation: the 20 mm dimension is the vertical extent of
+the two side gripping sections. It is not the height of the long crossbar.
+The open design is restored with a 2.4 mm-high crossbar.
+Both side grips extend down from the existing top, giving 20 mm contact height.
+The 18 mm opening, 4 mm backing and removed USB-end upright are retained.
+
+CAD checks: valid single solid, closed STL; no unintended overlap with the
+head; no overlap with ultrasonic PCB or cans; minimum sensor PCB gap 5.4 mm.
+The flexible contact pads retain nominal 0.15 mm interference per side.
+Larger contact height can increase insertion force; actual grip and fit
+must be checked physically. Internal component features are provisional.
+Solid-volume PLA estimate 2.12 g, before slicing.
+
+R3 has NOT been sent to the printer. Review in FreeCAD first.
+R2 is retained as a superseded interpretation and should not be reprinted.
