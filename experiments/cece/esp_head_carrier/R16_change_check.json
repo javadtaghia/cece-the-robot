@@ -1,0 +1,12 @@
+{
+  "removed_material_mm3": 0.0,
+  "added_material_mm3": 405.8104999999995,
+  "unchanged_parts": {
+    "ESP_PCB": 0.0,
+    "ESP_USB_Socket": 0.0,
+    "ESP_Camera_Housing": 0.0,
+    "ESP_Camera_Lens": 0.0,
+    "Rounded_Head_Study": 0.0,
+    "HC_SR04_PCB": 0.0
+  }
+}
