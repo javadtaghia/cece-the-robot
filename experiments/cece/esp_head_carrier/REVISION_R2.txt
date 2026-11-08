@@ -17,7 +17,12 @@ cece_mount_R2_checks.json: clearance results and limitations.
 
 The previous support and print project are preserved. The previous print
 project contains the earlier geometry; use the R2 STL for a new slice.
-No new print job was sent for R2.
+R2 print sent to the Bambu H2S on 2026-11-08; printer accepted the job
+and entered toolhead homing. Live camera showed a clear plate before sending.
+Saved print project: Cece_ESP_Support_R2_Light_PLA_TEST_FIT.3mf
+PLA slot A1, 0.20 mm layers, 2 walls, 10% infill, no added supports.
+Slicer estimate: 4.51 g, 14 minutes 5 seconds including preparation.
+Print completion and physical fit have not yet been checked.
 
 Verification:
 Valid single solid and closed STL. No unintended overlap with the current
