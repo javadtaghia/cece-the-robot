@@ -1,0 +1,27 @@
+Cece R5 deeper slide-in ESP carrier - review before printing
+
+Corrected direction: increase front-to-back rail depth by 5 mm, from
+5.4 to 10.4 mm. Do not lift the board or change its camera aperture height.
+Stacked ESP/camera position is restored to R3. The central crossbar stays
+narrow and open, and the 20 mm side grips are retained.
+
+PCB-edge channels allow sliding in from the open USB end, with a closed
+far-end stop. Load the ESP into the carrier OUTSIDE the head, then install
+the loaded carrier. Lateral insertion while the lens projects through the
+head aperture is not possible with the current round camera hole.
+This is not a separate removable sled and has no locking latch.
+
+Channel gap 2.2 mm assumes 1.6 mm PCB thickness plus 0.3 mm clearance on
+each face. Real PCB thickness, edge components and print tolerance need
+checking before claiming reliable capture or retention.
+
+CAD checks: one valid solid, closed STL. Sampled 26 mm rail insertion
+travel at 0.5 mm increments has no collision with the modeled PCB, USB,
+camera housing or lens, outside the head. These are provisional proxies;
+the full stack cuboid is not a component-accurate collision model.
+No unintended head collision at final pose. Minimum ultrasonic PCB gap
+5.4 mm. Existing nominal side contact interference remains intentional.
+Loaded carrier insertion into head and physical grip are unverified.
+Solid-volume PLA estimate 3.15 g, before slicing.
+
+R5 has not been sent to the printer. Prior revisions remain available.
