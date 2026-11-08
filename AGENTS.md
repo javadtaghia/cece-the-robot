@@ -60,3 +60,8 @@ Actual pin geometry remains unmeasured; do not claim physical pin clearance.
 R12 extends the R11 opening downward to Z=48.0 and 2 mm rearward,
 removing the marked ledge beside the upper board edge. A 2.45 mm deep rear
 rail remains; nominal board-to-rail clearance there is 2.3 mm.
+
+R13 replaces the straight central rail with a U-shaped route around the
+board. Preserve the empty former rail span and 6.45 mm board-to-rear-span
+gap. The new route clears the source prototype-board component allowance;
+do not revert to a straight bar crossing the marked access area.

@@ -1,0 +1,73 @@
+from pathlib import Path
+import FreeCAD as App
+import FreeCADGui as Gui
+from PySide import QtCore
+here=Path(r'C:/Users/user/OneDrive/Documents/ChatGPT/CeCe-the-robot/workspace/cece_the_robot_repo/experiments/cece/esp_head_carrier')
+doc=App.openDocument(str(here/'Cece_Head_ESP_Assembly_R13.FCStd'))
+def present():
+ try:
+  App.setActiveDocument(doc.Name)
+  for o in doc.Objects:
+   o.ViewObject.Visibility=True
+   c=(.65,.72,.8); t=0
+   if o.Name in ('Rounded_Head_Study','Rear_Cover_Study'):c=(.88,.93,.97);t=78
+   elif o.Name=='Body':c=(.87,.92,.96)
+   elif o.Name.startswith('Heart_Frame'):c=(.95,.22,.4)
+   elif o.Name=='ESP_Side_Bridge':c=(.1,.7,.85)
+   elif o.Name=='Flap_Contact_Zone':c=(1.0,.45,.08)
+   elif o.Name=='ESP_PCB':c=(.12,.65,.25)
+   elif o.Name.startswith('ESP_Camera'):c=(.15,.15,.17)
+   elif o.Name=='ESP_USB_Socket':c=(.72,.72,.74)
+   elif o.Name.startswith('HC_SR04'):c=(.15,.35,.7) if o.Name.endswith('PCB') else (.75,.75,.78)
+   elif o.Name.startswith('Left_Foot') or o.Name.startswith('Right_Foot'):c=(.35,.55,.78)
+   o.ViewObject.ShapeColor=c;o.ViewObject.Transparency=t
+   o.ViewObject.LineColor=(.18,.18,.2)
+   if 'Envelope' in o.Name or 'Allowance' in o.Name or 'Clearance' in o.Name:
+    o.ViewObject.Visibility=False
+   if o.Name=='ESP_Stack_Envelope':o.ViewObject.Visibility=False
+  view=Gui.getDocument(doc.Name).activeView()
+  z=App.Vector(-90,-125,78);z.normalize();x=App.Vector(0,0,1).cross(z);x.normalize();y=z.cross(x)
+  for o in doc.Objects:
+   o.ViewObject.Visibility=o.Name in ('Rounded_Head_Study','ESP_Side_Bridge','Flap_Contact_Zone','ESP_PCB','ESP_USB_Socket','ESP_Camera_Housing','ESP_Camera_Lens','HC_SR04_PCB','HC_SR04_Left_Can','HC_SR04_Right_Can')
+  view.setCameraOrientation(App.Rotation(x,y,z,'ZXY').Q);view.fitAll()
+  Gui.Selection.clearSelection();doc.recompute();doc.save()
+  view.saveImage(str(here/'Cece_Assembly_With_ESP_R13.png'),1400,1200,'White')
+  for o in doc.Objects:
+   o.ViewObject.Visibility=o.Name in ('ESP_Side_Bridge','Flap_Contact_Zone','ESP_PCB','ESP_USB_Socket','ESP_Camera_Housing','ESP_Camera_Lens')
+  view.fitAll()
+  view.saveImage(str(here/'Cece_Slide_Holder_R13_Detail.png'),1400,1000,'White')
+  for o in doc.Objects:o.ViewObject.Visibility=o.Name in ('ESP_Side_Bridge','Flap_Contact_Zone')
+  view.fitAll()
+  view.saveImage(str(here/'Cece_Carrier_R13_Only.png'),1400,1000,'White')
+  for o in doc.Objects:
+   o.ViewObject.Visibility=o.Name in ('Rounded_Head_Study','ESP_Side_Bridge','Flap_Contact_Zone','ESP_PCB','ESP_USB_Socket','ESP_Camera_Housing','ESP_Camera_Lens','HC_SR04_PCB','HC_SR04_Left_Can','HC_SR04_Right_Can')
+  for o in doc.Objects:o.ViewObject.Visibility=o.Name in ('ESP_Side_Bridge','Flap_Contact_Zone','ESP_PCB','ESP_USB_Socket','ESP_Camera_Housing','ESP_Camera_Lens')
+  z=App.Vector(55,105,135);z.normalize();x=App.Vector(0,0,1).cross(z);x.normalize();y=z.cross(x)
+  view.setCameraOrientation(App.Rotation(x,y,z,'ZXY').Q);view.fitAll()
+  view.saveImage(str(here/'Cece_Board_Clearance_R13.png'),1400,1000,'White')
+  view.viewTop();view.fitAll()
+  view.saveImage(str(here/'Cece_U_Route_R13_Top.png'),1400,1000,'White')
+  view.setCameraOrientation(App.Rotation(x,y,z,'ZXY').Q);view.fitAll()
+  doc.recompute();doc.save()
+  (here/'view_setup_R13_result.txt').write_text('Cece assembly opened and view saved.')
+ except Exception:
+  import traceback
+  for o in doc.Objects:
+   o.ViewObject.Visibility=o.Name in ('ESP_Side_Bridge','Flap_Contact_Zone','ESP_PCB','ESP_USB_Socket','ESP_Camera_Housing','ESP_Camera_Lens')
+  view.fitAll()
+  view.saveImage(str(here/'Cece_Slide_Holder_R13_Detail.png'),1400,1000,'White')
+  for o in doc.Objects:o.ViewObject.Visibility=o.Name in ('ESP_Side_Bridge','Flap_Contact_Zone')
+  view.fitAll()
+  view.saveImage(str(here/'Cece_Carrier_R13_Only.png'),1400,1000,'White')
+  for o in doc.Objects:
+   o.ViewObject.Visibility=o.Name in ('Rounded_Head_Study','ESP_Side_Bridge','Flap_Contact_Zone','ESP_PCB','ESP_USB_Socket','ESP_Camera_Housing','ESP_Camera_Lens','HC_SR04_PCB','HC_SR04_Left_Can','HC_SR04_Right_Can')
+  for o in doc.Objects:o.ViewObject.Visibility=o.Name in ('ESP_Side_Bridge','Flap_Contact_Zone','ESP_PCB','ESP_USB_Socket','ESP_Camera_Housing','ESP_Camera_Lens')
+  z=App.Vector(55,105,135);z.normalize();x=App.Vector(0,0,1).cross(z);x.normalize();y=z.cross(x)
+  view.setCameraOrientation(App.Rotation(x,y,z,'ZXY').Q);view.fitAll()
+  view.saveImage(str(here/'Cece_Board_Clearance_R13.png'),1400,1000,'White')
+  view.viewTop();view.fitAll()
+  view.saveImage(str(here/'Cece_U_Route_R13_Top.png'),1400,1000,'White')
+  view.setCameraOrientation(App.Rotation(x,y,z,'ZXY').Q);view.fitAll()
+  doc.recompute();doc.save()
+  (here/'view_setup_R13_result.txt').write_text(traceback.format_exc())
+QtCore.QTimer.singleShot(1500,present)
