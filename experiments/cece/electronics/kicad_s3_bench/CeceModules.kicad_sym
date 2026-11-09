@@ -80,6 +80,8 @@
 (pin bidirectional line (at 33.02 10.16 180) (length 7.62) (name "D4 / GPIO5" (effects (font (size 0.95 0.95)))) (number "D4 / GPIO5" (effects (font (size 0.8 0.8)))))
 (pin bidirectional line (at 33.02 0 180) (length 7.62) (name "D5 / GPIO6" (effects (font (size 0.95 0.95)))) (number "D5 / GPIO6" (effects (font (size 0.8 0.8)))))
 (pin power_in line (at 33.02 -10.16 180) (length 7.62) (name "GND" (effects (font (size 0.95 0.95)))) (number "GND" (effects (font (size 0.8 0.8)))))
+(pin output line (at 33.02 -20.32 180) (length 7.62) (name "D0 / GPIO1" (effects (font (size 0.95 0.95)))) (number "D0 / GPIO1" (effects (font (size 0.8 0.8)))))
+(pin input line (at 33.02 -30.48 180) (length 7.62) (name "D1 / GPIO2" (effects (font (size 0.95 0.95)))) (number "D1 / GPIO2" (effects (font (size 0.8 0.8)))))
 ))
 (symbol "PiicoDev_CE09181" (pin_numbers hide) (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
 (property "Reference" "U" (at 0 0 0) (effects (font (size 1 1))))
@@ -129,5 +131,48 @@
 (symbol "BulkCap_1_1"
 (pin passive line (at 0 7.62 270) (length 5.08) (name "+" (effects (font (size 0.95 0.95)))) (number "+" (effects (font (size 0.8 0.8)))))
 (pin passive line (at 0 -7.62 90) (length 5.08) (name "-" (effects (font (size 0.95 0.95)))) (number "-" (effects (font (size 0.8 0.8)))))
+))
+(symbol "HC_SR04" (pin_numbers hide) (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+(property "Reference" "U" (at 0 0 0) (effects (font (size 1 1))))
+(property "Value" "HC_SR04" (at 0 0 0) (effects (font (size 1 1))))
+(symbol "HC_SR04_0_1"
+(rectangle (start -20.32 22.86) (end 20.32 -22.86) (stroke (width 0.254) (type default)) (fill (type background)))
+)
+(symbol "HC_SR04_1_1"
+(pin power_in line (at -27.94 15.24 0) (length 7.62) (name "VCC" (effects (font (size 0.95 0.95)))) (number "VCC" (effects (font (size 0.8 0.8)))))
+(pin input line (at -27.94 5.08 0) (length 7.62) (name "TRIG" (effects (font (size 0.95 0.95)))) (number "TRIG" (effects (font (size 0.8 0.8)))))
+(pin output line (at -27.94 -5.08 0) (length 7.62) (name "ECHO" (effects (font (size 0.95 0.95)))) (number "ECHO" (effects (font (size 0.8 0.8)))))
+(pin power_in line (at -27.94 -15.24 0) (length 7.62) (name "GND" (effects (font (size 0.95 0.95)))) (number "GND" (effects (font (size 0.8 0.8)))))
+))
+(symbol "ResistorH" (pin_numbers hide) (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
+(property "Reference" "R" (at 0 0 0) (effects (font (size 1 1))))
+(property "Value" "ResistorH" (at 0 0 0) (effects (font (size 1 1))))
+(symbol "ResistorH_0_1"
+(rectangle (start -5.08 2.54) (end 5.08 -2.54) (stroke (width 0.254) (type default)) (fill (type background)))
+)
+(symbol "ResistorH_1_1"
+(pin passive line (at -12.7 0 0) (length 7.62) (name "1" (effects (font (size 0.95 0.95)))) (number "1" (effects (font (size 0.8 0.8)))))
+(pin passive line (at 12.7 0 180) (length 7.62) (name "2" (effects (font (size 0.95 0.95)))) (number "2" (effects (font (size 0.8 0.8)))))
+))
+(symbol "ResistorV" (pin_numbers hide) (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
+(property "Reference" "R" (at 0 0 0) (effects (font (size 1 1))))
+(property "Value" "ResistorV" (at 0 0 0) (effects (font (size 1 1))))
+(symbol "ResistorV_0_1"
+(rectangle (start -2.54 5.08) (end 2.54 -5.08) (stroke (width 0.254) (type default)) (fill (type background)))
+)
+(symbol "ResistorV_1_1"
+(pin passive line (at 0 12.7 270) (length 7.62) (name "1" (effects (font (size 0.95 0.95)))) (number "1" (effects (font (size 0.8 0.8)))))
+(pin passive line (at 0 -12.7 90) (length 7.62) (name "2" (effects (font (size 0.95 0.95)))) (number "2" (effects (font (size 0.8 0.8)))))
+))
+(symbol "CeramicCap" (pin_numbers hide) (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
+(property "Reference" "C" (at 0 0 0) (effects (font (size 1 1))))
+(property "Value" "CeramicCap" (at 0 0 0) (effects (font (size 1 1))))
+(symbol "CeramicCap_0_1"
+(polyline (pts (xy -3.81 2.54) (xy 3.81 2.54)) (stroke (width 0.508) (type default)) (fill (type none)))
+(polyline (pts (xy -3.81 -2.54) (xy 3.81 -2.54)) (stroke (width 0.508) (type default)) (fill (type none)))
+)
+(symbol "CeramicCap_1_1"
+(pin passive line (at 0 10.16 270) (length 7.62) (name "1" (effects (font (size 0.95 0.95)))) (number "1" (effects (font (size 0.8 0.8)))))
+(pin passive line (at 0 -10.16 90) (length 7.62) (name "2" (effects (font (size 0.95 0.95)))) (number "2" (effects (font (size 0.8 0.8)))))
 ))
 )

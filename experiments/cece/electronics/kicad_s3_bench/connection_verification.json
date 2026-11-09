@@ -1,21 +1,29 @@
 {
   "passed": true,
-  "revision": "1.1",
+  "revision": "1.2",
   "checks": [
     "/BATTERY_PLUS",
     "/SWITCHED_BAT_PLUS",
     "/ESP_5V",
     "Net-(D1-PadA)",
+    "/3V3_LOGIC",
     "/I2C_SDA",
     "/I2C_SCL",
-    "/3V3_LOGIC",
-    "four servo signals and power",
-    "UBEC powers JP1",
-    "JP1 OUT to diode A, diode K to ESP 5V",
-    "USB VBUS shares ESP 5V: remove JP1 before plugging USB",
-    "BAT+ unused",
-    "capacitor polarity"
+    "/ULTRA_TRIG_3V3",
+    "/ULTRA_ECHO_3V3",
+    "/Ultrasonic/ECHO_RAW_5V",
+    "/5V_SERVO",
+    "/GND",
+    "/SERVO_1_PWM",
+    "/SERVO_2_PWM",
+    "/SERVO_3_PWM",
+    "/SERVO_4_PWM",
+    "unconnected-(U1-PadBAT+)"
   ],
+  "servo_power_checked": true,
+  "echo_divider_volts_at_5V": 3.0,
+  "erc_violations": 0,
   "physical_hardware_tested": false,
-  "charger_pinout_verified": false
+  "charger_pinout_verified": false,
+  "ultrasonic_firmware_implemented": false
 }

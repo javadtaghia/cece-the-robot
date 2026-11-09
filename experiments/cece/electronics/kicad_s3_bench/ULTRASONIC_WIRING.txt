@@ -1,0 +1,46 @@
+Cece ultrasonic addition - revision 1.2, 9 November 2026
+
+Open Cece_USB_Bench_Wiring.kicad_sch in KiCad 8.
+Select Ultrasonic (page 2) in the sheet hierarchy for the sensor circuit.
+Keep Cece_Ultrasonic.kicad_sch beside the main file.
+
+HC-SR04 terminal     Connect to
+VCC                 Regulated 5.0 V UBEC output, same rail as servo V+.
+GND                 Common ground: UBEC, ESP and servo board ground.
+TRIG                XIAO D0 / GPIO1.
+ECHO                R1 (2.2 kohm); other end of R1 joins D1 / GPIO2 and R2.
+R2 (3.3 kohm)        From that GPIO2 junction to GND.
+C2 (100 nF ceramic)  Across sensor VCC and GND, near the sensor connector.
+
+Use through-hole 1% resistors (1/4 W is sufficient) and a 25 V ceramic
+capacitor. The divider makes a nominal 5 V ECHO about 3.0 V at GPIO2.
+Do not connect raw ECHO directly to the ESP. Follow the labels printed
+on the actual sensor: the schematic's block positions are not pin order.
+
+The sensor runs from regulated 5 V, never directly from the 2S battery.
+Follow the existing RUN / USB-programming instructions on page 1:
+remove JP1 before connecting computer USB. Test the sensor in battery
+RUN mode. Charger connections remain pending exact charger identification.
+
+GPIO1 and GPIO2 are free in the present S3MediaServo sketch. Its camera,
+microphone and I2C servo-driver pins remain unchanged. This schematic
+allocates the two ultrasound pins; that sketch does not yet implement
+distance acquisition. Firmware must send a >=10 us TRIG pulse, measure
+ECHO with a timeout and space measurements appropriately for the module.
+Confirm the actual HC-SR04 responds reliably to a 3.3 V trigger.
+
+Validation: KiCad ERC reports zero violations on both sheets. The exported
+netlist check verifies the divider, parent/child sheet connectivity,
+power routing, I2C and all four servo channels. These are schematic checks;
+they do not constitute a physical sensor test or a routed PCB.
+
+To repeat after editing: export KiCad XML netlist and JSON ERC report
+using the existing filenames, then run python verify_connections.py.
+build_schematic.py regenerates BOTH sheets; preserve manual edits before
+running it, because it replaces generated files.
+
+References checked 9 November 2026:
+Seeed XIAO ESP32-S3 pin mapping:
+https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/
+Adafruit HC-SR04 supply, trigger and ECHO level shifting:
+https://learn.adafruit.com/distance-measurement-ultrasound-hcsr04/connect-the-sensor

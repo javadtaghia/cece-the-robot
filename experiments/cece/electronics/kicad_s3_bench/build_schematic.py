@@ -16,6 +16,8 @@ def fx(size=1.0, justify=None):
     return f'(effects (font (size {n(size)} {n(size)}))'+(f' (justify {justify})' if justify else '')+')'
 
 root_id = uid()
+instance_path = "/"+root_id
+ultrasonic_sheet_id = uid()
 symbols = {}
 placed = []
 wires = []
@@ -25,8 +27,9 @@ points = {}
 
 def define(name, width, height, pins, graphic=None):
     """pins: (terminal/name, electrical type, local x, local y, angle)."""
-    prefix='C' if name=='BulkCap' else 'U'
-    s=[f'(symbol {q(name)} (pin_numbers hide) (pin_names (offset 1.016)) (in_bom yes) (on_board yes)',
+    prefix='C' if name in ('BulkCap','CeramicCap') else ('R' if name.startswith('Resistor') else 'U')
+    hide_names=' hide' if name in ('ResistorH','ResistorV','CeramicCap') else ''
+    s=[f'(symbol {q(name)} (pin_numbers hide) (pin_names (offset 1.016){hide_names}) (in_bom yes) (on_board yes)',
        f'(property "Reference" {q(prefix)} (at 0 0 0) {fx()})',
        f'(property "Value" {q(name)} (at 0 0 0) {fx()})',
        f'(symbol {q(name+"_0_1")}']
@@ -51,7 +54,7 @@ def place(name,ref,value,x,y):
     for terminal,_,px,py,_ in definition['pins']:
         points[(ref,terminal)]=(round(x+px,4),round(y-py,4))
         text.append(f'(pin {q(terminal)} (uuid {q(uid())}))')
-    text.append(f'(instances (project {q(NAME)} (path {q("/"+root_id)} (reference {q(ref)}) (unit 1)))) )')
+    text.append(f'(instances (project {q(NAME)} (path {q(instance_path)} (reference {q(ref)}) (unit 1)))) )')
     placed.append('\n'.join(text))
 
 def wire(*path):
@@ -76,7 +79,7 @@ define('PC_USB',25.4,25.4,[('USB 5V','passive',20.32,10.16,180),('USB GND','pass
 # Functional power-flow types describe JP1 fitted; programming requires removal.
 define('RunLink',5.08,10.16,[('IN','power_in',-10.16,0,0),('OUT','power_out',10.16,0,180)])
 define('Schottky',20.32,10.16,[('A','power_in',-17.78,0,0),('K','power_out',17.78,0,180)])
-define('XIAO_Sense',50.8,71.12,[('USB VBUS','power_in',-33.02,15.24,0),('USB GND','passive',-33.02,-5.08,0),('5V HEADER','power_in',-33.02,-20.32,0),('BAT+','power_in',-33.02,-27.94,0),('3V3','power_out',33.02,20.32,180),('D4 / GPIO5','bidirectional',33.02,10.16,180),('D5 / GPIO6','bidirectional',33.02,0,180),('GND','power_in',33.02,-10.16,180)])
+define('XIAO_Sense',50.8,71.12,[('USB VBUS','power_in',-33.02,15.24,0),('USB GND','passive',-33.02,-5.08,0),('5V HEADER','power_in',-33.02,-20.32,0),('BAT+','power_in',-33.02,-27.94,0),('3V3','power_out',33.02,20.32,180),('D4 / GPIO5','bidirectional',33.02,10.16,180),('D5 / GPIO6','bidirectional',33.02,0,180),('GND','power_in',33.02,-10.16,180),('D0 / GPIO1','output',33.02,-20.32,180),('D1 / GPIO2','input',33.02,-30.48,180)])
 driver_pins=[('5V MOTOR','power_in',-38.1,43.18,0),('GND MOTOR','power_in',-38.1,27.94,0),('3V3 LOGIC','power_in',-38.1,-10.16,0),('SDA','bidirectional',-38.1,-20.32,0),('SCL','input',-38.1,-30.48,0),('GND LOGIC','power_in',-38.1,-40.64,0)]
 for socket,cy in enumerate([60.96,86.36,111.76,137.16],1):
     for terminal,dy,typ in [('SIG',-5.08,'output'),('5V',0,'passive'),('GND',5.08,'passive')]:
@@ -87,6 +90,14 @@ define('BulkCap',7.62,5.08,[('+','passive',0,7.62,270),('-','passive',0,-7.62,90
     '(polyline (pts (xy -3.81 2.54) (xy 3.81 2.54)) (stroke (width 0.508) (type default)) (fill (type none)))',
     '(polyline (pts (xy -3.81 -2.54) (xy 3.81 -2.54)) (stroke (width 0.508) (type default)) (fill (type none)))',
     f'(text "+" (at -5.08 3.81 0) {fx(1.27)})'])
+
+# HC-SR04 interface uses through-hole resistors and a ceramic bypass capacitor.
+define('HC_SR04',40.64,45.72,[('VCC','power_in',-27.94,15.24,0),('TRIG','input',-27.94,5.08,0),('ECHO','output',-27.94,-5.08,0),('GND','power_in',-27.94,-15.24,0)])
+define('ResistorH',10.16,5.08,[('1','passive',-12.7,0,0),('2','passive',12.7,0,180)])
+define('ResistorV',5.08,10.16,[('1','passive',0,12.7,270),('2','passive',0,-12.7,90)])
+define('CeramicCap',7.62,5.08,[('1','passive',0,10.16,270),('2','passive',0,-10.16,90)],graphic=[
+ '(polyline (pts (xy -3.81 2.54) (xy 3.81 2.54)) (stroke (width 0.508) (type default)) (fill (type none)))',
+ '(polyline (pts (xy -3.81 -2.54) (xy 3.81 -2.54)) (stroke (width 0.508) (type default)) (fill (type none)))'])
 
 place('Battery','BT1','Dualsky 2S / 550mAh',27.94,63.5)
 place('PushbuttonSwitch','U2','Mini PB Reverse / LV',101.6,63.5)
@@ -136,6 +147,21 @@ for i in range(1,5):
         a=points['U4',f'{i} {driver_pin}'];b=points[f'M{i}',servo_pin]
         wire(a,b);label(net,(312.42,a[1]))
 
+# Detail sheet keeps the original battery/servo overview readable.
+sheet_x,sheet_y,sheet_w,sheet_h=243.84,185.42,43.18,27.94
+sheet_pins=[('TRIG_3V3','input',sheet_x,193.04,180),('ECHO_3V3','output',sheet_x,203.2,180),('5V_IN','input',sheet_x+sheet_w,193.04,0),('GND_IN','input',sheet_x+sheet_w,203.2,0)]
+hierarchy=[f'(sheet (at {n(sheet_x)} {n(sheet_y)}) (size {n(sheet_w)} {n(sheet_h)}) (stroke (width 0.254) (type default)) (fill (color 0 0 0 0)) (uuid {q(ultrasonic_sheet_id)})',
+ f'(property "Sheetname" "Ultrasonic" (at {n(sheet_x)} {n(sheet_y-1.27)} 0) {fx(1.27,"left bottom")})',
+ f'(property "Sheetfile" "Cece_Ultrasonic.kicad_sch" (at {n(sheet_x)} {n(sheet_y+sheet_h+1.27)} 0) {fx(.9,"left top")})']
+for name,typ,x,y,angle in sheet_pins:
+ hierarchy.append(f'(pin {q(name)} {typ} (at {n(x)} {n(y)} {angle}) {fx(.9,"left" if angle==180 else "right")} (uuid {q(uid())}))')
+hierarchy.append(f'(instances (project {q(NAME)} (path {q(instance_path)} (page "2")))) )')
+graphics.append('\n'.join(hierarchy))
+wire(points['U1','D0 / GPIO1'],(sheet_x,193.04));label('ULTRA_TRIG_3V3',(165.1,193.04))
+wire(points['U1','D1 / GPIO2'],(sheet_x,203.2));label('ULTRA_ECHO_3V3',(165.1,203.2))
+wire((sheet_x+sheet_w,193.04),(292.1,193.04));label('5V_SERVO',(292.1,193.04))
+wire((sheet_x+sheet_w,203.2),(292.1,203.2));label('GND',(292.1,203.2))
+
 text('CECE - BATTERY POWER + USB PROGRAMMING',20.32,15.24,2.54)
 text('Normal run: battery powers ESP + four SG90s | USB for programming only | Camera / mic / Wi-Fi retained',20.32,22.86,1.35)
 text('1. BATTERY / SWITCH / REGULATOR',20.32,30.48,1.6)
@@ -149,7 +175,7 @@ text('JP1: fitted to RUN; REMOVE before USB.\nD1 banded end -> ESP 5V header.',1
 text('Both address switches OFF\nI2C address 0x44\nSockets 1/2 = hips; 3/4 = feet\nChip channels = 3/2/1/0',246.38,162.56,1.15)
 text('POWER / PROGRAMMING MODES\nRUN: no computer USB; JP1 fitted; switch ON.\nBattery -> switch -> UBEC 5V -> servos AND ESP.\nESP branch: JP1 -> D1 -> ESP 5V header.\nPROGRAM: switch OFF; REMOVE JP1; then plug USB.\nAfter programming: unplug USB, then refit JP1.\nD1 alone does NOT prevent PC backfeed; remove JP1.\nNever connect 2S pack directly to ESP 5V or BAT+.\nAll GND labels share ground. Use proper power wire.',20.32,220.98,1.15)
 text('BATTERY HAS TWO SEPARATE CONNECTORS\nMain 2-wire lead: RED = pack +; BLACK = pack -.\nMain lead supplies the switch / UBEC as drawn above.\n3-wire BLACK / BLUE / RED plug = 2S balance lead.\nBalance functions: pack -, cell midpoint, pack +.\nWire-to-pin order is NOT verified: do not wire by colour.\nMidpoint is NOT ground; never join it to GND.',157.48,220.98,1.15)
-text('CHARGER CONNECTION - PENDING IDENTIFICATION\nUnplug MAIN lead from robot before charging.\nUse a charger explicitly rated for 2S LiPo (8.4V full).\nBalance plug -> charger 2S balance socket, after pin check.\nSome chargers ALSO need main red/black charge leads;\nothers charge through the balance plug alone.\nExact connections require charger model + plug photos.\nDo NOT use an unverified Adafruit 1S USB-C charger.\nESP USB and UBEC do not charge this pack.',294.64,185.42,1.1)
+text('CHARGER CONNECTION - PENDING IDENTIFICATION\nUnplug MAIN lead from robot before charging.\nUse a charger explicitly rated for 2S LiPo (8.4V full).\nBalance plug -> charger 2S balance socket, after pin check.\nSome chargers ALSO need main red/black charge leads;\nothers charge through the balance plug alone.\nExact connections require charger model + plug photos.\nDo NOT use an unverified Adafruit 1S USB-C charger.\nESP USB and UBEC do not charge this pack.',317.5,185.42,1.0)
 text('MODULE DRAWING\nFollow printed terminal labels, not block positions.\nModule wiring only; no physical footprint mapping.\nSwitch is ON/OFF, not safety isolation.',294.64,243.84,1.05)
 
 external='(kicad_symbol_lib (version 20231120) (generator "kicad_symbol_editor")\n'+ '\n'.join(d['text'] for d in symbols.values())+'\n)\n'
@@ -157,8 +183,42 @@ external='(kicad_symbol_lib (version 20231120) (generator "kicad_symbol_editor")
 (ROOT/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "CeceModules") (type "KiCad") (uri "${KIPRJMOD}/CeceModules.kicad_sym") (options "") (descr "Cece module wiring symbols")))\n')
 cached='\n'.join(d['text'].replace('(symbol '+q(name),'(symbol '+q('CeceModules:'+name),1) for name,d in symbols.items())
 sheet=[f'(kicad_sch (version 20231120) (generator "eeschema") (uuid {q(root_id)}) (paper "A3")',
-       '(title_block (title "Cece - Battery operation / USB programming") (date "2026-11-07") (rev "1.1") (company "Cece the robot") (comment 1 "Remove JP1 before USB. Charger wiring pending model confirmation."))',
-       '(lib_symbols\n'+cached+'\n)',*placed,*wires,*labels,*graphics,')']
+       '(title_block (title "Cece - Battery operation / USB programming") (date "2026-11-09") (rev "1.2") (company "Cece the robot") (comment 1 "Remove JP1 before USB. Charger wiring pending model confirmation."))',
+       '(lib_symbols\n'+cached+'\n)',*placed,*wires,*labels,*graphics,'(sheet_instances (path "/" (page "1")))',')']
 (ROOT/(NAME+'.kicad_sch')).write_text('\n'.join(sheet)+'\n',encoding='utf-8')
 (ROOT/(NAME+'.kicad_pro')).write_text(json.dumps({'meta':{'filename':NAME+'.kicad_pro','version':1},'schematic':{},'text_variables':{}},indent=2)+'\n')
 print(ROOT/(NAME+'.kicad_sch'))
+
+# Child page: show the echo divider explicitly, not hidden inside a module.
+parent_instance_path=instance_path
+instance_path=parent_instance_path+"/"+ultrasonic_sheet_id
+child_root=uid()
+placed=[];wires=[];labels=[];graphics=[];points={}
+place('HC_SR04','U5','HC-SR04',233.68,83.82)
+place('ResistorH','R1','2.2k / 1%',157.48,88.9)
+place('ResistorV','R2','3.3k / 1%',127,111.76)
+place('CeramicCap','C2','100nF / 25V',269.24,83.82)
+# R1 is series from 5V ECHO to the GPIO node; R2 shunts that node to GND.
+wire(points['U5','ECHO'],points['R1','2'])
+wire(points['R1','1'],(127,88.9),(45.72,88.9))
+wire((127,88.9),points['R2','1']);junction(127,88.9)
+wire(points['R2','2'],(205.74,124.46),(205.74,99.06))
+wire(points['U5','VCC'],(205.74,53.34),(45.72,53.34))
+wire((205.74,53.34),(269.24,53.34),points['C2','1']);junction(205.74,53.34)
+wire(points['C2','2'],(269.24,124.46),(205.74,124.46));junction(205.74,124.46)
+wire((127,124.46),(45.72,124.46))
+# Route trigger above the resistor/capacitor network.
+wire(points['U5','TRIG'],(210.82,78.74),(210.82,43.18),(68.58,43.18),(68.58,68.58),(45.72,68.58))
+for name,typ,x,y in [('5V_IN','input',45.72,53.34),('TRIG_3V3','input',45.72,68.58),('ECHO_3V3','output',45.72,88.9),('GND_IN','input',45.72,124.46)]:
+ graphics.append(f'(hierarchical_label {q(name)} (shape {typ}) (at {n(x)} {n(y)} 0) {fx(1.1,"right")} (uuid {q(uid())}))')
+label('ECHO_RAW_5V',(172.72,88.9))
+text('CECE - HC-SR04 ULTRASONIC CONNECTIONS',20.32,15.24,2.0)
+text('D0 / GPIO1 -> TRIG | D1 / GPIO2 <- divided ECHO | 5V from UBEC | common ground',20.32,22.86,1.15)
+text('To XIAO D1 / GPIO2',48.26,96.52,1.1)
+text('R1: ECHO -> GPIO node\nR2: GPIO node -> GND\n5V echo becomes about 3.0V.\nNever connect raw ECHO directly to ESP.',20.32,137.16,1.15)
+text('C2 across VCC/GND, close to sensor.\nUse 2.2k and 3.3k through-hole resistors, 1%.\nTRIG is a 3.3V pulse, at least 10us.\nVerify trigger response on your sensor.',137.16,137.16,1.15)
+text('Terminal labels show electrical connections, not physical pin order. Follow VCC/TRIG/ECHO/GND on your board.\nFirmware allocation: GPIO1 trigger, GPIO2 echo. Existing S3 media/servo firmware does not yet read this sensor.\nUse battery RUN mode for sensor tests; do not feed the sensor from the raw 2S battery or the ESP 3V3 rail.',20.32,165.1,1.05)
+child=[f'(kicad_sch (version 20231120) (generator "eeschema") (uuid {q(child_root)}) (paper "A4")',
+ '(title_block (title "Cece - Ultrasonic sensor / 3.3V echo interface") (date "2026-11-09") (rev "1.2"))',
+ '(lib_symbols\n'+cached+'\n)',*placed,*wires,*labels,*graphics,')']
+(ROOT/'Cece_Ultrasonic.kicad_sch').write_text('\n'.join(child)+'\n',encoding='utf-8')
