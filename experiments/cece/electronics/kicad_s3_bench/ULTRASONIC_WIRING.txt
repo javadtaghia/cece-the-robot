@@ -1,8 +1,9 @@
-Cece ultrasonic addition - revision 1.2, 9 November 2026
+Cece ultrasonic addition - revision 1.3, 9 November 2026
 
 Open Cece_USB_Bench_Wiring.kicad_sch in KiCad 8.
-Select Ultrasonic (page 2) in the sheet hierarchy for the sensor circuit.
-Keep Cece_Ultrasonic.kicad_sch beside the main file.
+The ultrasonic sensor, divider and capacitor are now on the MAIN sheet,
+alongside the ESP, battery, UBEC and servo driver. No sub-sheet is needed.
+Cece_Ultrasonic.kicad_sch is retained only as the earlier revision 1.2 detail.
 
 HC-SR04 terminal     Connect to
 VCC                 Regulated 5.0 V UBEC output, same rail as servo V+.
@@ -29,14 +30,14 @@ distance acquisition. Firmware must send a >=10 us TRIG pulse, measure
 ECHO with a timeout and space measurements appropriately for the module.
 Confirm the actual HC-SR04 responds reliably to a 3.3 V trigger.
 
-Validation: KiCad ERC reports zero violations on both sheets. The exported
-netlist check verifies the divider, parent/child sheet connectivity,
+Validation: KiCad ERC reports zero violations on the single sheet. The exported
+netlist check verifies the divider, direct ESP-to-sensor connectivity,
 power routing, I2C and all four servo channels. These are schematic checks;
 they do not constitute a physical sensor test or a routed PCB.
 
 To repeat after editing: export KiCad XML netlist and JSON ERC report
 using the existing filenames, then run python verify_connections.py.
-build_schematic.py regenerates BOTH sheets; preserve manual edits before
+build_schematic.py regenerates the main sheet; preserve manual edits before
 running it, because it replaces generated files.
 
 References checked 9 November 2026:

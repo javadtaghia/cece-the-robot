@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "revision": "1.2",
+  "revision": "1.3",
   "checks": [
     "/BATTERY_PLUS",
     "/SWITCHED_BAT_PLUS",
@@ -11,7 +11,7 @@
     "/I2C_SCL",
     "/ULTRA_TRIG_3V3",
     "/ULTRA_ECHO_3V3",
-    "/Ultrasonic/ECHO_RAW_5V",
+    "/ECHO_RAW_5V",
     "/5V_SERVO",
     "/GND",
     "/SERVO_1_PWM",

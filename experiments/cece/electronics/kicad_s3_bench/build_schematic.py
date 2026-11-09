@@ -17,7 +17,6 @@ def fx(size=1.0, justify=None):
 
 root_id = uid()
 instance_path = "/"+root_id
-ultrasonic_sheet_id = uid()
 symbols = {}
 placed = []
 wires = []
@@ -147,20 +146,24 @@ for i in range(1,5):
         a=points['U4',f'{i} {driver_pin}'];b=points[f'M{i}',servo_pin]
         wire(a,b);label(net,(312.42,a[1]))
 
-# Detail sheet keeps the original battery/servo overview readable.
-sheet_x,sheet_y,sheet_w,sheet_h=243.84,185.42,43.18,27.94
-sheet_pins=[('TRIG_3V3','input',sheet_x,193.04,180),('ECHO_3V3','output',sheet_x,203.2,180),('5V_IN','input',sheet_x+sheet_w,193.04,0),('GND_IN','input',sheet_x+sheet_w,203.2,0)]
-hierarchy=[f'(sheet (at {n(sheet_x)} {n(sheet_y)}) (size {n(sheet_w)} {n(sheet_h)}) (stroke (width 0.254) (type default)) (fill (color 0 0 0 0)) (uuid {q(ultrasonic_sheet_id)})',
- f'(property "Sheetname" "Ultrasonic" (at {n(sheet_x)} {n(sheet_y-1.27)} 0) {fx(1.27,"left bottom")})',
- f'(property "Sheetfile" "Cece_Ultrasonic.kicad_sch" (at {n(sheet_x)} {n(sheet_y+sheet_h+1.27)} 0) {fx(.9,"left top")})']
-for name,typ,x,y,angle in sheet_pins:
- hierarchy.append(f'(pin {q(name)} {typ} (at {n(x)} {n(y)} {angle}) {fx(.9,"left" if angle==180 else "right")} (uuid {q(uid())}))')
-hierarchy.append(f'(instances (project {q(NAME)} (path {q(instance_path)} (page "2")))) )')
-graphics.append('\n'.join(hierarchy))
-wire(points['U1','D0 / GPIO1'],(sheet_x,193.04));label('ULTRA_TRIG_3V3',(165.1,193.04))
-wire(points['U1','D1 / GPIO2'],(sheet_x,203.2));label('ULTRA_ECHO_3V3',(165.1,203.2))
-wire((sheet_x+sheet_w,193.04),(292.1,193.04));label('5V_SERVO',(292.1,193.04))
-wire((sheet_x+sheet_w,203.2),(292.1,203.2));label('GND',(292.1,203.2))
+# Ultrasonic sensor is on the same page, with direct ESP signal wires.
+place('HC_SR04','U5','HC-SR04',330.2,198.12)
+place('ResistorH','R1','2.2k / 1%',266.7,203.2)
+place('ResistorV','R2','3.3k / 1%',233.68,226.06)
+place('CeramicCap','C2','100nF / 25V',375.92,203.2)
+wire(points['U1','D0 / GPIO1'],points['U5','TRIG'])
+label('ULTRA_TRIG_3V3',(165.1,193.04))
+wire(points['U1','D1 / GPIO2'],(233.68,203.2),points['R1','1'])
+label('ULTRA_ECHO_3V3',(165.1,203.2))
+wire((233.68,203.2),points['R2','1']);junction(233.68,203.2)
+wire(points['R1','2'],points['U5','ECHO']);label('ECHO_RAW_5V',(279.4,203.2))
+wire(points['U5','VCC'],(302.26,172.72),(375.92,172.72),points['C2','1'])
+label('5V_SERVO',(320.04,172.72))
+wire(points['R2','2'],(302.26,238.76),(375.92,238.76),points['C2','2'])
+wire(points['U5','GND'],(302.26,238.76));junction(302.26,238.76)
+label('GND',(325.12,238.76))
+text('4. ULTRASONIC SENSOR',317.5,162.56,1.6)
+text('R1: ECHO to GPIO2; R2: GPIO2 to GND. 5V echo -> 3.0V.\nNever connect raw ECHO directly to ESP. Use 1% resistors.\nC2 near sensor. GPIO1/2 distance-reading firmware still required.',157.48,246.38,1.05)
 
 text('CECE - BATTERY POWER + USB PROGRAMMING',20.32,15.24,2.54)
 text('Normal run: battery powers ESP + four SG90s | USB for programming only | Camera / mic / Wi-Fi retained',20.32,22.86,1.35)
@@ -169,13 +172,13 @@ text('2. CONTROLLER / SERVO SOCKETS',241.3,30.48,1.6)
 text('Leave these three\ncontrol pins unwired.',76.2,27.94,.95)
 text('Set and measure\n5.0V BEFORE connecting.',157.48,86.36,1.1)
 text('C1 + to 5V; striped\nnegative side to GND.',195.58,99.06,1.05)
-text('3. ESP POWER + FOUR LOGIC WIRES',20.32,119.38,1.6)
+text('3. ESP POWER + SIGNAL CONNECTIONS',20.32,119.38,1.6)
 text('Camera / mic on Sense add-on.\nUSB VBUS and 5V header are\ninternally common (ESP_5V).',86.36,185.42,1.05)
 text('JP1: fitted to RUN; REMOVE before USB.\nD1 banded end -> ESP 5V header.',15.24,208.28,1.05)
 text('Both address switches OFF\nI2C address 0x44\nSockets 1/2 = hips; 3/4 = feet\nChip channels = 3/2/1/0',246.38,162.56,1.15)
 text('POWER / PROGRAMMING MODES\nRUN: no computer USB; JP1 fitted; switch ON.\nBattery -> switch -> UBEC 5V -> servos AND ESP.\nESP branch: JP1 -> D1 -> ESP 5V header.\nPROGRAM: switch OFF; REMOVE JP1; then plug USB.\nAfter programming: unplug USB, then refit JP1.\nD1 alone does NOT prevent PC backfeed; remove JP1.\nNever connect 2S pack directly to ESP 5V or BAT+.\nAll GND labels share ground. Use proper power wire.',20.32,220.98,1.15)
-text('BATTERY HAS TWO SEPARATE CONNECTORS\nMain 2-wire lead: RED = pack +; BLACK = pack -.\nMain lead supplies the switch / UBEC as drawn above.\n3-wire BLACK / BLUE / RED plug = 2S balance lead.\nBalance functions: pack -, cell midpoint, pack +.\nWire-to-pin order is NOT verified: do not wire by colour.\nMidpoint is NOT ground; never join it to GND.',157.48,220.98,1.15)
-text('CHARGER CONNECTION - PENDING IDENTIFICATION\nUnplug MAIN lead from robot before charging.\nUse a charger explicitly rated for 2S LiPo (8.4V full).\nBalance plug -> charger 2S balance socket, after pin check.\nSome chargers ALSO need main red/black charge leads;\nothers charge through the balance plug alone.\nExact connections require charger model + plug photos.\nDo NOT use an unverified Adafruit 1S USB-C charger.\nESP USB and UBEC do not charge this pack.',317.5,185.42,1.0)
+text('BATTERY HAS TWO SEPARATE CONNECTORS\nMain 2-wire lead: RED = pack +; BLACK = pack -.\nMain lead supplies the switch / UBEC as drawn above.\n3-wire BLACK / BLUE / RED plug = 2S balance lead.\nBalance functions: pack -, cell midpoint, pack +.\nWire-to-pin order is NOT verified: do not wire by colour.\nMidpoint is NOT ground; never join it to GND.',157.48,261.62,1.05)
+text('CHARGER CONNECTION - PENDING IDENTIFICATION\nUnplug MAIN lead from robot before charging.\nUse a charger explicitly rated for 2S LiPo (8.4V full).\nBalance plug -> charger 2S balance socket, after pin check.\nSome chargers ALSO need main red/black charge leads;\nothers charge through the balance plug alone.\nExact connections require charger model + plug photos.\nDo NOT use an unverified Adafruit 1S USB-C charger.\nESP USB and UBEC do not charge this pack.',20.32,254,1.0)
 text('MODULE DRAWING\nFollow printed terminal labels, not block positions.\nModule wiring only; no physical footprint mapping.\nSwitch is ON/OFF, not safety isolation.',294.64,243.84,1.05)
 
 external='(kicad_symbol_lib (version 20231120) (generator "kicad_symbol_editor")\n'+ '\n'.join(d['text'] for d in symbols.values())+'\n)\n'
@@ -183,42 +186,8 @@ external='(kicad_symbol_lib (version 20231120) (generator "kicad_symbol_editor")
 (ROOT/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "CeceModules") (type "KiCad") (uri "${KIPRJMOD}/CeceModules.kicad_sym") (options "") (descr "Cece module wiring symbols")))\n')
 cached='\n'.join(d['text'].replace('(symbol '+q(name),'(symbol '+q('CeceModules:'+name),1) for name,d in symbols.items())
 sheet=[f'(kicad_sch (version 20231120) (generator "eeschema") (uuid {q(root_id)}) (paper "A3")',
-       '(title_block (title "Cece - Battery operation / USB programming") (date "2026-11-09") (rev "1.2") (company "Cece the robot") (comment 1 "Remove JP1 before USB. Charger wiring pending model confirmation."))',
+       '(title_block (title "Cece - Battery operation / USB programming") (date "2026-11-09") (rev "1.3") (company "Cece the robot") (comment 1 "Remove JP1 before USB. Charger wiring pending model confirmation."))',
        '(lib_symbols\n'+cached+'\n)',*placed,*wires,*labels,*graphics,'(sheet_instances (path "/" (page "1")))',')']
 (ROOT/(NAME+'.kicad_sch')).write_text('\n'.join(sheet)+'\n',encoding='utf-8')
 (ROOT/(NAME+'.kicad_pro')).write_text(json.dumps({'meta':{'filename':NAME+'.kicad_pro','version':1},'schematic':{},'text_variables':{}},indent=2)+'\n')
 print(ROOT/(NAME+'.kicad_sch'))
-
-# Child page: show the echo divider explicitly, not hidden inside a module.
-parent_instance_path=instance_path
-instance_path=parent_instance_path+"/"+ultrasonic_sheet_id
-child_root=uid()
-placed=[];wires=[];labels=[];graphics=[];points={}
-place('HC_SR04','U5','HC-SR04',233.68,83.82)
-place('ResistorH','R1','2.2k / 1%',157.48,88.9)
-place('ResistorV','R2','3.3k / 1%',127,111.76)
-place('CeramicCap','C2','100nF / 25V',269.24,83.82)
-# R1 is series from 5V ECHO to the GPIO node; R2 shunts that node to GND.
-wire(points['U5','ECHO'],points['R1','2'])
-wire(points['R1','1'],(127,88.9),(45.72,88.9))
-wire((127,88.9),points['R2','1']);junction(127,88.9)
-wire(points['R2','2'],(205.74,124.46),(205.74,99.06))
-wire(points['U5','VCC'],(205.74,53.34),(45.72,53.34))
-wire((205.74,53.34),(269.24,53.34),points['C2','1']);junction(205.74,53.34)
-wire(points['C2','2'],(269.24,124.46),(205.74,124.46));junction(205.74,124.46)
-wire((127,124.46),(45.72,124.46))
-# Route trigger above the resistor/capacitor network.
-wire(points['U5','TRIG'],(210.82,78.74),(210.82,43.18),(68.58,43.18),(68.58,68.58),(45.72,68.58))
-for name,typ,x,y in [('5V_IN','input',45.72,53.34),('TRIG_3V3','input',45.72,68.58),('ECHO_3V3','output',45.72,88.9),('GND_IN','input',45.72,124.46)]:
- graphics.append(f'(hierarchical_label {q(name)} (shape {typ}) (at {n(x)} {n(y)} 0) {fx(1.1,"right")} (uuid {q(uid())}))')
-label('ECHO_RAW_5V',(172.72,88.9))
-text('CECE - HC-SR04 ULTRASONIC CONNECTIONS',20.32,15.24,2.0)
-text('D0 / GPIO1 -> TRIG | D1 / GPIO2 <- divided ECHO | 5V from UBEC | common ground',20.32,22.86,1.15)
-text('To XIAO D1 / GPIO2',48.26,96.52,1.1)
-text('R1: ECHO -> GPIO node\nR2: GPIO node -> GND\n5V echo becomes about 3.0V.\nNever connect raw ECHO directly to ESP.',20.32,137.16,1.15)
-text('C2 across VCC/GND, close to sensor.\nUse 2.2k and 3.3k through-hole resistors, 1%.\nTRIG is a 3.3V pulse, at least 10us.\nVerify trigger response on your sensor.',137.16,137.16,1.15)
-text('Terminal labels show electrical connections, not physical pin order. Follow VCC/TRIG/ECHO/GND on your board.\nFirmware allocation: GPIO1 trigger, GPIO2 echo. Existing S3 media/servo firmware does not yet read this sensor.\nUse battery RUN mode for sensor tests; do not feed the sensor from the raw 2S battery or the ESP 3V3 rail.',20.32,165.1,1.05)
-child=[f'(kicad_sch (version 20231120) (generator "eeschema") (uuid {q(child_root)}) (paper "A4")',
- '(title_block (title "Cece - Ultrasonic sensor / 3.3V echo interface") (date "2026-11-09") (rev "1.2"))',
- '(lib_symbols\n'+cached+'\n)',*placed,*wires,*labels,*graphics,')']
-(ROOT/'Cece_Ultrasonic.kicad_sch').write_text('\n'.join(child)+'\n',encoding='utf-8')

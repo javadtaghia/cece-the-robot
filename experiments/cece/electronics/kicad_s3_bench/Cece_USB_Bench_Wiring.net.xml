@@ -2,34 +2,16 @@
 <export version="E">
   <design>
     <source>C:\Users\user\OneDrive\Documents\ChatGPT\CeCe-the-robot\workspace\cece_the_robot_repo\experiments\cece\electronics\kicad_s3_bench\Cece_USB_Bench_Wiring.kicad_sch</source>
-    <date>2026-11-09T21:00:22+1100</date>
+    <date>2026-11-09T21:08:59+1100</date>
     <tool>Eeschema 8.0.5</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>Cece - Battery operation / USB programming</title>
         <company>Cece the robot</company>
-        <rev>1.2</rev>
+        <rev>1.3</rev>
         <date>2026-11-09</date>
         <source>Cece_USB_Bench_Wiring.kicad_sch</source>
         <comment number="1" value="Remove JP1 before USB. Charger wiring pending model confirmation."/>
-        <comment number="2" value=""/>
-        <comment number="3" value=""/>
-        <comment number="4" value=""/>
-        <comment number="5" value=""/>
-        <comment number="6" value=""/>
-        <comment number="7" value=""/>
-        <comment number="8" value=""/>
-        <comment number="9" value=""/>
-      </title_block>
-    </sheet>
-    <sheet number="2" name="/Ultrasonic/" tstamps="/6068cb48-0d42-44b1-9d22-7c61f99e4a74/">
-      <title_block>
-        <title>Cece - Ultrasonic sensor / 3.3V echo interface</title>
-        <company/>
-        <rev>1.2</rev>
-        <date>2026-11-09</date>
-        <source>Cece_Ultrasonic.kicad_sch</source>
-        <comment number="1" value=""/>
         <comment number="2" value=""/>
         <comment number="3" value=""/>
         <comment number="4" value=""/>
@@ -53,7 +35,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>52ff2b52-3b39-43d5-acc0-4c56424ce7d0</tstamps>
+      <tstamps>932f121c-e4cc-4a94-9f5e-5d66b425c252</tstamps>
     </comp>
     <comp ref="C1">
       <value>1000uF / 25V</value>
@@ -66,7 +48,20 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>68f13366-2437-4b05-a295-85f5ae7a309d</tstamps>
+      <tstamps>f646a4ef-59eb-47a1-b627-28abf47f2037</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>100nF / 25V</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="CeceModules" part="CeramicCap" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>39101a34-adf9-46cb-a8ce-b58d2c31f78c</tstamps>
     </comp>
     <comp ref="D1">
       <value>1N5819</value>
@@ -79,7 +74,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4ada3ba8-8868-4661-93b9-9bd775a12d51</tstamps>
+      <tstamps>bcbdbc79-717a-48b5-a332-985dcf66cb15</tstamps>
     </comp>
     <comp ref="J1">
       <value>USB: PROGRAM ONLY</value>
@@ -92,7 +87,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2a8b0c65-2cef-4b03-afb0-c5ef61be4c6b</tstamps>
+      <tstamps>858475f2-1bee-4695-8ea9-58bc52857720</tstamps>
     </comp>
     <comp ref="JP1">
       <value>RUN</value>
@@ -105,7 +100,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e073b80c-fc91-4b94-8446-608abdc51dc2</tstamps>
+      <tstamps>587c258a-0254-43a2-bf5e-7f5dfd8e9f73</tstamps>
     </comp>
     <comp ref="M1">
       <value>SG90 LEFT HIP</value>
@@ -118,7 +113,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d387dbbb-8c93-4939-91d8-6c9daf953536</tstamps>
+      <tstamps>d9a10e53-b3b5-46bf-9127-319e4ef9f174</tstamps>
     </comp>
     <comp ref="M2">
       <value>SG90 RIGHT HIP</value>
@@ -131,7 +126,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>98c69b66-2670-4db9-a794-6637004593dc</tstamps>
+      <tstamps>eb6bf7fc-bbba-46ea-83eb-7cf840642e2f</tstamps>
     </comp>
     <comp ref="M3">
       <value>SG90 LEFT FOOT</value>
@@ -144,7 +139,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>27f1a85f-efa4-425f-b7b7-ff53293810b5</tstamps>
+      <tstamps>fe970514-7d2b-4b50-b998-abc49dae6917</tstamps>
     </comp>
     <comp ref="M4">
       <value>SG90 RIGHT FOOT</value>
@@ -157,7 +152,33 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>bc485503-c765-4b57-835e-b739007aee67</tstamps>
+      <tstamps>40e4b112-0072-442e-9f72-f9e43b17b78f</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>2.2k / 1%</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="CeceModules" part="ResistorH" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5b22d15e-89e2-4e70-91d6-ea6d342fe7bc</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>3.3k / 1%</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="CeceModules" part="ResistorV" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0c75154f-17eb-4e70-a630-568c920e0182</tstamps>
     </comp>
     <comp ref="U1">
       <value>XIAO ESP32-S3 Sense</value>
@@ -170,7 +191,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>62fd2432-bfdd-418c-a7f2-4640b7979d1f</tstamps>
+      <tstamps>d09b3820-4f2e-448f-9991-8e55dd3c4a53</tstamps>
     </comp>
     <comp ref="U2">
       <value>Mini PB Reverse / LV</value>
@@ -183,7 +204,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>230b64c2-6be7-4faa-9228-432d560c29fa</tstamps>
+      <tstamps>cf65aef5-bafd-411e-9b4d-ead0533aee0c</tstamps>
     </comp>
     <comp ref="U3">
       <value>Hobbywing UBEC / 5.0V</value>
@@ -196,7 +217,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8029b86d-cdd6-4a4e-a3c3-09bb87d6bc6d</tstamps>
+      <tstamps>74c97c94-822a-4496-8d9f-fe6ca472d55e</tstamps>
     </comp>
     <comp ref="U4">
       <value>PiicoDev CE09181</value>
@@ -209,46 +230,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b03c04c3-3737-4ba7-9db8-dcbf24703b70</tstamps>
-    </comp>
-    <comp ref="C2">
-      <value>100nF / 25V</value>
-      <fields>
-        <field name="Footprint"/>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <libsource lib="CeceModules" part="CeramicCap" description=""/>
-      <property name="Sheetname" value="Ultrasonic"/>
-      <property name="Sheetfile" value="Cece_Ultrasonic.kicad_sch"/>
-      <sheetpath names="/Ultrasonic/" tstamps="/6068cb48-0d42-44b1-9d22-7c61f99e4a74/"/>
-      <tstamps>5dabe7df-b1a7-4393-ac04-4ea3d37c09b8</tstamps>
-    </comp>
-    <comp ref="R1">
-      <value>2.2k / 1%</value>
-      <fields>
-        <field name="Footprint"/>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <libsource lib="CeceModules" part="ResistorH" description=""/>
-      <property name="Sheetname" value="Ultrasonic"/>
-      <property name="Sheetfile" value="Cece_Ultrasonic.kicad_sch"/>
-      <sheetpath names="/Ultrasonic/" tstamps="/6068cb48-0d42-44b1-9d22-7c61f99e4a74/"/>
-      <tstamps>2fa05e7a-3acf-48e5-a63a-07741a2df85d</tstamps>
-    </comp>
-    <comp ref="R2">
-      <value>3.3k / 1%</value>
-      <fields>
-        <field name="Footprint"/>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <libsource lib="CeceModules" part="ResistorV" description=""/>
-      <property name="Sheetname" value="Ultrasonic"/>
-      <property name="Sheetfile" value="Cece_Ultrasonic.kicad_sch"/>
-      <sheetpath names="/Ultrasonic/" tstamps="/6068cb48-0d42-44b1-9d22-7c61f99e4a74/"/>
-      <tstamps>c7c6c3b0-3fe6-47c3-9247-d8120ed0b3dd</tstamps>
+      <tstamps>395e7b82-7f4e-4227-9b68-025796780c68</tstamps>
     </comp>
     <comp ref="U5">
       <value>HC-SR04</value>
@@ -258,10 +240,10 @@
         <field name="Description"/>
       </fields>
       <libsource lib="CeceModules" part="HC_SR04" description=""/>
-      <property name="Sheetname" value="Ultrasonic"/>
-      <property name="Sheetfile" value="Cece_Ultrasonic.kicad_sch"/>
-      <sheetpath names="/Ultrasonic/" tstamps="/6068cb48-0d42-44b1-9d22-7c61f99e4a74/"/>
-      <tstamps>1c891a5d-91d7-411b-b40f-f8b5a729947e</tstamps>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Cece_USB_Bench_Wiring.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>87fb6301-ab56-4e95-9fc1-3d7093d52a66</tstamps>
     </comp>
   </components>
   <libparts>
@@ -511,13 +493,17 @@
       <node ref="BT1" pin="+" pinfunction="+" pintype="power_out"/>
       <node ref="U2" pin="VIN" pinfunction="VIN" pintype="power_in"/>
     </net>
-    <net code="4" name="/ESP_5V">
+    <net code="4" name="/ECHO_RAW_5V">
+      <node ref="R1" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="U5" pin="ECHO" pinfunction="ECHO" pintype="output"/>
+    </net>
+    <net code="5" name="/ESP_5V">
       <node ref="D1" pin="K" pinfunction="K" pintype="power_out"/>
       <node ref="J1" pin="USB_5V" pinfunction="USB_5V" pintype="passive"/>
       <node ref="U1" pin="5V_HEADER" pinfunction="5V_HEADER" pintype="power_in"/>
       <node ref="U1" pin="USB_VBUS" pinfunction="USB_VBUS" pintype="power_in"/>
     </net>
-    <net code="5" name="/GND">
+    <net code="6" name="/GND">
       <node ref="BT1" pin="-" pinfunction="-" pintype="power_out"/>
       <node ref="C1" pin="-" pinfunction="-" pintype="passive"/>
       <node ref="C2" pin="2" pinfunction="2" pintype="passive"/>
@@ -540,46 +526,42 @@
       <node ref="U4" pin="GND_MOTOR" pinfunction="GND_MOTOR" pintype="power_in"/>
       <node ref="U5" pin="GND" pinfunction="GND" pintype="power_in"/>
     </net>
-    <net code="6" name="/I2C_SCL">
+    <net code="7" name="/I2C_SCL">
       <node ref="U1" pin="D5_/_GPIO6" pinfunction="D5_/_GPIO6" pintype="bidirectional"/>
       <node ref="U4" pin="SCL" pinfunction="SCL" pintype="input"/>
     </net>
-    <net code="7" name="/I2C_SDA">
+    <net code="8" name="/I2C_SDA">
       <node ref="U1" pin="D4_/_GPIO5" pinfunction="D4_/_GPIO5" pintype="bidirectional"/>
       <node ref="U4" pin="SDA" pinfunction="SDA" pintype="bidirectional"/>
     </net>
-    <net code="8" name="/SERVO_1_PWM">
+    <net code="9" name="/SERVO_1_PWM">
       <node ref="M1" pin="SIGNAL" pinfunction="SIGNAL" pintype="input"/>
       <node ref="U4" pin="1_SIG" pinfunction="1_SIG" pintype="output"/>
     </net>
-    <net code="9" name="/SERVO_2_PWM">
+    <net code="10" name="/SERVO_2_PWM">
       <node ref="M2" pin="SIGNAL" pinfunction="SIGNAL" pintype="input"/>
       <node ref="U4" pin="2_SIG" pinfunction="2_SIG" pintype="output"/>
     </net>
-    <net code="10" name="/SERVO_3_PWM">
+    <net code="11" name="/SERVO_3_PWM">
       <node ref="M3" pin="SIGNAL" pinfunction="SIGNAL" pintype="input"/>
       <node ref="U4" pin="3_SIG" pinfunction="3_SIG" pintype="output"/>
     </net>
-    <net code="11" name="/SERVO_4_PWM">
+    <net code="12" name="/SERVO_4_PWM">
       <node ref="M4" pin="SIGNAL" pinfunction="SIGNAL" pintype="input"/>
       <node ref="U4" pin="4_SIG" pinfunction="4_SIG" pintype="output"/>
     </net>
-    <net code="12" name="/SWITCHED_BAT_PLUS">
+    <net code="13" name="/SWITCHED_BAT_PLUS">
       <node ref="U2" pin="VOUT" pinfunction="VOUT" pintype="power_out"/>
       <node ref="U3" pin="IN+" pinfunction="IN+" pintype="power_in"/>
     </net>
-    <net code="13" name="/ULTRA_ECHO_3V3">
+    <net code="14" name="/ULTRA_ECHO_3V3">
       <node ref="R1" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="R2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U1" pin="D1_/_GPIO2" pinfunction="D1_/_GPIO2" pintype="input"/>
     </net>
-    <net code="14" name="/ULTRA_TRIG_3V3">
+    <net code="15" name="/ULTRA_TRIG_3V3">
       <node ref="U1" pin="D0_/_GPIO1" pinfunction="D0_/_GPIO1" pintype="output"/>
       <node ref="U5" pin="TRIG" pinfunction="TRIG" pintype="input"/>
-    </net>
-    <net code="15" name="/Ultrasonic/ECHO_RAW_5V">
-      <node ref="R1" pin="2" pinfunction="2" pintype="passive"/>
-      <node ref="U5" pin="ECHO" pinfunction="ECHO" pintype="output"/>
     </net>
     <net code="16" name="Net-(D1-PadA)">
       <node ref="D1" pin="A" pinfunction="A" pintype="power_in"/>
