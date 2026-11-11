@@ -14,6 +14,10 @@ git clone --branch codex/cece2 https://github.com/javadtaghia/cece-the-robot.git
 cd cece-the-robot
 ```
 
+## Bill of materials and Australian prices
+
+The [Cece bill of materials](BILL_OF_MATERIALS.md) lists the quantities, part numbers, original supplier links, order prices and current Australian retail prices for the prototype. The confirmed merchandise from MLAB, Rapid Robotics Australia, Supercheap Hobbies, Little Bird Electronics and Core Electronics totaled **A$225.42 before freight**. The same basket was listed at **A$225.42 on 11 November 2026**. The guide separately prices PLA, ankle hardware, a programming jumper and a candidate 2S charger so they are not mistaken for items already ordered.
+
 ## Open the design and print files
 
 | What you want | File and instructions |
