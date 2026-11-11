@@ -91,6 +91,8 @@ define('BulkCap',7.62,5.08,[('+','passive',0,7.62,270),('-','passive',0,-7.62,90
     f'(text "+" (at -5.08 3.81 0) {fx(1.27)})'])
 
 # HC-SR04 interface uses through-hole resistors and a ceramic bypass capacitor.
+define('OLED_SSD1327_QT',50.8,35.56,[('VIN','power_in',33.02,12.7,180),('DATA / SDA','bidirectional',33.02,5.08,180),('CLK / SCL','input',33.02,-5.08,180),('GND','power_in',33.02,-12.7,180)])
+
 define('HC_SR04',40.64,45.72,[('VCC','power_in',-27.94,15.24,0),('TRIG','input',-27.94,5.08,0),('ECHO','output',-27.94,-5.08,0),('GND','power_in',-27.94,-15.24,0)])
 define('ResistorH',10.16,5.08,[('1','passive',-12.7,0,0),('2','passive',12.7,0,180)])
 define('ResistorV',5.08,10.16,[('1','passive',0,12.7,270),('2','passive',0,-12.7,90)])
@@ -176,9 +178,14 @@ text('3. ESP POWER + SIGNAL CONNECTIONS',20.32,119.38,1.6)
 text('Camera / mic on Sense add-on.\nUSB VBUS and 5V header are\ninternally common (ESP_5V).',86.36,185.42,1.05)
 text('JP1: fitted to RUN; REMOVE before USB.\nD1 banded end -> ESP 5V header.',15.24,208.28,1.05)
 text('Both address switches OFF\nI2C address 0x44\nSockets 1/2 = hips; 3/4 = feet\nChip channels = 3/2/1/0',246.38,162.56,1.15)
-text('POWER / PROGRAMMING MODES\nRUN: no computer USB; JP1 fitted; switch ON.\nBattery -> switch -> UBEC 5V -> servos AND ESP.\nESP branch: JP1 -> D1 -> ESP 5V header.\nPROGRAM: switch OFF; REMOVE JP1; then plug USB.\nAfter programming: unplug USB, then refit JP1.\nD1 alone does NOT prevent PC backfeed; remove JP1.\nNever connect 2S pack directly to ESP 5V or BAT+.\nAll GND labels share ground. Use proper power wire.',20.32,220.98,1.15)
-text('BATTERY HAS TWO SEPARATE CONNECTORS\nMain 2-wire lead: RED = pack +; BLACK = pack -.\nMain lead supplies the switch / UBEC as drawn above.\n3-wire BLACK / BLUE / RED plug = 2S balance lead.\nBalance functions: pack -, cell midpoint, pack +.\nWire-to-pin order is NOT verified: do not wire by colour.\nMidpoint is NOT ground; never join it to GND.',157.48,261.62,1.05)
-text('CHARGER CONNECTION - PENDING IDENTIFICATION\nUnplug MAIN lead from robot before charging.\nUse a charger explicitly rated for 2S LiPo (8.4V full).\nBalance plug -> charger 2S balance socket, after pin check.\nSome chargers ALSO need main red/black charge leads;\nothers charge through the balance plug alone.\nExact connections require charger model + plug photos.\nDo NOT use an unverified Adafruit 1S USB-C charger.\nESP USB and UBEC do not charge this pack.',20.32,254,1.0)
+# OLED shares the existing 3.3 V I2C bus; four-wire QT connection only.
+place('OLED_SSD1327_QT','U6','Adafruit 4741 / SSD1327',55.88,246.38)
+for pin,net in [('VIN','3V3_LOGIC'),('DATA / SDA','I2C_SDA'),('CLK / SCL','I2C_SCL'),('GND','GND')]:
+    start=points['U6',pin]; end=(104.14,start[1])
+    wire(start,end);label(net,end)
+text('5. OLED - 1.5 inch / 128 x 128',20.32,220.98,1.6)
+text('4-wire STEMMA QT cable to spare PiicoDev I2C socket.\nSame net labels = electrically joined. VIN uses 3V3, NOT 5V.\nDATA -> D4/GPIO5; CLK -> D5/GPIO6. No extra GPIO.\nJ1 + J2 closed (I2C); A0 open = 0x3D (driver = 0x44).\nOther OLED header pins unused. See OLED_WIRING.txt.',20.32,269.24,1.05)
+text('RUN: USB unplugged, JP1 fitted. PROGRAM: switch OFF,\nREMOVE JP1 before USB. D1 alone does not stop backfeed.\nNever connect 2S pack to ESP BAT+ or 5V header.\nCharging: unplug main battery lead from robot; use a 2S\nLiPo balance charger. Exact charger pinout still unverified.\nSee POWER_AND_CHARGING.txt for both battery plugs.',157.48,261.62,1.05)
 text('MODULE DRAWING\nFollow printed terminal labels, not block positions.\nModule wiring only; no physical footprint mapping.\nSwitch is ON/OFF, not safety isolation.',294.64,243.84,1.05)
 
 external='(kicad_symbol_lib (version 20231120) (generator "kicad_symbol_editor")\n'+ '\n'.join(d['text'] for d in symbols.values())+'\n)\n'
@@ -186,7 +193,7 @@ external='(kicad_symbol_lib (version 20231120) (generator "kicad_symbol_editor")
 (ROOT/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "CeceModules") (type "KiCad") (uri "${KIPRJMOD}/CeceModules.kicad_sym") (options "") (descr "Cece module wiring symbols")))\n')
 cached='\n'.join(d['text'].replace('(symbol '+q(name),'(symbol '+q('CeceModules:'+name),1) for name,d in symbols.items())
 sheet=[f'(kicad_sch (version 20231120) (generator "eeschema") (uuid {q(root_id)}) (paper "A3")',
-       '(title_block (title "Cece - Battery operation / USB programming") (date "2026-11-09") (rev "1.3") (company "Cece the robot") (comment 1 "Remove JP1 before USB. Charger wiring pending model confirmation."))',
+       '(title_block (title "Cece - Battery operation / USB programming") (date "2026-11-10") (rev "1.4") (company "Cece the robot") (comment 1 "Remove JP1 before USB. Charger wiring pending model confirmation."))',
        '(lib_symbols\n'+cached+'\n)',*placed,*wires,*labels,*graphics,'(sheet_instances (path "/" (page "1")))',')']
 (ROOT/(NAME+'.kicad_sch')).write_text('\n'.join(sheet)+'\n',encoding='utf-8')
 (ROOT/(NAME+'.kicad_pro')).write_text(json.dumps({'meta':{'filename':NAME+'.kicad_pro','version':1},'schematic':{},'text_variables':{}},indent=2)+'\n')

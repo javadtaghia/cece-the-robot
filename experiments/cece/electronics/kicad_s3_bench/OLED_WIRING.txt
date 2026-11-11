@@ -1,0 +1,41 @@
+CECE OLED - COMBINED SCHEMATIC REVISION 1.4
+
+Selected display: Adafruit 4741, grayscale 1.5 inch 128 x 128 SSD1327,
+STEMMA QT / Qwiic breakout. These connections are for this module.
+
+OLED terminal       ESP32-S3 Sense terminal      Shared with driver
+VIN                 3V3                         3V3 LOGIC
+GND                 GND                         GND LOGIC
+DATA / SDA          D4 / GPIO5                  SDA
+CLK / SCL           D5 / GPIO6                  SCL
+
+Use a four-wire 1 mm JST-SH STEMMA QT / PiicoDev-compatible cable from
+an unused I2C socket on the servo driver to either OLED QT socket.
+Match connector pin functions; do not infer pin order from block positions.
+Both OLED QT sockets are wired in parallel; only one is needed.
+VIN takes 3.3 V here, keeping the shared I2C pull-ups at ESP logic voltage.
+Never connect the servo 5 V supply to the driver's I2C power connector.
+Do not use the OLED 3Vo output as its power input.
+
+Leave OLED J1 and J2 closed for I2C (factory configuration).
+Leave A0 open: default address 0x3D. Bridging A0 changes it to 0x3C.
+Servo driver address 0x44 with its two address switches OFF.
+The 4-wire QT mode does not require a separate reset GPIO. Leave RST,
+CS, DC/A0 and 3Vo header pins externally unconnected for this setup.
+Do not add SPI wiring. The symbol shows the four connected QT functions.
+
+Firmware setup: Wire.begin(5, 6); use the Adafruit_SSD1327 library,
+128 x 128, I2C address 0x3D, reset pin -1 for the QT connection.
+Start at 100 kHz while checking the shared bus. Scan for 0x3D and 0x44.
+This schematic change does not add or validate display firmware.
+No physical OLED test, regulator load test or I2C rise-time measurement
+has been performed. Verify operation alongside camera, Wi-Fi and servos.
+
+Checks: KiCad ERC and exported-net checks include OLED power, ground,
+SDA and SCL and preservation of ultrasonic and servo connections.
+Main schematic: Cece_USB_Bench_Wiring.kicad_sch (single combined sheet).
+Detailed power/charging notes: POWER_AND_CHARGING.txt.
+
+Manufacturer wiring and pinout references (checked 2026-11-10):
+https://learn.adafruit.com/adafruit-grayscale-1-5-128x128-oled-display/pinouts
+https://learn.adafruit.com/adafruit-grayscale-1-5-128x128-oled-display/arduino-wiring-and-test

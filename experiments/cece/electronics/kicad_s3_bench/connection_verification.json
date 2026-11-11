@@ -1,6 +1,8 @@
 {
   "passed": true,
-  "revision": "1.3",
+  "revision": "1.4",
+  "oled_i2c_wiring_checked": true,
+  "oled_hardware_tested": false,
   "checks": [
     "/BATTERY_PLUS",
     "/SWITCHED_BAT_PLUS",

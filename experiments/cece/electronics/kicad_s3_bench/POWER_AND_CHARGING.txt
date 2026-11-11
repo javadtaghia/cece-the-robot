@@ -1,0 +1,27 @@
+POWER / PROGRAMMING MODES
+RUN: no computer USB; JP1 fitted; switch ON.
+Battery -> switch -> UBEC 5V -> servos AND ESP.
+ESP branch: JP1 -> D1 -> ESP 5V header.
+PROGRAM: switch OFF; REMOVE JP1; then plug USB.
+After programming: unplug USB, then refit JP1.
+D1 alone does NOT prevent PC backfeed; remove JP1.
+Never connect 2S pack directly to ESP 5V or BAT+.
+All GND labels share ground. Use proper power wire.
+
+BATTERY HAS TWO SEPARATE CONNECTORS
+Main 2-wire lead: RED = pack +; BLACK = pack -.
+Main lead supplies the switch / UBEC as drawn above.
+3-wire BLACK / BLUE / RED plug = 2S balance lead.
+Balance functions: pack -, cell midpoint, pack +.
+Wire-to-pin order is NOT verified: do not wire by colour.
+Midpoint is NOT ground; never join it to GND.
+
+CHARGER CONNECTION - PENDING IDENTIFICATION
+Unplug MAIN lead from robot before charging.
+Use a charger explicitly rated for 2S LiPo (8.4V full).
+Balance plug -> charger 2S balance socket, after pin check.
+Some chargers ALSO need main red/black charge leads;
+others charge through the balance plug alone.
+Exact connections require charger model + plug photos.
+Do NOT use an unverified Adafruit 1S USB-C charger.
+ESP USB and UBEC do not charge this pack.
