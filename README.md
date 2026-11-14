@@ -42,6 +42,17 @@ The [Cece bill of materials](BILL_OF_MATERIALS.md) lists the quantities, part nu
 
 **14 November 2026 walking milestone** (`walking-looks-ok-1411`). The builder reported that Cece's walking looked OK and that the printed [servo angle card](experiments/bench_tests/esp32_s3_media_servo/servo_angle_card.svg) worked well for checking the joints. Print the card at 100% and use it again after changing a servo or refitting a horn.
 
+**Calibration for this Cece** (tag `walking-looks-ok-1411-board-calibration`). On 14 November 2026 at 19:57 Sydney time, the physical ESP reported `CENTER_US 1600 1500 1500 1800` over USB and detected the servo driver at address `0x44`. These are the neutral pulses the firmware uses on a fresh board. The table gives the manual command targets in microseconds. The right hip's three targets were also read back over USB. The other offset targets are calculated from the firmware.
+
+| Driver socket | Installed joint | −10° button | Center | +10° button |
+| --- | --- | ---: | ---: | ---: |
+| 1 | Left foot | 1500 | 1600 | 1700 |
+| 2 | Right foot | 1400 | 1500 | 1600 |
+| 3 | Left hip | 1400 | 1500 | 1600 |
+| 4 | Right hip | 1750 | 1800 | 1850 |
+
+To verify a replacement ESP after uploading the S3 sketch, open Serial Monitor at **115200** and send lowercase **`s`**. Compare its `CENTER_US` line to the four values above. This reads the settings without moving the legs. An ESP with saved trims uses those values first. To restore a joint on that board, use the calibration controls in step 4 to save the corresponding **Center** pulse, then check again with `s`.
+
 1. Support the body with both feet clear. Open the ESP's phone control page (the `PHONE_URL` shown on serial, or `http://192.168.4.1/` on Cece's own Wi-Fi). Press **Stop movement**, check the 5 V servo supply, then tick the servo confirmation box.
 2. Under **Individual servo**, work through the driver sockets one at a time: **1 left foot, 2 right foot, 3 left hip, 4 right hip**, from Cece's perspective. Press **Center** first. Place the card's cross at the pivot. Keep the zero line aligned with the *intended* neutral: a level sole viewed from behind, or a forward-facing foot viewed from above for a hip. Keep the card and body still throughout the check.
 3. Press **Center → +10° → Center → −10° → Center**. Let each move settle and read the angle while the servo is holding. Record which side of zero it reaches and how far. The buttons request approximate positions. A centered joint should return to the same neutral and move to opposite sides with roughly even travel. The right hip intentionally has a smaller commanded span.

@@ -12,7 +12,7 @@ volatile uint8_t servoActiveSocket=0;
 QueueHandle_t servoCommands=nullptr;
 String servoControlToken;
 enum ServoAction { Stop, Test, Scan, Walk, Heartbeat, Position, PreviewZero, SaveZero };
-int CENTER_US[4] = {1600, 1500, 1500, 1800};
+int CENTER_US[4] = {1600, 1500, 1500, 1800}; // Cece USB readback, 2026-11-14: feet L/R, hips L/R (us).
 constexpr int MIN_ZERO = 1280, MAX_ZERO = 1720;
 constexpr uint8_t RIGHT_HIP = 3; // Zero-based index for socket 4.
 constexpr int maxCenterUs(uint8_t joint) {
@@ -67,7 +67,7 @@ void setupServoControl() {
   if (settingsReady) {
     // Socket 1 was level at V6's +10 command. Derive its new default
     // from that firmware's saved center until the user saves a new trim.
-    int previousLeft = jointSettings.getInt("footL", 1500);
+    int previousLeft = jointSettings.getInt("footL", -1); // Only migrate a stored V6 trim.
     if (previousLeft >= MIN_ZERO && previousLeft <= MAX_ZERO)
       CENTER_US[0] = constrain(previousLeft + 100, MIN_ZERO, MAX_ZERO);
     for (int j = 0; j < 4; ++j) {
