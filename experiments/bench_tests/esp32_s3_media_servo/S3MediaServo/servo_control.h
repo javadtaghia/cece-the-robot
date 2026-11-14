@@ -12,12 +12,12 @@ volatile uint8_t servoActiveSocket=0;
 QueueHandle_t servoCommands=nullptr;
 String servoControlToken;
 enum ServoAction { Stop, Test, Scan, Walk, Heartbeat, Position, PreviewZero, SaveZero };
-int CENTER_US[4] = {1500, 1500, 1500, 1500};
+int CENTER_US[4] = {1600, 1500, 1500, 1500};
 constexpr int MIN_ZERO = 1280, MAX_ZERO = 1720;
 volatile bool calibrating = false;
 int previewUs = 1500;
 uint32_t calibrationOwner = 0;
-const char *const centerKeys[] = {"footL", "footR", "hipL", "hipR"};
+const char *const centerKeys[] = {"footL_v7", "footR", "hipL", "hipR"};
 Preferences jointSettings;
 bool settingsReady = false;
 struct ServoCommand { ServoAction action; uint8_t socket; int offset; uint32_t owner, sent; };
@@ -56,8 +56,13 @@ bool configureServoController() {
 void setupServoControl() {
   settingsReady = jointSettings.begin("cece-joints", false);
   if (settingsReady) {
+    // Socket 1 was level at V6's +10 command. Derive its new default
+    // from that firmware's saved center until the user saves a new trim.
+    int previousLeft = jointSettings.getInt("footL", 1500);
+    if (previousLeft >= MIN_ZERO && previousLeft <= MAX_ZERO)
+      CENTER_US[0] = constrain(previousLeft + 100, MIN_ZERO, MAX_ZERO);
     for (int j = 0; j < 4; ++j) {
-      int saved = jointSettings.getInt(centerKeys[j], 1500);
+      int saved = jointSettings.getInt(centerKeys[j], CENTER_US[j]);
       if (saved >= MIN_ZERO && saved <= MAX_ZERO) CENTER_US[j] = saved;
     }
   }

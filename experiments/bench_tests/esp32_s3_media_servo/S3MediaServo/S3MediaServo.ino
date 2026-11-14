@@ -10,7 +10,7 @@
 #include "esp_random.h"
 #include "web_page.h"
 
-constexpr char VERSION[] = "CECE_S3_MEDIA_WALK_V6";
+constexpr char VERSION[] = "CECE_S3_MEDIA_WALK_V7";
 constexpr uint32_t SAMPLE_RATE = 16000;
 I2SClass microphone(I2S_NUM_0);
 bool cameraReady = false, micReady = false;
@@ -209,7 +209,10 @@ void setupWifi() {
 }
 // USB diagnostics retrieve actual JPEG/PCM bytes without a Wi-Fi connection.
 void serialDiagnostic(char command) {
-  if(command=='s') {Serial.printf("SERVO_DRIVER address=0x44 found=%s active_socket=%u\n",servoControllerReady?"YES":"NO",servoActiveSocket);}
+  if(command=='s') {
+    Serial.printf("SERVO_DRIVER address=0x44 found=%s active_socket=%u\n",servoControllerReady?"YES":"NO",servoActiveSocket);
+    Serial.printf("CENTER_US %d %d %d %d\n", CENTER_US[0], CENTER_US[1], CENTER_US[2], CENTER_US[3]);
+  }
   else if(command=='x') {queueStop();}
   else if(command=='i') {printStatus();showSetup();}
   else if(command=='c') {

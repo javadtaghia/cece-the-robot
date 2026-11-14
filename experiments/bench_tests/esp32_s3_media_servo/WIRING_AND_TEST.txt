@@ -86,7 +86,11 @@ TEST SEQUENCE
 11. Disconnect battery after the bench test. This firmware has no battery
     voltage sensing or automatic LiPo low-voltage cutoff.
 
-PHONE CONTROLS (S3 media walk V6)
+PHONE CONTROLS (S3 media walk V7)
+Socket 1 uses the former +10 degree position as its center. The +100 us
+correction is relative to its V6 center, within the trim limits. A new
+saved V7 calibration takes precedence on future boots. With a former
+1500 us center, -10, Center and +10 now request 1500, 1600 and 1700 us.
 Join Cece's setup Wi-Fi and open http://192.168.4.1/ or use the PHONE_URL
 printed on USB serial at 115200 when Cece joins your home Wi-Fi.
 Start camera and Listen to robot mic can run while the motion controls are active.
