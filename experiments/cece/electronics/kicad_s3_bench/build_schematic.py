@@ -109,7 +109,7 @@ place('PC_USB','J1','USB: PROGRAM ONLY',40.64,167.64)
 place('XIAO_Sense','U1','XIAO ESP32-S3 Sense',109.22,172.72)
 place('RunLink','JP1','RUN',22.86,200.66)
 place('Schottky','D1','1N5819',53.34,200.66)
-for i,name in enumerate(['SG90 LEFT HIP','SG90 RIGHT HIP','SG90 LEFT FOOT','SG90 RIGHT FOOT'],1):
+for i,name in enumerate(['SG90 LEFT FOOT','SG90 RIGHT FOOT','SG90 LEFT HIP','SG90 RIGHT HIP'],1):
     place('SG90',f'M{i}',name,365.76,[60.96,86.36,111.76,137.16][i-1])
 
 # Battery -> electronic switch -> UBEC. Negative is not switched.

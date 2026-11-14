@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>C:\Users\user\OneDrive\Documents\ChatGPT\CeCe-the-robot\workspace\cece_the_robot_repo\experiments\cece\electronics\kicad_s3_bench\Cece_USB_Bench_Wiring.kicad_sch</source>
-    <date>2026-11-10T20:00:32+1100</date>
+    <date>2026-11-14T14:16:30+1100</date>
     <tool>Eeschema 8.0.5</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -103,7 +103,7 @@
       <tstamps>1f23464a-d0f0-4495-8953-16ccac572e6d</tstamps>
     </comp>
     <comp ref="M1">
-      <value>SG90 LEFT HIP</value>
+      <value>SG90 LEFT FOOT</value>
       <fields>
         <field name="Footprint"/>
         <field name="Datasheet"/>
@@ -116,7 +116,7 @@
       <tstamps>8da88dc6-8277-4240-9d5a-eeda039485f7</tstamps>
     </comp>
     <comp ref="M2">
-      <value>SG90 RIGHT HIP</value>
+      <value>SG90 RIGHT FOOT</value>
       <fields>
         <field name="Footprint"/>
         <field name="Datasheet"/>
@@ -129,7 +129,7 @@
       <tstamps>9ee209e9-adb4-4609-8c7a-6d60242fb5a8</tstamps>
     </comp>
     <comp ref="M3">
-      <value>SG90 LEFT FOOT</value>
+      <value>SG90 LEFT HIP</value>
       <fields>
         <field name="Footprint"/>
         <field name="Datasheet"/>
@@ -142,7 +142,7 @@
       <tstamps>dd9949bb-f587-47a0-b9ce-7c49caa0083e</tstamps>
     </comp>
     <comp ref="M4">
-      <value>SG90 RIGHT FOOT</value>
+      <value>SG90 RIGHT HIP</value>
       <fields>
         <field name="Footprint"/>
         <field name="Datasheet"/>

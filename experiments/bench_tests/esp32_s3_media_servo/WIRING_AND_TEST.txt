@@ -51,10 +51,11 @@ Do not connect the raw 2S battery to PiicoDev 5V, ESP 5V, ESP 3V3 or ESP BAT.
 SERVO PLUGS
 Brown/black -> GND. Red -> 5V. Orange/yellow -> signal/PWM.
 Confirm the actual servo lead colours and PCB silk before applying power.
-Socket 1: left hip/body servo; internal PCA9685 channel 3.
-Socket 2: right hip/body servo; internal channel 2.
-Socket 3: left foot servo; internal channel 1.
-Socket 4: right foot servo; internal channel 0.
+Facing forward with Cece, use the numbers printed on the driver.
+Socket 1: left foot (lower) servo; internal PCA9685 channel 3.
+Socket 2: right foot (lower) servo; internal channel 2.
+Socket 3: left hip (upper) servo; internal channel 1.
+Socket 4: right hip (upper) servo; internal channel 0.
 Both address switches OFF: I2C address 0x44.
 No direct ESP-to-servo signal wires are used with this controller.
 The Sense camera/microphone stay connected as before; GPIO5/6 are free.
@@ -85,7 +86,7 @@ TEST SEQUENCE
 11. Disconnect battery after the bench test. This firmware has no battery
     voltage sensing or automatic LiPo low-voltage cutoff.
 
-PHONE CONTROLS (S3 media walk V2)
+PHONE CONTROLS (S3 media walk V3)
 Join Cece's setup Wi-Fi and open http://192.168.4.1/ or use the PHONE_URL
 printed on USB serial at 115200 when Cece joins your home Wi-Fi.
 Start camera and Listen to robot mic can run while the motion controls are active.

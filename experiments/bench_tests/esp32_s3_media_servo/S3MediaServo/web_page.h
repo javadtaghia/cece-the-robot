@@ -11,7 +11,7 @@ body{font:17px system-ui;background:#111b29;color:#f5f7fa;margin:0;padding:20px;
 <label><input id="servoConfirmed" type="checkbox" style="width:auto"> I checked the 5 V servo supply and the legs can move freely.</label>
 <p><button id="walk" disabled>Start walking forward</button><button id="servoStop">Stop movement</button></p>
 <label for="joint">Individual servo</label>
-<select id="joint"><option value="1">1 · Left hip</option><option value="2">2 · Right hip</option><option value="3">3 · Left foot</option><option value="4">4 · Right foot</option></select>
+<select id="joint"><option value="1">1 · Left foot (lower)</option><option value="2">2 · Right foot (lower)</option><option value="3">3 · Left hip (upper)</option><option value="4">4 · Right hip (upper)</option></select>
 <p><button class="manual" data-offset="-100" disabled>−10°</button><button class="manual" data-offset="0" disabled>Center</button><button class="manual" data-offset="100" disabled>+10°</button><button id="test" disabled>Test sweep</button></p>
 <small>Angles are approximate offsets from center. Each individual command releases the selected servo after two seconds. Support Cece for the first test.</small>
 <p><button id="servoScan">Rescan driver</button></p><p id="servoMessage" role="status"></p></div>

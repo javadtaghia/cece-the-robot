@@ -10,7 +10,7 @@
 #include "esp_random.h"
 #include "web_page.h"
 
-constexpr char VERSION[] = "CECE_S3_MEDIA_WALK_V2";
+constexpr char VERSION[] = "CECE_S3_MEDIA_WALK_V3";
 constexpr uint32_t SAMPLE_RATE = 16000;
 I2SClass microphone(I2S_NUM_0);
 bool cameraReady = false, micReady = false;

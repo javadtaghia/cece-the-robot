@@ -34,6 +34,8 @@ for i in range(1,5):
     assert {(f'M{i}','BROWN_GND'), ('U4',f'{i}_GND')} <= nets['/GND']
 check('unconnected-(U1-PadBAT+)', [('U1','BAT+')], True)
 values = {c.attrib['ref']: c.findtext('value') for c in xml.findall('./components/comp')}
+for socket, joint in enumerate(('LEFT FOOT', 'RIGHT FOOT', 'LEFT HIP', 'RIGHT HIP'), 1):
+    assert values[f'M{socket}'] == f'SG90 {joint}'
 assert values['R1'] == '2.2k / 1%' and values['R2'] == '3.3k / 1%'
 assert values['C2'] == '100nF / 25V'
 erc = json.loads((root/'erc.json').read_text())

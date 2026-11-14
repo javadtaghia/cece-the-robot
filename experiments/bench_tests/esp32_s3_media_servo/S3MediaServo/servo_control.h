@@ -64,13 +64,17 @@ const int16_t *walkFrame(uint32_t frame) {
   if (frame < STARTUP_FRAMES) return STARTUP_CDEG[frame];
   return CYCLE_CDEG[(frame - STARTUP_FRAMES) % CYCLE_FRAMES];
 }
-int walkPulse(uint8_t joint, uint32_t elapsed) {
+// Gait columns are left hip, right hip, left foot, right foot.
+// Physical sockets 1..4 are left foot, right foot, left hip, right hip.
+constexpr uint8_t GAIT_COLUMN_BY_SOCKET[4] = {2, 3, 0, 1};
+int walkPulse(uint8_t socketIndex, uint32_t elapsed) {
   // Match the Due bench timing: 1 s to settle, then one reference frame per 40 ms.
-  if (elapsed < 1000) return CENTER_US[joint];
+  if (elapsed < 1000) return CENTER_US[socketIndex];
   uint32_t t = elapsed - 1000;
-  int a = walkFrame(t / 40)[joint], b = walkFrame(t / 40 + 1)[joint];
+  const uint8_t column = GAIT_COLUMN_BY_SOCKET[socketIndex];
+  int a = walkFrame(t / 40)[column], b = walkFrame(t / 40 + 1)[column];
   int offsetUs = lroundf((a + (b - a) * ((t % 40) / 40.0f)) / 10.0f);
-  return constrain(CENTER_US[joint] + JOINT_SIGN[joint] * offsetUs, 1100, 1900);
+  return constrain(CENTER_US[socketIndex] + JOINT_SIGN[socketIndex] * offsetUs, 1100, 1900);
 }
 uint32_t lastHeartbeat = 0, walkOwner = 0;
 int manualOffset = 0;
@@ -85,9 +89,9 @@ void stopMotion() {
   walkOwner = 0;
   servoActiveSocket = 0;
 }
-bool writePulse(uint8_t joint, int us) {
+bool writePulse(uint8_t socketIndex, int us) {
   uint16_t ticks = lroundf(us * SERVO_PWM_HZ * 4096.0f / 1000000.0f);
-  if (servoOutput(SERVO_CHANNELS[joint], ticks, false)) return true;
+  if (servoOutput(SERVO_CHANNELS[socketIndex], ticks, false)) return true;
   stopMotion();
   servoControllerReady = false;
   return false;
