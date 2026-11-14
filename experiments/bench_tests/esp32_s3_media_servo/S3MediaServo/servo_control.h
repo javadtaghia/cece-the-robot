@@ -1,5 +1,6 @@
 #pragma once
 #include <Wire.h>
+#include "walk_profile.h"
 
 // Core Electronics CE09181: socket labels 1..4 map to chip channels 3..0.
 constexpr uint8_t SERVO_ADDRESS=0x44;
@@ -10,7 +11,11 @@ volatile bool servoControllerReady=false;
 volatile uint8_t servoActiveSocket=0;
 QueueHandle_t servoCommands=nullptr;
 String servoControlToken;
-struct ServoCommand { uint8_t action; uint8_t socket; }; // 0 stop, 1 test, 2 rescan
+enum ServoAction { Stop, Test, Scan, Walk, Heartbeat, Position };
+struct ServoCommand { ServoAction action; uint8_t socket; int offset; uint32_t owner, sent; };
+volatile bool servoWalking = false;
+bool servoTaskReady = false;
+void motorTask(void *);
 uint32_t servoStarted=0, servoLastUpdate=0;
 
 bool servoRegister(uint8_t reg,uint8_t value) {
@@ -44,46 +49,107 @@ void setupServoControl() {
   uint8_t bytes[16];esp_fill_random(bytes,sizeof(bytes));char token[33];
   for(size_t i=0;i<16;i++) snprintf(token+i*2,3,"%02x",bytes[i]);
   servoControlToken=token;
-  servoCommands=xQueueCreate(1,sizeof(ServoCommand));
+  servoCommands=xQueueCreate(8,sizeof(ServoCommand));
   Wire.begin(5,6,100000);Wire.setTimeOut(25);
   servoControllerReady=servoCommands && configureServoController();
+  servoTaskReady = servoCommands && xTaskCreate(motorTask,"cece-motion",4096,nullptr,2,nullptr)==pdPASS;
+  servoControllerReady = servoControllerReady && servoTaskReady;
   Serial.printf("SERVO_DRIVER address=0x44 found=%s outputs=%s\n",servoControllerReady?"YES":"NO",servoControllerReady?"OFF":"NOT_CONFIRMED");
 }
+// Motion state and I2C writes belong to the motor task. The HTTP task queues requests.
+constexpr uint32_t WALK_TIMEOUT_MS = 3000;
+constexpr int CENTER_US[4] = {1500, 1500, 1500, 1500};
+constexpr int JOINT_SIGN[4] = {1, 1, 1, 1}; // Verify with the refitted horns.
+const int16_t *walkFrame(uint32_t frame) {
+  if (frame < STARTUP_FRAMES) return STARTUP_CDEG[frame];
+  return CYCLE_CDEG[(frame - STARTUP_FRAMES) % CYCLE_FRAMES];
+}
+int walkPulse(uint8_t joint, uint32_t elapsed) {
+  // Match the Due bench timing: 1 s to settle, then one reference frame per 40 ms.
+  if (elapsed < 1000) return CENTER_US[joint];
+  uint32_t t = elapsed - 1000;
+  int a = walkFrame(t / 40)[joint], b = walkFrame(t / 40 + 1)[joint];
+  int offsetUs = lroundf((a + (b - a) * ((t % 40) / 40.0f)) / 10.0f);
+  return constrain(CENTER_US[joint] + JOINT_SIGN[joint] * offsetUs, 1100, 1900);
+}
+uint32_t lastHeartbeat = 0, walkOwner = 0;
+int manualOffset = 0;
+bool testing = false;
+
+void stopMotion() {
+  if (!servoDisableOutputs()) {
+    servoControllerReady = false;
+    Serial.println("SERVO_STOP_I2C_ERROR: disconnect servo power");
+  }
+  servoWalking = false;
+  walkOwner = 0;
+  servoActiveSocket = 0;
+}
+bool writePulse(uint8_t joint, int us) {
+  uint16_t ticks = lroundf(us * SERVO_PWM_HZ * 4096.0f / 1000000.0f);
+  if (servoOutput(SERVO_CHANNELS[joint], ticks, false)) return true;
+  stopMotion();
+  servoControllerReady = false;
+  return false;
+}
 void serviceServoControl() {
-  ServoCommand command;
-  if(servoCommands && xQueueReceive(servoCommands,&command,0)==pdPASS) {
-    if(command.action==0) {
-      if(servoControllerReady && !servoDisableOutputs()) {
-        servoControllerReady=false;Serial.println("SERVO_STOP_I2C_ERROR: disconnect servo power");
-      }
-      servoActiveSocket=0;Serial.println("SERVO_STOP signals disabled");
-    } else if(command.action==2) {
-      servoControllerReady=configureServoController();
-      Serial.printf("SERVO_RESCAN found=%s outputs=%s\n",servoControllerReady?"YES":"NO",servoControllerReady?"OFF":"NOT_CONFIRMED");
-    } else if(command.action==1 && command.socket>=1 && command.socket<=4 && !servoActiveSocket) {
-      if(!servoControllerReady) servoControllerReady=configureServoController();
-      if(servoControllerReady) {
-        servoActiveSocket=command.socket;servoStarted=millis();servoLastUpdate=0;
-        Serial.printf("SERVO_TEST socket=%u pulse_range_us=1400..1600\n",command.socket);
-      } else Serial.println("SERVO_TEST_ERROR: no controller at 0x44");
+  uint32_t now = millis();
+  if (servoWalking && now - lastHeartbeat >= WALK_TIMEOUT_MS) stopMotion();
+  ServoCommand c;
+  while (xQueueReceive(servoCommands, &c, 0) == pdPASS) {
+    now = millis();
+    if (c.action == Stop) { stopMotion(); continue; }
+    if (c.action == Heartbeat) {
+      if (servoWalking && c.owner == walkOwner) lastHeartbeat = now;
+      continue;
+    }
+    if (servoWalking || servoActiveSocket) continue;
+    if (c.action == Scan) { servoControllerReady = configureServoController(); continue; }
+    if (!servoControllerReady || now - c.sent >= WALK_TIMEOUT_MS) continue;
+    servoStarted = now;
+    servoLastUpdate = now - 20;
+    if (c.action == Walk) {
+      walkOwner = c.owner;
+      lastHeartbeat = now;
+      servoWalking = true;
+    } else {
+      servoActiveSocket = c.socket;
+      manualOffset = c.offset;
+      testing = c.action == Test;
     }
   }
-  if(!servoActiveSocket || millis()-servoLastUpdate<20) return;
-  servoLastUpdate=millis();uint32_t t=millis()-servoStarted;
-  if(t>=1900) {
-    if(!servoDisableOutputs()) {servoControllerReady=false;Serial.println("SERVO_STOP_I2C_ERROR: disconnect servo power");}
-    Serial.println("SERVO_TEST_DONE signals disabled");return;
-  }
-  int pulse=1500;
-  if(t>=400 && t<700) pulse=1500-int((t-400)*100/300);
-  else if(t>=700 && t<1300) pulse=1400+int((t-700)*200/600);
-  else if(t>=1300 && t<1600) pulse=1600-int((t-1300)*100/300);
-  uint16_t counts=uint16_t(pulse*SERVO_PWM_HZ*4096.0f/1000000.0f+0.5f);
-  if(!servoOutput(SERVO_CHANNELS[servoActiveSocket-1],counts,false)) {
-    servoActiveSocket=0;servoControllerReady=false;
-    servoDisableOutputs();Serial.println("SERVO_I2C_ERROR: disconnect servo power");
+  if (now - servoLastUpdate < 20) return;
+  servoLastUpdate = now;
+  uint32_t elapsed = now - servoStarted;
+  if (servoWalking) {
+    for (uint8_t j = 0; j < 4; ++j)
+      if (!writePulse(j, walkPulse(j, elapsed))) break;
+  } else if (servoActiveSocket) {
+    if (elapsed >= 1900) { stopMotion(); return; }
+    int offset = manualOffset;
+    if (testing) {
+      offset = 0;
+      if (elapsed >= 400 && elapsed < 700) offset = -int((elapsed - 400) / 3);
+      else if (elapsed >= 700 && elapsed < 1300) offset = -100 + int((elapsed - 700) / 3);
+      else if (elapsed >= 1300 && elapsed < 1600) offset = 100 - int((elapsed - 1300) / 3);
+    }
+    uint8_t j = servoActiveSocket - 1;
+    writePulse(j, CENTER_US[j] + JOINT_SIGN[j] * offset);
   }
 }
+void motorTask(void *) {
+  for (;;) {
+    serviceServoControl();
+    vTaskDelay(pdMS_TO_TICKS(10));
+  }
+}
+bool queueStop() {
+  if (!servoTaskReady) return false;
+  ServoCommand stop = {Stop};
+  xQueueReset(servoCommands);
+  return xQueueSendToFront(servoCommands, &stop, 0) == pdPASS;
+}
+
 esp_err_t servoHandler(httpd_req_t *req) {
   char token[40]={};
   if(httpd_req_get_hdr_value_str(req,"X-Cece-Control",token,sizeof(token))!=ESP_OK || servoControlToken!=token) {
@@ -97,17 +163,43 @@ esp_err_t servoHandler(httpd_req_t *req) {
     if(n<=0) return httpd_resp_send_err(req,HTTPD_408_REQ_TIMEOUT,"Command timed out.");used+=n;
   }
   String data(body);String action=formField(data,"action");ServoCommand command={};
-  if(action=="stop") command.action=0;
-  else if(action=="scan") command.action=2;
-  else if(action=="test") {
-    String socket=formField(data,"socket");
-    if(formField(data,"confirmed")!="1" || socket.length()!=1 || socket[0]<'1' || socket[0]>'4')
-      return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Confirm measured 5V and unloaded servos first.");
-    if(servoActiveSocket) return unavailable(req,"Test running. Press Stop or wait two seconds.");
-    command.action=1;command.socket=socket[0]-'0';
-  } else return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Unknown servo command.");
-  if(!servoCommands || xQueueOverwrite(servoCommands,&command)!=pdPASS)
-    return httpd_resp_send_err(req,HTTPD_500_INTERNAL_SERVER_ERROR,"Servo queue unavailable.");
+  command.sent = millis();
+  if (action == "stop") {
+    if (!queueStop()) return unavailable(req,"Motion task unavailable.");
+  } else {
+    if (!servoTaskReady) return unavailable(req,"Motion task unavailable.");
+    if (action == "heartbeat" || action == "walk") {
+      String owner = formField(data,"owner");
+      if (owner.length() != 8 || owner == "00000000" || strspn(owner.c_str(),"0123456789abcdef") != 8)
+        return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Invalid walk session.");
+      command.owner = strtoul(owner.c_str(), nullptr, 16);
+    }
+    if (action == "heartbeat") command.action = Heartbeat;
+    else {
+      if (servoWalking || servoActiveSocket) return unavailable(req,"Motion active. Press Stop first.");
+      if (action == "scan") command.action = Scan;
+      else {
+        if (!servoControllerReady) return unavailable(req,"Servo driver unavailable. Check wiring and rescan.");
+        if (formField(data,"confirmed") != "1")
+          return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Confirm servo supply and clearance first.");
+        if (action == "walk") command.action = Walk;
+        else if (action == "test" || action == "position") {
+          String socket = formField(data,"socket");
+          if (socket.length()!=1 || socket[0]<'1' || socket[0]>'4')
+            return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Choose socket 1 to 4.");
+          command.socket = socket[0]-'0';
+          command.action = action == "test" ? Test : Position;
+          if (command.action == Position) {
+            String offset = formField(data,"offset");
+            if (offset!="0" && offset!="-100" && offset!="100")
+              return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Invalid manual pulse offset.");
+            command.offset = offset.toInt();
+          }
+        } else return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Unknown action.");
+      }
+    }
+    if (xQueueSend(servoCommands,&command,0)!=pdPASS) return unavailable(req,"Motion queue busy.");
+  }
   httpd_resp_set_type(req,"application/json");
   return httpd_resp_send(req,"{\"accepted\":true}",HTTPD_RESP_USE_STRLEN);
 }

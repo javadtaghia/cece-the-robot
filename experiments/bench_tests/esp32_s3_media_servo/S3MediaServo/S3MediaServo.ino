@@ -10,7 +10,7 @@
 #include "esp_random.h"
 #include "web_page.h"
 
-constexpr char VERSION[] = "CECE_S3_MEDIA_SERVO_V1";
+constexpr char VERSION[] = "CECE_S3_MEDIA_WALK_V2";
 constexpr uint32_t SAMPLE_RATE = 16000;
 I2SClass microphone(I2S_NUM_0);
 bool cameraReady = false, micReady = false;
@@ -68,21 +68,22 @@ void setupMicrophone() {
 extern String servoControlToken;
 extern volatile bool servoControllerReady;
 extern volatile uint8_t servoActiveSocket;
+extern volatile bool servoWalking;
 
 void commonHeaders(httpd_req_t *req) {
   httpd_resp_set_hdr(req, "Cache-Control", "no-store");
   httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
 }
 esp_err_t rootHandler(httpd_req_t *req) {
-  commonHeaders(req); httpd_resp_set_type(req, "text/html; charset=utf-8");
+  httpd_resp_set_hdr(req,"Cache-Control","no-store"); httpd_resp_set_type(req, "text/html; charset=utf-8");
   String page=FPSTR(PHONE_PAGE);page.replace("__SERVO_TOKEN__",servoControlToken);
   return httpd_resp_send(req,page.c_str(),page.length());
 }
 esp_err_t statusHandler(httpd_req_t *req) {
   char data[420]; const bool connected = WiFi.status() == WL_CONNECTED;
-  snprintf(data, sizeof(data), "{\"camera\":%s,\"microphone\":%s,\"sensor\":\"0x%04x\",\"psram\":%u,\"connected\":%s,\"ip\":\"%s\",\"rssi\":%d,\"servo_driver\":%s,\"servo_socket\":%u}",
+  snprintf(data, sizeof(data), "{\"camera\":%s,\"microphone\":%s,\"sensor\":\"0x%04x\",\"psram\":%u,\"connected\":%s,\"ip\":\"%s\",\"rssi\":%d,\"servo_driver\":%s,\"servo_socket\":%u,\"walking\":%s}",
     cameraReady ? "true" : "false", micReady ? "true" : "false", sensorId,
-    ESP.getPsramSize(), connected ? "true" : "false", connected ? WiFi.localIP().toString().c_str() : "", connected ? WiFi.RSSI() : 0, servoControllerReady ? "true" : "false", servoActiveSocket);
+    ESP.getPsramSize(), connected ? "true" : "false", connected ? WiFi.localIP().toString().c_str() : "", connected ? WiFi.RSSI() : 0, servoControllerReady ? "true" : "false", servoActiveSocket, servoWalking ? "true" : "false");
   commonHeaders(req); httpd_resp_set_type(req, "application/json");
   return httpd_resp_send(req, data, HTTPD_RESP_USE_STRLEN);
 }
@@ -207,7 +208,7 @@ void setupWifi() {
 // USB diagnostics retrieve actual JPEG/PCM bytes without a Wi-Fi connection.
 void serialDiagnostic(char command) {
   if(command=='s') {Serial.printf("SERVO_DRIVER address=0x44 found=%s active_socket=%u\n",servoControllerReady?"YES":"NO",servoActiveSocket);}
-  else if(command=='x') {ServoCommand stop={0,0};xQueueOverwrite(servoCommands,&stop);}
+  else if(command=='x') {queueStop();}
   else if(command=='i') {printStatus();showSetup();}
   else if(command=='c') {
     if(!cameraReady || xSemaphoreTake(cameraLock,0)!=pdTRUE) {Serial.println("JPEG_ERROR camera unavailable or streaming");return;}
@@ -236,7 +237,6 @@ void setup() {
   printStatus();Serial.println("USB commands: i=status/setup, s=servo status, x=stop servos, c=JPEG, a=microphone PCM");
 }
 void loop() {
-  serviceServoControl();
   NetworkSettings settings;
   if(xQueueReceive(networkQueue,&settings,0)==pdPASS) {
     Preferences prefs;prefs.begin("cece-media",false);prefs.putString("ssid",settings.ssid);prefs.putString("password",settings.password);prefs.end();
@@ -251,6 +251,6 @@ void loop() {
       Serial.println("WIFI_WAITING: check 2.4 GHz network name/password. Setup Wi-Fi remains available.");lastAnnouncement=millis();
     }
   }
-  while(Serial.available()) {char c=Serial.read();if(!servoActiveSocket || c=='i' || c=='s' || c=='x') serialDiagnostic(c);}
+  while(Serial.available()) {char c=Serial.read();if((!servoActiveSocket && !servoWalking) || c=='i' || c=='s' || c=='x') serialDiagnostic(c);}
   delay(10);
 }
