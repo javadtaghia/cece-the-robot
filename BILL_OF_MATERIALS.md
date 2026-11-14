@@ -2,6 +2,17 @@
 
 Prices checked **11 November 2026** (Sydney), in **AUD**, before freight. This is the purchased prototype basket, including spares, plus a separate list of items to check before building. “Ordered” is supported by an order confirmation; it does not mean delivered, installed or tested. Price links go to public retailer listings. Retail pack sizes matter: a pack of resistors makes more than one robot.
 
+## Still needed to charge Cece
+
+**Choose one balance charger** for the Dualsky 7.4 V, 550 mAh 2S LiPo. One charger is still to buy. Prices below were checked on 14 November 2026 and exclude shipping.
+
+| Model | Power source | Price | Australian supplier |
+|---|---|---:|---|
+| ISDT UC2 | USB-C cable and a 5 V USB adapter rated for at least 2 A | A$19.95 | [M1 Hobby Store](https://m1hobbystore.com.au/isdt-uc2-1s-2s-usb-c-lipo-charger/) |
+| HOTRC B3AC (B3 2S/3S LiPo balance charger) | Australian wall outlet using the included AU power cable | A$22.99 | [Amazon Australia](https://www.amazon.com.au/dp/B0CS2W4Z4S) |
+
+With either charger, disconnect the battery from Cece, power the charger and insert the pack's keyed three-wire balance plug into the **2S** socket. Leave the two-wire robot power plug disconnected. The UC2 charges at 0.8 A and the B3AC lists up to 0.8 A per cell. The Adafruit USB plug breakout only carries power. Never connect USB or a bench supply directly to the pack.
+
 ## What the project ordered
 
 | Original supplier | Items | Recorded merchandise | Same basket at listed prices |
@@ -64,7 +75,7 @@ These prices are examples for missing items, not evidence of purchase.
 | Check before ordering | Quantity and example price | What to verify |
 | --- | --- | --- |
 | JP1 removable programming link | 1 × [2.54 mm shunt, Core — $0.86](https://core-electronics.com.au/jumper-2-pin.html) | Fit to two pins cut from the purchased male header. Remove JP1 before connecting PC USB as shown in the schematic. |
-| External 2S LiPo balance charger | 1 required for recharging; [ISDT UC2 study candidate, M1 Hobby Store — $19.95](https://m1hobbystore.com.au/isdt-uc2-1s-2s-usb-c-lipo-charger/) | Charger purchase and installed charge port are unconfirmed. Match the actual balance plug, polarity and pack charge rating to the charger; the UC2 is fixed at 0.8 A. Disconnect the robot load for charging. See the [charging interface review](experiments/cece/packaging_study/CHARGING_INTERFACE_REVIEW.md). |
+| Installed charge port | Optional for external charging | The external charger connects directly to the disconnected pack. See the [charging interface review](experiments/cece/packaging_study/CHARGING_INTERFACE_REVIEW.md). |
 | Horns, ankle retainers and ties | Four servo horn sets; for the captive-ankle design, two pointed M2 × 8 mm screws and four narrow ties. Examples: [2 × 8 tapping screws, $5.90/10](https://plaig.com.au/product/2x8mm-button-head-screws-with-tapping-thread-pack-of-10/) and [2.5 mm nylon ties, $4.55/100](https://www.altronics.com.au/product/h4012a-100mm-natural-cable-ties-pk-100) | Check the servo bags first. Confirm screw tip, head, pilot grip and tie-slot fit against the [ankle assembly notes](experiments/cece/ankle_v2/README.md). |
 | Printed parts and PLA | [1 kg eSUN green PLA+, Jaycar — $19.95](https://www.jaycar.com.au/esun-green-pla-filament-1kg-1-75mm/p/TL4462) | Slicer estimates: [prototype plate](experiments/cece/print_preparation/README.md) 150.7 g (about $3.01 of PLA); [R16 carrier](experiments/cece/esp_head_carrier/R16_REVIEW.md) 5.99 g (about $0.12). Excludes reprints. |
 | Bench supplies | USB-C **data** cable, solder, insulation/heat-shrink and battery retention as needed | Reuse what is on hand. Final harness lengths, enclosure fasteners and physical fits depend on the chosen printed revision; no confirmed purchase price. |
