@@ -86,26 +86,32 @@ TEST SEQUENCE
 11. Disconnect battery after the bench test. This firmware has no battery
     voltage sensing or automatic LiPo low-voltage cutoff.
 
-PHONE CONTROLS (S3 media walk V4)
+PHONE CONTROLS (S3 media walk V5)
 Join Cece's setup Wi-Fi and open http://192.168.4.1/ or use the PHONE_URL
 printed on USB serial at 115200 when Cece joins your home Wi-Fi.
 Start camera and Listen to robot mic can run while the motion controls are active.
 Choose a hip or foot, then -10 degrees, Center, +10 degrees or Test sweep.
-Positions are relative to that joint's configured center. The signal releases
+Manual positions are absolute pulse targets relative to that joint's configured
+center. Moving directly from -10 to +10 requests about 20 degrees of travel.
+V5 takes 0.8 s to ease to a manual target from the last commanded pulse. The signal releases
 after 1.9 s. Verify all four centers and directions with Cece supported.
 Start walking forward commands all four joints. It settles for one second,
-eases in over two seconds, then repeats a 2.00 s gait cycle. Keep the
+eases in over 3.04 seconds, then repeats a 3.04 s gait cycle. Keep the
 controlling page visible. Stop movement releases all four outputs. If the
 phone loses contact, the ESP releases the outputs after 3 s without a heartbeat.
 The gait is open loop. Ground travel depends on horn alignment, joint signs
-and balance. CENTER_US and JOINT_SIGN in servo_control.h can be calibrated
-per socket. The initial signs assume all four installations have the same sign.
+and balance. CENTER_US and WALK_SIGN in servo_control.h can be calibrated
+per socket. WALK_SIGN affects walking only; manual tests keep their raw direction.
 
 Forward gait check: face Cece along a straight floor mark. Test on a level
 surface with the USB lead removed. Check the feet point forward at Center.
 With Cece supported, test +10 degrees on each upper socket from Center.
-The model expects both feet to turn counterclockwise when viewed from above.
-If only one turns clockwise, reverse JOINT_SIGN for that hip socket and retest.
+In the supplied sketch, at raw -10 the left outer foot edge rises and the right
+outer edge drops when viewed from behind. Both hips turn counterclockwise from
+neutral when viewed from above at raw -10. The model expects this hip rotation
+for a positive gait angle, so V5 inverts both upper sockets during walking.
+On the supported robot the toes should point toward Cece's right for raw +10
+from center on either hip. Retest if a servo or horn is remounted.
 An SG90 has no position readback; an off-center joint can move immediately
 when first energized, even with the gait ramp.
 V4 eases both ankles in during the first cycle and limits the swing ankle
@@ -115,6 +121,18 @@ displacement. At friction 0.6 the result was 241.7 mm forward and 2.7 mm
 lateral in the other direction. Both runs stayed upright with 19 detected
 foot lifts and landings. Actual horn directions and floor travel need a
 physical check.
+
+V5 soft landing: each half-step uses 280 ms to approach the floor and
+400 ms to roll level, with eased starts and stops. Maximum ankle target
+is 17 degrees. At the 20 ms command interval the fastest change during
+the final roll is 65 deg/s, compared with 295 deg/s in V4. Those are
+command speeds; neither foot force nor actual servo speed is measured.
+With V5 pulse targets transformed using the directions in the sketch,
+the Bullet model stayed upright over 20 half-steps: at friction 0.6,
+242.9 mm forward, 5.2 mm sideways, peak tilt 10.35 degrees; at 0.8,
+245.4 mm forward, 6.4 mm sideways, peak tilt 10.47 degrees. Each run
+had 18 detected lifts followed by ground contact. Test the actual robot
+on a level floor with a hand ready to catch the body.
 
 BATTERY-ONLY OPERATION (AFTER THE USB-POWERED TEST WORKS)
 Disconnect the PC USB cable. Keep the 5V UBEC branch to the servo controller.

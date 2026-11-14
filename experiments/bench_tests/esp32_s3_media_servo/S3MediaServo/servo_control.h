@@ -59,7 +59,15 @@ void setupServoControl() {
 // Motion state and I2C writes belong to the motor task. The HTTP task queues requests.
 constexpr uint32_t WALK_TIMEOUT_MS = 3000;
 constexpr int CENTER_US[4] = {1500, 1500, 1500, 1500};
-constexpr int JOINT_SIGN[4] = {1, 1, 1, 1}; // Verify with the refitted horns.
+// Model-positive rotation relative to the raw manual control on this assembly.
+constexpr int WALK_SIGN[4] = {1, 1, -1, -1};
+int lastPulseUs[4] = {CENTER_US[0], CENTER_US[1], CENTER_US[2], CENTER_US[3]};
+int startPulseUs[4];
+int easePulse(int from, int to, uint32_t elapsed, uint32_t duration) {
+  if (elapsed >= duration) return to;
+  float x = elapsed / float(duration);
+  return from + lroundf((to - from) * x * x * (3.0f - 2.0f * x));
+}
 const int16_t *walkFrame(uint32_t frame) {
   if (frame < STARTUP_FRAMES) return STARTUP_CDEG[frame];
   return CYCLE_CDEG[(frame - STARTUP_FRAMES) % CYCLE_FRAMES];
@@ -69,12 +77,12 @@ const int16_t *walkFrame(uint32_t frame) {
 constexpr uint8_t GAIT_COLUMN_BY_SOCKET[4] = {2, 3, 0, 1};
 int walkPulse(uint8_t socketIndex, uint32_t elapsed) {
   // Hold center for one second, then follow the phased weight transfer and hip swing.
-  if (elapsed < 1000) return CENTER_US[socketIndex];
+  if (elapsed < 1000) return easePulse(startPulseUs[socketIndex], CENTER_US[socketIndex], elapsed, 800);
   uint32_t t = elapsed - 1000;
   const uint8_t column = GAIT_COLUMN_BY_SOCKET[socketIndex];
   int a = walkFrame(t / FRAME_MS)[column], b = walkFrame(t / FRAME_MS + 1)[column];
   int offsetUs = lroundf((a + (b - a) * ((t % FRAME_MS) / float(FRAME_MS))) / 10.0f);
-  return constrain(CENTER_US[socketIndex] + JOINT_SIGN[socketIndex] * offsetUs, 1100, 1900);
+  return constrain(CENTER_US[socketIndex] + WALK_SIGN[socketIndex] * offsetUs, 1100, 1900);
 }
 uint32_t lastHeartbeat = 0, walkOwner = 0;
 int manualOffset = 0;
@@ -91,7 +99,10 @@ void stopMotion() {
 }
 bool writePulse(uint8_t socketIndex, int us) {
   uint16_t ticks = lroundf(us * SERVO_PWM_HZ * 4096.0f / 1000000.0f);
-  if (servoOutput(SERVO_CHANNELS[socketIndex], ticks, false)) return true;
+  if (servoOutput(SERVO_CHANNELS[socketIndex], ticks, false)) {
+    lastPulseUs[socketIndex] = us;
+    return true;
+  }
   stopMotion();
   servoControllerReady = false;
   return false;
@@ -111,6 +122,7 @@ void serviceServoControl() {
     if (c.action == Scan) { servoControllerReady = configureServoController(); continue; }
     if (!servoControllerReady || now - c.sent >= WALK_TIMEOUT_MS) continue;
     servoStarted = now;
+    for (uint8_t j = 0; j < 4; ++j) startPulseUs[j] = lastPulseUs[j];
     servoLastUpdate = now - 20;
     if (c.action == Walk) {
       walkOwner = c.owner;
@@ -138,7 +150,10 @@ void serviceServoControl() {
       else if (elapsed >= 1300 && elapsed < 1600) offset = 100 - int((elapsed - 1300) / 3);
     }
     uint8_t j = servoActiveSocket - 1;
-    writePulse(j, CENTER_US[j] + JOINT_SIGN[j] * offset);
+    int target = CENTER_US[j] + offset;
+    if (!testing) target = easePulse(startPulseUs[j], target, elapsed, 800);
+    else if (elapsed < 400) target = easePulse(startPulseUs[j], CENTER_US[j], elapsed, 400);
+    writePulse(j, target);
   }
 }
 void motorTask(void *) {

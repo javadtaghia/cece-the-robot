@@ -1,0 +1,502 @@
+{
+  "firmware": "CECE_S3_MEDIA_WALK_V5",
+  "method": "Replay of firmware pulse commands at 50 Hz in Cece 2 Bullet with the installation signs inferred from the movement sketch. Starts at neutral. Not a physical landing force measurement.",
+  "runs": [
+    {
+      "surface_friction": 0.6,
+      "motor_torque_limit_nm": 0.08,
+      "result": {
+        "requested_half_steps": 20,
+        "completed_half_steps": 20,
+        "fell": false,
+        "failure": null,
+        "simulated_gait_time_s": 30.333,
+        "net_base_displacement_mm": [
+          -5.17,
+          -242.92,
+          0.67
+        ],
+        "max_body_tilt_deg": 10.35,
+        "final_body_tilt_deg": 1.09,
+        "peak_motor_torque_Nm": 0.08,
+        "max_joint_tracking_error_deg": 4.34,
+        "motor_limit_fraction_of_joint_time_samples": 0.00419,
+        "foot_contact_point_observations": {
+          "1": 15362,
+          "3": 15809
+        },
+        "observed_lift_and_land_count": 18
+      },
+      "half_steps": [
+        {
+          "half_step": 1,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 0.0,
+          "airborne_duration_s": 0.0,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 0.25,
+          "stance_foot_max_horizontal_drift_mm": 0.48,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 2,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 0.0,
+          "airborne_duration_s": 0.0,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 1.77,
+          "stance_foot_max_horizontal_drift_mm": 3.0,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 3,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.43,
+          "airborne_duration_s": 0.463,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.779,
+          "stance_foot_max_horizontal_drift_mm": 1.78,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 4,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.56,
+          "airborne_duration_s": 0.496,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 3.013,
+          "stance_foot_max_horizontal_drift_mm": 1.64,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 5,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.65,
+          "airborne_duration_s": 0.458,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.317,
+          "stance_foot_max_horizontal_drift_mm": 1.7,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 6,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.47,
+          "airborne_duration_s": 0.496,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.77,
+          "stance_foot_max_horizontal_drift_mm": 1.8,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 7,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.55,
+          "airborne_duration_s": 0.463,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.889,
+          "stance_foot_max_horizontal_drift_mm": 1.58,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 8,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.56,
+          "airborne_duration_s": 0.446,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.596,
+          "stance_foot_max_horizontal_drift_mm": 1.67,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 9,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.56,
+          "airborne_duration_s": 0.442,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.833,
+          "stance_foot_max_horizontal_drift_mm": 1.71,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 10,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.49,
+          "airborne_duration_s": 0.508,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.536,
+          "stance_foot_max_horizontal_drift_mm": 1.62,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 11,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.53,
+          "airborne_duration_s": 0.417,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.802,
+          "stance_foot_max_horizontal_drift_mm": 1.73,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 12,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.4,
+          "airborne_duration_s": 0.5,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.65,
+          "stance_foot_max_horizontal_drift_mm": 1.67,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 13,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.61,
+          "airborne_duration_s": 0.458,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.335,
+          "stance_foot_max_horizontal_drift_mm": 1.66,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 14,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.51,
+          "airborne_duration_s": 0.517,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.17,
+          "stance_foot_max_horizontal_drift_mm": 1.51,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 15,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.55,
+          "airborne_duration_s": 0.463,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.699,
+          "stance_foot_max_horizontal_drift_mm": 1.6,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 16,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.49,
+          "airborne_duration_s": 0.504,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.615,
+          "stance_foot_max_horizontal_drift_mm": 1.56,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 17,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.62,
+          "airborne_duration_s": 0.425,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.558,
+          "stance_foot_max_horizontal_drift_mm": 1.36,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 18,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.53,
+          "airborne_duration_s": 0.487,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 3.255,
+          "stance_foot_max_horizontal_drift_mm": 1.61,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 19,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.55,
+          "airborne_duration_s": 0.458,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.73,
+          "stance_foot_max_horizontal_drift_mm": 1.44,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 20,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.43,
+          "airborne_duration_s": 0.512,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.717,
+          "stance_foot_max_horizontal_drift_mm": 1.42,
+          "stance_foot_airborne_duration_s": 0.0
+        }
+      ]
+    },
+    {
+      "surface_friction": 0.8,
+      "motor_torque_limit_nm": 0.08,
+      "result": {
+        "requested_half_steps": 20,
+        "completed_half_steps": 20,
+        "fell": false,
+        "failure": null,
+        "simulated_gait_time_s": 30.333,
+        "net_base_displacement_mm": [
+          -6.36,
+          -245.35,
+          0.73
+        ],
+        "max_body_tilt_deg": 10.47,
+        "final_body_tilt_deg": 1.02,
+        "peak_motor_torque_Nm": 0.08,
+        "max_joint_tracking_error_deg": 4.36,
+        "motor_limit_fraction_of_joint_time_samples": 0.00567,
+        "foot_contact_point_observations": {
+          "1": 15006,
+          "3": 15462
+        },
+        "observed_lift_and_land_count": 18
+      },
+      "half_steps": [
+        {
+          "half_step": 1,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 0.0,
+          "airborne_duration_s": 0.0,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 0.494,
+          "stance_foot_max_horizontal_drift_mm": 0.48,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 2,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 0.0,
+          "airborne_duration_s": 0.0,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 1.855,
+          "stance_foot_max_horizontal_drift_mm": 2.88,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 3,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.62,
+          "airborne_duration_s": 0.446,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 3.099,
+          "stance_foot_max_horizontal_drift_mm": 1.41,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 4,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.63,
+          "airborne_duration_s": 0.475,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 3.048,
+          "stance_foot_max_horizontal_drift_mm": 1.44,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 5,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.73,
+          "airborne_duration_s": 0.421,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 1.861,
+          "stance_foot_max_horizontal_drift_mm": 1.27,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 6,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.54,
+          "airborne_duration_s": 0.5,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.037,
+          "stance_foot_max_horizontal_drift_mm": 1.31,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 7,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.74,
+          "airborne_duration_s": 0.45,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 1.492,
+          "stance_foot_max_horizontal_drift_mm": 1.38,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 8,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.45,
+          "airborne_duration_s": 0.521,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 1.461,
+          "stance_foot_max_horizontal_drift_mm": 1.28,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 9,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.75,
+          "airborne_duration_s": 0.417,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.413,
+          "stance_foot_max_horizontal_drift_mm": 1.27,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 10,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.56,
+          "airborne_duration_s": 0.487,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.664,
+          "stance_foot_max_horizontal_drift_mm": 1.33,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 11,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.93,
+          "airborne_duration_s": 0.438,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 1.927,
+          "stance_foot_max_horizontal_drift_mm": 1.3,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 12,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.48,
+          "airborne_duration_s": 0.508,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 1.922,
+          "stance_foot_max_horizontal_drift_mm": 1.28,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 13,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.78,
+          "airborne_duration_s": 0.375,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.179,
+          "stance_foot_max_horizontal_drift_mm": 0.88,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 14,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.52,
+          "airborne_duration_s": 0.479,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 1.87,
+          "stance_foot_max_horizontal_drift_mm": 1.23,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 15,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.76,
+          "airborne_duration_s": 0.412,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 1.992,
+          "stance_foot_max_horizontal_drift_mm": 1.09,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 16,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.38,
+          "airborne_duration_s": 0.483,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.442,
+          "stance_foot_max_horizontal_drift_mm": 1.26,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 17,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.77,
+          "airborne_duration_s": 0.433,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.194,
+          "stance_foot_max_horizontal_drift_mm": 1.17,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 18,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.59,
+          "airborne_duration_s": 0.496,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.17,
+          "stance_foot_max_horizontal_drift_mm": 1.26,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 19,
+          "swing": "right",
+          "max_foot_aabb_bottom_mm": 2.64,
+          "airborne_duration_s": 0.463,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 1.763,
+          "stance_foot_max_horizontal_drift_mm": 1.23,
+          "stance_foot_airborne_duration_s": 0.0
+        },
+        {
+          "half_step": 20,
+          "swing": "left",
+          "max_foot_aabb_bottom_mm": 2.49,
+          "airborne_duration_s": 0.504,
+          "ground_contact_during_final_phase": true,
+          "ground_contact_at_step_end": true,
+          "stance_contact_slip_integral_mm": 2.048,
+          "stance_foot_max_horizontal_drift_mm": 1.17,
+          "stance_foot_airborne_duration_s": 0.0
+        }
+      ]
+    }
+  ]
+}
