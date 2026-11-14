@@ -12,12 +12,21 @@ volatile uint8_t servoActiveSocket=0;
 QueueHandle_t servoCommands=nullptr;
 String servoControlToken;
 enum ServoAction { Stop, Test, Scan, Walk, Heartbeat, Position, PreviewZero, SaveZero };
-int CENTER_US[4] = {1600, 1500, 1500, 1500};
+int CENTER_US[4] = {1600, 1500, 1500, 1800};
 constexpr int MIN_ZERO = 1280, MAX_ZERO = 1720;
+constexpr uint8_t RIGHT_HIP = 3; // Zero-based index for socket 4.
+constexpr int maxCenterUs(uint8_t joint) {
+  // Reserve 75 us for the right hip's full 15 degree gait excursion.
+  return joint == RIGHT_HIP ? 1825 : MAX_ZERO;
+}
+int jointPulse(uint8_t joint, float nominalOffsetUs) {
+  float scale = joint == RIGHT_HIP ? 0.5f : 1.0f;
+  return constrain(CENTER_US[joint] + int(lroundf(nominalOffsetUs * scale)), 1100, 1900);
+}
 volatile bool calibrating = false;
 int previewUs = 1500;
 uint32_t calibrationOwner = 0;
-const char *const centerKeys[] = {"footL_v7", "footR", "hipL", "hipR"};
+const char *const centerKeys[] = {"footL_v7", "footR", "hipL", "hipR_v8"};
 Preferences jointSettings;
 bool settingsReady = false;
 struct ServoCommand { ServoAction action; uint8_t socket; int offset; uint32_t owner, sent; };
@@ -63,7 +72,7 @@ void setupServoControl() {
       CENTER_US[0] = constrain(previousLeft + 100, MIN_ZERO, MAX_ZERO);
     for (int j = 0; j < 4; ++j) {
       int saved = jointSettings.getInt(centerKeys[j], CENTER_US[j]);
-      if (saved >= MIN_ZERO && saved <= MAX_ZERO) CENTER_US[j] = saved;
+      if (saved >= MIN_ZERO && saved <= maxCenterUs(j)) CENTER_US[j] = saved;
     }
   }
   uint8_t bytes[16];esp_fill_random(bytes,sizeof(bytes));char token[33];
@@ -100,8 +109,8 @@ int walkPulse(uint8_t socketIndex, uint32_t elapsed) {
   uint32_t t = elapsed - 1000;
   const uint8_t column = GAIT_COLUMN_BY_SOCKET[socketIndex];
   int a = walkFrame(t / FRAME_MS)[column], b = walkFrame(t / FRAME_MS + 1)[column];
-  int offsetUs = lroundf((a + (b - a) * ((t % FRAME_MS) / float(FRAME_MS))) / 10.0f);
-  return constrain(CENTER_US[socketIndex] + WALK_SIGN[socketIndex] * offsetUs, 1100, 1900);
+  float offsetUs = (a + (b - a) * ((t % FRAME_MS) / float(FRAME_MS))) / 10.0f;
+  return jointPulse(socketIndex, WALK_SIGN[socketIndex] * offsetUs);
 }
 uint32_t lastHeartbeat = 0, walkOwner = 0;
 int manualOffset = 0;
@@ -197,7 +206,7 @@ void serviceServoControl() {
       else if (elapsed >= 1300 && elapsed < 1600) offset = 100 - int((elapsed - 1300) / 3);
     }
     uint8_t j = servoActiveSocket - 1;
-    int target = CENTER_US[j] + offset;
+    int target = jointPulse(j, offset);
     if (!testing) target = easePulse(startPulseUs[j], target, elapsed, 800);
     else if (elapsed < 400) target = easePulse(startPulseUs[j], CENTER_US[j], elapsed, 400);
     writePulse(j, target);
@@ -252,7 +261,7 @@ esp_err_t servoHandler(httpd_req_t *req) {
         if (calibration) {
           String joint = formField(data,"socket"), value = formField(data,"pulse");
           if (joint.length()!=1 || joint[0]<'1' || joint[0]>'4' || value.length()!=4 ||
-              strspn(value.c_str(),"0123456789")!=4 || value.toInt()<MIN_ZERO || value.toInt()>MAX_ZERO)
+              strspn(value.c_str(),"0123456789")!=4 || value.toInt()<MIN_ZERO || value.toInt()>maxCenterUs(joint[0]-'1'))
             return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Invalid joint or center pulse.");
           command.socket = joint[0]-'0';
           command.offset = value.toInt();

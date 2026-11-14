@@ -47,7 +47,7 @@ async function trimJoint(mode, step=0){
   const socket=Number($('joint').value);
   const base=centers[socket-1];
   const pulse=mode==='hold'?base:(preview?.socket===socket?preview.pulse:base)+step;
-  if(pulse<1280 || pulse>1720){$('zeroState').textContent='Adjustment limit reached. Refit the horn closer to neutral.';return;}
+  if(pulse<1280 || pulse>(socket===4?1825:1720)){$('zeroState').textContent='Adjustment limit reached. Refit the horn closer to neutral.';return;}
   pending=true;enableServoButtons();
   try {
     if(mode==='save' && preview?.socket!==socket)throw new Error('Hold and adjust this joint first.');

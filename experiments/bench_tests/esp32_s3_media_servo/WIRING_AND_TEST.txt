@@ -86,7 +86,12 @@ TEST SEQUENCE
 11. Disconnect battery after the bench test. This firmware has no battery
     voltage sensing or automatic LiPo low-voltage cutoff.
 
-PHONE CONTROLS (S3 media walk V7)
+PHONE CONTROLS (S3 media walk V8)
+Socket 4 (right hip) uses an original-scale center of +30 degrees and
+half the original command span. Manual -10, Center and +10 request
+1750, 1800 and 1850 us before any further saved trim. Walking and the test
+sweep use the same scale. The walking direction sign still applies before
+conversion. Actual joint angles require observation on the assembled robot.
 Socket 1 uses the former +10 degree position as its center. The +100 us
 correction is relative to its V6 center, within the trim limits. A new
 saved V7 calibration takes precedence on future boots. With a former
