@@ -14,6 +14,10 @@ body{font:17px system-ui;background:#111b29;color:#f5f7fa;margin:0;padding:20px;
 <select id="joint"><option value="1">1 · Left foot (lower)</option><option value="2">2 · Right foot (lower)</option><option value="3">3 · Left hip (upper)</option><option value="4">4 · Right hip (upper)</option></select>
 <p><button class="manual" data-offset="-100" disabled>−10°</button><button class="manual" data-offset="0" disabled>Center</button><button class="manual" data-offset="100" disabled>+10°</button><button id="test" disabled>Test sweep</button></p>
 <small>Angles are approximate offsets from center. Each individual command releases the selected servo after two seconds. Support Cece for the first test.</small>
+<details><summary>Calibrate selected joint</summary>
+<p>Support Cece with its feet free. Tap Hold, then adjust until the sole is level or the hip points forward. Each tap holds for 12 seconds.</p>
+<button id="holdZero">Hold saved zero</button><button id="trimMinus">−10 µs</button><button id="trimPlus">+10 µs</button><button id="saveZero">Save zero</button>
+<p id="zeroState" role="status"></p><small>If the adjustment reaches its limit, refit the horn closer to neutral.</small></details>
 <p><button id="servoScan">Rescan driver</button></p><p id="servoMessage" role="status"></p></div>
 <div class="panel"><img id="camera" alt="Tap Start camera to see Cece's view">
 <button id="videoStart">Start camera</button><button id="videoStop">Stop camera</button>
@@ -36,11 +40,42 @@ const $=id=>document.getElementById(id);
 let cameraAllowed=false, micAllowed=false, audioSession=null;
 let walkSentAt=0;
 let driverReady=false, activeServo=0, walking=false, pending=false, owner='', beatBusy=false;
+let centers=null, preview=null;
+const trimOwner=(crypto.getRandomValues(new Uint32Array(1))[0] || 1).toString(16).padStart(8,'0');
+async function trimJoint(mode, step=0){
+  if(pending || !centers || !$('servoConfirmed').checked)return;
+  const socket=Number($('joint').value);
+  const base=centers[socket-1];
+  const pulse=mode==='hold'?base:(preview?.socket===socket?preview.pulse:base)+step;
+  if(pulse<1280 || pulse>1720){$('zeroState').textContent='Adjustment limit reached. Refit the horn closer to neutral.';return;}
+  pending=true;enableServoButtons();
+  try {
+    if(mode==='save' && preview?.socket!==socket)throw new Error('Hold and adjust this joint first.');
+    await sendServo(mode==='save'?'saveZero':'previewZero',{socket,pulse,owner:trimOwner});
+    if(mode==='save'){
+      await new Promise(resolve=>setTimeout(resolve,160));
+      const s=await (await fetch('/status',{cache:'no-store'})).json();
+      if(s.centers[socket-1]!==pulse || s.servo_socket!==0)throw new Error('Save unconfirmed. Hold and try again.');
+      centers=s.centers;preview=null;
+      $('zeroState').textContent='Zero saved for socket '+socket+' at '+pulse+' µs.';
+    }else{
+      preview={socket,pulse};
+      $('zeroState').textContent='Socket '+socket+' • preview '+pulse+' µs • saved '+base+' µs';
+    }
+  }catch(e){$('zeroState').textContent=e.message;}
+  finally{pending=false;enableServoButtons();}
+}
+$('holdZero').onclick=()=>trimJoint('hold');
+$('trimMinus').onclick=()=>trimJoint('adjust',-10);
+$('trimPlus').onclick=()=>trimJoint('adjust',10);
+$('saveZero').onclick=()=>trimJoint('save');
 function enableServoButtons(){
   const busy=pending || walking || !!activeServo || !!owner;
   for(const b of document.querySelectorAll('.manual,#walk,#test'))
     b.disabled=busy || !driverReady || !$('servoConfirmed').checked;
   $('servoScan').disabled=busy;
+  for(const id of ['holdZero','trimMinus','trimPlus','saveZero'])
+    $(id).disabled=pending || walking || !!owner || !driverReady || !$('servoConfirmed').checked || !centers;
 }
 async function sendServo(action,fields={},keepalive=false){
   const res=await fetch('/servo',{method:'POST',keepalive,
@@ -126,6 +161,7 @@ $('listen').onclick=async()=>{
 };
 async function status(){const queriedOwner=owner,requestTime=performance.now();try{const response=await fetch('/status',{cache:'no-store'});const s=await response.json();cameraAllowed=s.camera;micAllowed=s.microphone;driverReady=s.servo_driver;activeServo=s.servo_socket;walking=s.walking;
   if(!walking && !pending && owner && owner===queriedOwner && performance.now()-requestTime<1500 && requestTime>walkSentAt+500)owner='';
+  centers=s.centers;
   enableServoButtons();
   $('servoStatus').textContent=!driverReady?'Driver unavailable. Check I²C wiring and rescan.':walking?'Walking forward':activeServo?'Moving servo '+activeServo:'Stopped · driver ready';
   $('listen').disabled=!micAllowed||!!audioSession;

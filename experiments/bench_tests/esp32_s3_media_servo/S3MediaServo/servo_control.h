@@ -11,7 +11,15 @@ volatile bool servoControllerReady=false;
 volatile uint8_t servoActiveSocket=0;
 QueueHandle_t servoCommands=nullptr;
 String servoControlToken;
-enum ServoAction { Stop, Test, Scan, Walk, Heartbeat, Position };
+enum ServoAction { Stop, Test, Scan, Walk, Heartbeat, Position, PreviewZero, SaveZero };
+int CENTER_US[4] = {1500, 1500, 1500, 1500};
+constexpr int MIN_ZERO = 1280, MAX_ZERO = 1720;
+volatile bool calibrating = false;
+int previewUs = 1500;
+uint32_t calibrationOwner = 0;
+const char *const centerKeys[] = {"footL", "footR", "hipL", "hipR"};
+Preferences jointSettings;
+bool settingsReady = false;
 struct ServoCommand { ServoAction action; uint8_t socket; int offset; uint32_t owner, sent; };
 volatile bool servoWalking = false;
 bool servoTaskReady = false;
@@ -46,6 +54,13 @@ bool configureServoController() {
   return servoRegister(0x00,0xA0);
 }
 void setupServoControl() {
+  settingsReady = jointSettings.begin("cece-joints", false);
+  if (settingsReady) {
+    for (int j = 0; j < 4; ++j) {
+      int saved = jointSettings.getInt(centerKeys[j], 1500);
+      if (saved >= MIN_ZERO && saved <= MAX_ZERO) CENTER_US[j] = saved;
+    }
+  }
   uint8_t bytes[16];esp_fill_random(bytes,sizeof(bytes));char token[33];
   for(size_t i=0;i<16;i++) snprintf(token+i*2,3,"%02x",bytes[i]);
   servoControlToken=token;
@@ -58,7 +73,6 @@ void setupServoControl() {
 }
 // Motion state and I2C writes belong to the motor task. The HTTP task queues requests.
 constexpr uint32_t WALK_TIMEOUT_MS = 3000;
-constexpr int CENTER_US[4] = {1500, 1500, 1500, 1500};
 // Model-positive rotation relative to the raw manual control on this assembly.
 constexpr int WALK_SIGN[4] = {1, 1, -1, -1};
 int lastPulseUs[4] = {CENTER_US[0], CENTER_US[1], CENTER_US[2], CENTER_US[3]};
@@ -89,6 +103,8 @@ int manualOffset = 0;
 bool testing = false;
 
 void stopMotion() {
+  calibrating = false;
+  calibrationOwner = 0;
   if (!servoDisableOutputs()) {
     servoControllerReady = false;
     Serial.println("SERVO_STOP_I2C_ERROR: disconnect servo power");
@@ -118,6 +134,26 @@ void serviceServoControl() {
       if (servoWalking && c.owner == walkOwner) lastHeartbeat = now;
       continue;
     }
+    if (c.action == PreviewZero || c.action == SaveZero) {
+      if (!settingsReady || !servoControllerReady || servoWalking || now - c.sent >= WALK_TIMEOUT_MS) continue;
+      const uint8_t j = c.socket - 1;
+      if (servoActiveSocket && (!calibrating || servoActiveSocket != c.socket || calibrationOwner != c.owner)) continue;
+      if (c.action == SaveZero) {
+        if (calibrating && previewUs == c.offset && lastPulseUs[j] == previewUs &&
+            jointSettings.putInt(centerKeys[j], previewUs) == sizeof(int32_t)) {
+          CENTER_US[j] = previewUs;
+          stopMotion();
+        }
+        continue;
+      }
+      startPulseUs[j] = lastPulseUs[j];
+      servoStarted = now;
+      previewUs = c.offset;
+      calibrating = true;
+      calibrationOwner = c.owner;
+      servoActiveSocket = c.socket;
+      continue;
+    }
     if (servoWalking || servoActiveSocket) continue;
     if (c.action == Scan) { servoControllerReady = configureServoController(); continue; }
     if (!servoControllerReady || now - c.sent >= WALK_TIMEOUT_MS) continue;
@@ -141,6 +177,12 @@ void serviceServoControl() {
     for (uint8_t j = 0; j < 4; ++j)
       if (!writePulse(j, walkPulse(j, elapsed))) break;
   } else if (servoActiveSocket) {
+    if (calibrating) {
+      if (elapsed >= 12000) { stopMotion(); return; }
+      uint8_t j = servoActiveSocket - 1;
+      writePulse(j, easePulse(startPulseUs[j], previewUs, elapsed, 800));
+      return;
+    }
     if (elapsed >= 1900) { stopMotion(); return; }
     int offset = manualOffset;
     if (testing) {
@@ -187,7 +229,8 @@ esp_err_t servoHandler(httpd_req_t *req) {
     if (!queueStop()) return unavailable(req,"Motion task unavailable.");
   } else {
     if (!servoTaskReady) return unavailable(req,"Motion task unavailable.");
-    if (action == "heartbeat" || action == "walk") {
+    bool calibration = action == "previewZero" || action == "saveZero";
+    if (action == "heartbeat" || action == "walk" || calibration) {
       String owner = formField(data,"owner");
       if (owner.length() != 8 || owner == "00000000" || strspn(owner.c_str(),"0123456789abcdef") != 8)
         return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Invalid walk session.");
@@ -195,13 +238,26 @@ esp_err_t servoHandler(httpd_req_t *req) {
     }
     if (action == "heartbeat") command.action = Heartbeat;
     else {
-      if (servoWalking || servoActiveSocket) return unavailable(req,"Motion active. Press Stop first.");
+      if (servoWalking || (servoActiveSocket && !(calibration && calibrating))) return unavailable(req,"Motion active. Press Stop first.");
       if (action == "scan") command.action = Scan;
       else {
         if (!servoControllerReady) return unavailable(req,"Servo driver unavailable. Check wiring and rescan.");
         if (formField(data,"confirmed") != "1")
           return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Confirm servo supply and clearance first.");
-        if (action == "walk") command.action = Walk;
+        if (calibration) {
+          String joint = formField(data,"socket"), value = formField(data,"pulse");
+          if (joint.length()!=1 || joint[0]<'1' || joint[0]>'4' || value.length()!=4 ||
+              strspn(value.c_str(),"0123456789")!=4 || value.toInt()<MIN_ZERO || value.toInt()>MAX_ZERO)
+            return httpd_resp_send_err(req,HTTPD_400_BAD_REQUEST,"Invalid joint or center pulse.");
+          command.socket = joint[0]-'0';
+          command.offset = value.toInt();
+          if (!settingsReady) return unavailable(req,"Calibration storage unavailable.");
+          if (calibrating && (servoActiveSocket != command.socket || calibrationOwner != command.owner))
+            return unavailable(req,"Another joint or page is active. Press Stop first.");
+          if (action == "saveZero" && (!calibrating || previewUs != command.offset || millis()-servoStarted<850))
+            return unavailable(req,"Preview this position and let it settle before saving.");
+          command.action = action == "previewZero" ? PreviewZero : SaveZero;
+        } else if (action == "walk") command.action = Walk;
         else if (action == "test" || action == "position") {
           String socket = formField(data,"socket");
           if (socket.length()!=1 || socket[0]<'1' || socket[0]>'4')

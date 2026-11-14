@@ -10,7 +10,7 @@
 #include "esp_random.h"
 #include "web_page.h"
 
-constexpr char VERSION[] = "CECE_S3_MEDIA_WALK_V5";
+constexpr char VERSION[] = "CECE_S3_MEDIA_WALK_V6";
 constexpr uint32_t SAMPLE_RATE = 16000;
 I2SClass microphone(I2S_NUM_0);
 bool cameraReady = false, micReady = false;
@@ -69,6 +69,7 @@ extern String servoControlToken;
 extern volatile bool servoControllerReady;
 extern volatile uint8_t servoActiveSocket;
 extern volatile bool servoWalking;
+extern int CENTER_US[4];
 
 void commonHeaders(httpd_req_t *req) {
   httpd_resp_set_hdr(req, "Cache-Control", "no-store");
@@ -81,7 +82,8 @@ esp_err_t rootHandler(httpd_req_t *req) {
 }
 esp_err_t statusHandler(httpd_req_t *req) {
   char data[420]; const bool connected = WiFi.status() == WL_CONNECTED;
-  snprintf(data, sizeof(data), "{\"camera\":%s,\"microphone\":%s,\"sensor\":\"0x%04x\",\"psram\":%u,\"connected\":%s,\"ip\":\"%s\",\"rssi\":%d,\"servo_driver\":%s,\"servo_socket\":%u,\"walking\":%s}",
+  snprintf(data, sizeof(data), "{\"centers\":[%d,%d,%d,%d],\"camera\":%s,\"microphone\":%s,\"sensor\":\"0x%04x\",\"psram\":%u,\"connected\":%s,\"ip\":\"%s\",\"rssi\":%d,\"servo_driver\":%s,\"servo_socket\":%u,\"walking\":%s}",
+    CENTER_US[0], CENTER_US[1], CENTER_US[2], CENTER_US[3],
     cameraReady ? "true" : "false", micReady ? "true" : "false", sensorId,
     ESP.getPsramSize(), connected ? "true" : "false", connected ? WiFi.localIP().toString().c_str() : "", connected ? WiFi.RSSI() : 0, servoControllerReady ? "true" : "false", servoActiveSocket, servoWalking ? "true" : "false");
   commonHeaders(req); httpd_resp_set_type(req, "application/json");

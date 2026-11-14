@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140mm" height="110mm" viewBox="0 0 140 110"><rect width="140" height="110" fill="white"/><g font-family="sans-serif" fill="#172134"><text x="70" y="10" font-size="5" text-anchor="middle">Cece servo angle card</text><text x="70" y="18" font-size="3.2" text-anchor="middle">Align the pivot with the cross and the centered joint with the zero line.</text>
+<path d="M43.13 56.13 L36.06 49.06" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="34.64" y="47.64" font-size="2.8">45&#176;</text>
+<path d="M38.74 50.63 L36.66 48.47" stroke="#85909b" stroke-width="0.22"/>
+<path d="M39.31 50.09 L37.26 47.90" stroke="#85909b" stroke-width="0.22"/>
+<path d="M39.89 49.56 L37.88 47.33" stroke="#85909b" stroke-width="0.22"/>
+<path d="M40.48 49.04 L38.51 46.77" stroke="#85909b" stroke-width="0.22"/>
+<path d="M70.00 83.00 L39.15 46.23" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="35.29" y="41.63" font-size="2.8">40&#176;</text>
+<path d="M41.68 48.03 L39.79 45.70" stroke="#85909b" stroke-width="0.22"/>
+<path d="M42.30 47.54 L40.45 45.18" stroke="#85909b" stroke-width="0.22"/>
+<path d="M42.92 47.06 L41.11 44.67" stroke="#85909b" stroke-width="0.22"/>
+<path d="M43.55 46.59 L41.79 44.17" stroke="#85909b" stroke-width="0.22"/>
+<path d="M48.20 51.87 L42.47 43.68" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="41.32" y="42.04" font-size="2.8">35&#176;</text>
+<path d="M44.84 45.69 L43.16 43.21" stroke="#85909b" stroke-width="0.22"/>
+<path d="M45.49 45.26 L43.86 42.74" stroke="#85909b" stroke-width="0.22"/>
+<path d="M46.15 44.84 L44.56 42.29" stroke="#85909b" stroke-width="0.22"/>
+<path d="M46.82 44.43 L45.28 41.86" stroke="#85909b" stroke-width="0.22"/>
+<path d="M70.00 83.00 L46.00 41.43" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="43.00" y="36.23" font-size="2.8">30&#176;</text>
+<path d="M48.18 43.64 L46.73 41.02" stroke="#85909b" stroke-width="0.22"/>
+<path d="M48.87 43.27 L47.47 40.62" stroke="#85909b" stroke-width="0.22"/>
+<path d="M49.57 42.90 L48.21 40.23" stroke="#85909b" stroke-width="0.22"/>
+<path d="M50.27 42.55 L48.96 39.86" stroke="#85909b" stroke-width="0.22"/>
+<path d="M53.94 48.56 L49.71 39.50" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="48.87" y="37.68" font-size="2.8">25&#176;</text>
+<path d="M51.70 41.89 L50.48 39.15" stroke="#85909b" stroke-width="0.22"/>
+<path d="M52.42 41.58 L51.24 38.82" stroke="#85909b" stroke-width="0.22"/>
+<path d="M53.14 41.28 L52.02 38.50" stroke="#85909b" stroke-width="0.22"/>
+<path d="M53.87 40.99 L52.80 38.19" stroke="#85909b" stroke-width="0.22"/>
+<path d="M70.00 83.00 L53.58 37.89" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="51.53" y="32.26" font-size="2.8">20&#176;</text>
+<path d="M55.35 40.45 L54.37 37.62" stroke="#85909b" stroke-width="0.22"/>
+<path d="M56.09 40.20 L55.17 37.35" stroke="#85909b" stroke-width="0.22"/>
+<path d="M56.84 39.97 L55.97 37.10" stroke="#85909b" stroke-width="0.22"/>
+<path d="M57.60 39.74 L56.77 36.86" stroke="#85909b" stroke-width="0.22"/>
+<path d="M60.16 46.29 L57.58 36.64" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="57.06" y="34.70" font-size="2.8">15&#176;</text>
+<path d="M59.11 39.34 L58.39 36.43" stroke="#85909b" stroke-width="0.22"/>
+<path d="M59.88 39.15 L59.20 36.23" stroke="#85909b" stroke-width="0.22"/>
+<path d="M60.64 38.98 L60.02 36.05" stroke="#85909b" stroke-width="0.22"/>
+<path d="M61.41 38.83 L60.84 35.88" stroke="#85909b" stroke-width="0.22"/>
+<path d="M70.00 83.00 L61.66 35.73" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="60.62" y="29.82" font-size="2.8">10&#176;</text>
+<path d="M62.96 38.55 L62.49 35.59" stroke="#85909b" stroke-width="0.22"/>
+<path d="M63.74 38.44 L63.32 35.47" stroke="#85909b" stroke-width="0.22"/>
+<path d="M64.52 38.34 L64.15 35.36" stroke="#85909b" stroke-width="0.22"/>
+<path d="M65.30 38.25 L64.98 35.26" stroke="#85909b" stroke-width="0.22"/>
+<path d="M66.69 45.14 L65.82 35.18" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="65.64" y="33.19" font-size="2.8">5&#176;</text>
+<path d="M66.86 38.11 L66.65 35.12" stroke="#85909b" stroke-width="0.22"/>
+<path d="M67.64 38.06 L67.49 35.07" stroke="#85909b" stroke-width="0.22"/>
+<path d="M68.43 38.03 L68.32 35.03" stroke="#85909b" stroke-width="0.22"/>
+<path d="M69.21 38.01 L69.16 35.01" stroke="#85909b" stroke-width="0.22"/>
+<path d="M70.00 83.00 L70.00 35.00" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="70.00" y="29.00" font-size="2.8">0&#176;</text>
+<path d="M70.79 38.01 L70.84 35.01" stroke="#85909b" stroke-width="0.22"/>
+<path d="M71.57 38.03 L71.68 35.03" stroke="#85909b" stroke-width="0.22"/>
+<path d="M72.36 38.06 L72.51 35.07" stroke="#85909b" stroke-width="0.22"/>
+<path d="M73.14 38.11 L73.35 35.12" stroke="#85909b" stroke-width="0.22"/>
+<path d="M73.31 45.14 L74.18 35.18" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="74.36" y="33.19" font-size="2.8">5&#176;</text>
+<path d="M74.70 38.25 L75.02 35.26" stroke="#85909b" stroke-width="0.22"/>
+<path d="M75.48 38.34 L75.85 35.36" stroke="#85909b" stroke-width="0.22"/>
+<path d="M76.26 38.44 L76.68 35.47" stroke="#85909b" stroke-width="0.22"/>
+<path d="M77.04 38.55 L77.51 35.59" stroke="#85909b" stroke-width="0.22"/>
+<path d="M70.00 83.00 L78.34 35.73" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="79.38" y="29.82" font-size="2.8">10&#176;</text>
+<path d="M78.59 38.83 L79.16 35.88" stroke="#85909b" stroke-width="0.22"/>
+<path d="M79.36 38.98 L79.98 36.05" stroke="#85909b" stroke-width="0.22"/>
+<path d="M80.12 39.15 L80.80 36.23" stroke="#85909b" stroke-width="0.22"/>
+<path d="M80.89 39.34 L81.61 36.43" stroke="#85909b" stroke-width="0.22"/>
+<path d="M79.84 46.29 L82.42 36.64" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="82.94" y="34.70" font-size="2.8">15&#176;</text>
+<path d="M82.40 39.74 L83.23 36.86" stroke="#85909b" stroke-width="0.22"/>
+<path d="M83.16 39.97 L84.03 37.10" stroke="#85909b" stroke-width="0.22"/>
+<path d="M83.91 40.20 L84.83 37.35" stroke="#85909b" stroke-width="0.22"/>
+<path d="M84.65 40.45 L85.63 37.62" stroke="#85909b" stroke-width="0.22"/>
+<path d="M70.00 83.00 L86.42 37.89" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="88.47" y="32.26" font-size="2.8">20&#176;</text>
+<path d="M86.13 40.99 L87.20 38.19" stroke="#85909b" stroke-width="0.22"/>
+<path d="M86.86 41.28 L87.98 38.50" stroke="#85909b" stroke-width="0.22"/>
+<path d="M87.58 41.58 L88.76 38.82" stroke="#85909b" stroke-width="0.22"/>
+<path d="M88.30 41.89 L89.52 39.15" stroke="#85909b" stroke-width="0.22"/>
+<path d="M86.06 48.56 L90.29 39.50" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="91.13" y="37.68" font-size="2.8">25&#176;</text>
+<path d="M89.73 42.55 L91.04 39.86" stroke="#85909b" stroke-width="0.22"/>
+<path d="M90.43 42.90 L91.79 40.23" stroke="#85909b" stroke-width="0.22"/>
+<path d="M91.13 43.27 L92.53 40.62" stroke="#85909b" stroke-width="0.22"/>
+<path d="M91.82 43.64 L93.27 41.02" stroke="#85909b" stroke-width="0.22"/>
+<path d="M70.00 83.00 L94.00 41.43" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="97.00" y="36.23" font-size="2.8">30&#176;</text>
+<path d="M93.18 44.43 L94.72 41.86" stroke="#85909b" stroke-width="0.22"/>
+<path d="M93.85 44.84 L95.44 42.29" stroke="#85909b" stroke-width="0.22"/>
+<path d="M94.51 45.26 L96.14 42.74" stroke="#85909b" stroke-width="0.22"/>
+<path d="M95.16 45.69 L96.84 43.21" stroke="#85909b" stroke-width="0.22"/>
+<path d="M91.80 51.87 L97.53 43.68" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="98.68" y="42.04" font-size="2.8">35&#176;</text>
+<path d="M96.45 46.59 L98.21 44.17" stroke="#85909b" stroke-width="0.22"/>
+<path d="M97.08 47.06 L98.89 44.67" stroke="#85909b" stroke-width="0.22"/>
+<path d="M97.70 47.54 L99.55 45.18" stroke="#85909b" stroke-width="0.22"/>
+<path d="M98.32 48.03 L100.21 45.70" stroke="#85909b" stroke-width="0.22"/>
+<path d="M70.00 83.00 L100.85 46.23" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="104.71" y="41.63" font-size="2.8">40&#176;</text>
+<path d="M99.52 49.04 L101.49 46.77" stroke="#85909b" stroke-width="0.22"/>
+<path d="M100.11 49.56 L102.12 47.33" stroke="#85909b" stroke-width="0.22"/>
+<path d="M100.69 50.09 L102.74 47.90" stroke="#85909b" stroke-width="0.22"/>
+<path d="M101.26 50.63 L103.34 48.47" stroke="#85909b" stroke-width="0.22"/>
+<path d="M96.87 56.13 L103.94 49.06" stroke="#155c99" stroke-width="0.55"/>
+<text text-anchor="middle" x="105.36" y="47.64" font-size="2.8">45&#176;</text>
+<path d="M66 83h8 M70 80v6" stroke="#bf3131" stroke-width=".5"/><text x="70" y="95" text-anchor="middle" font-size="3.4">Read while the servo is holding. Center again before testing the other direction.</text><text x="70" y="102" text-anchor="middle" font-size="3.1">Hips: view from above. Feet: view from behind. Keep the body still.</text></g></svg>

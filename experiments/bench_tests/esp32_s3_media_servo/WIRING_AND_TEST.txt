@@ -86,11 +86,20 @@ TEST SEQUENCE
 11. Disconnect battery after the bench test. This firmware has no battery
     voltage sensing or automatic LiPo low-voltage cutoff.
 
-PHONE CONTROLS (S3 media walk V5)
+PHONE CONTROLS (S3 media walk V6)
 Join Cece's setup Wi-Fi and open http://192.168.4.1/ or use the PHONE_URL
 printed on USB serial at 115200 when Cece joins your home Wi-Fi.
 Start camera and Listen to robot mic can run while the motion controls are active.
 Choose a hip or foot, then -10 degrees, Center, +10 degrees or Test sweep.
+To set its mechanical zero, support the body with the feet free. Select the
+joint, open Calibrate selected joint and press Hold saved zero. Use the
+10 microsecond adjustments until the sole is level in rear view or the hip
+points forward in top view. Wait a second for the joint to settle and press
+Save zero during the 12 second hold. Check for the saved message. Center,
+manual moves and walking now use that joint's saved zero, including after a
+restart. Each preview is temporary until saved. To undo, preview the old
+pulse and save again. If you reach the trim limit, use Stop, disconnect
+servo power and re-index the horn closer to neutral before fine adjustment.
 Manual positions are absolute pulse targets relative to that joint's configured
 center. Moving directly from -10 to +10 requests about 20 degrees of travel.
 V5 takes 0.8 s to ease to a manual target from the last commanded pulse. The signal releases
