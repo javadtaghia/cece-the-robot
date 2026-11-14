@@ -70,7 +70,8 @@ def nc(ref,pin):
     x,y=points[(ref,pin)]
     graphics.append(f'(no_connect (at {n(x)} {n(y)}) (uuid {q(uid())}))')
 
-define('Battery',25.4,30.48,[('+','power_out',20.32,5.08,180),('-','power_out',20.32,-10.16,180)])
+define('Battery',25.4,30.48,[('+','power_out',20.32,5.08,180),('-','power_out',20.32,-10.16,180),('MID','passive',7.62,22.86,270)])
+define('ExternalBalancePort',50.8,17.78,[('PACK-','passive',-33.02,5.08,0),('MID','passive',-33.02,0,0),('PACK+','passive',-33.02,-5.08,0)])
 define('PushbuttonSwitch',40.64,35.56,[('VIN','power_in',-27.94,5.08,0),('VOUT','power_out',27.94,5.08,180),('GND','power_in',0,-25.4,90),('ON','input',-10.16,25.4,270),('OFF','input',0,25.4,270),('CTRL','tri_state',10.16,25.4,270)])
 define('UBEC',35.56,30.48,[('IN+','power_in',-25.4,5.08,0),('IN-','power_in',-25.4,-10.16,0),('OUT+','power_out',25.4,5.08,180),('OUT-','passive',25.4,-10.16,180)])
 # Cable terminals are passive; USB supply is used only with JP1 removed.
@@ -78,7 +79,7 @@ define('PC_USB',25.4,25.4,[('USB 5V','passive',20.32,10.16,180),('USB GND','pass
 # Functional power-flow types describe JP1 fitted; programming requires removal.
 define('RunLink',5.08,10.16,[('IN','power_in',-10.16,0,0),('OUT','power_out',10.16,0,180)])
 define('Schottky',20.32,10.16,[('A','power_in',-17.78,0,0),('K','power_out',17.78,0,180)])
-define('XIAO_Sense',50.8,71.12,[('USB VBUS','power_in',-33.02,15.24,0),('USB GND','passive',-33.02,-5.08,0),('5V HEADER','power_in',-33.02,-20.32,0),('BAT+','power_in',-33.02,-27.94,0),('3V3','power_out',33.02,20.32,180),('D4 / GPIO5','bidirectional',33.02,10.16,180),('D5 / GPIO6','bidirectional',33.02,0,180),('GND','power_in',33.02,-10.16,180),('D0 / GPIO1','output',33.02,-20.32,180),('D1 / GPIO2','input',33.02,-30.48,180)])
+define('XIAO_Sense',50.8,71.12,[('USB VBUS','power_in',-33.02,15.24,0),('USB GND','passive',-33.02,-5.08,0),('5V HEADER','power_in',-33.02,-20.32,0),('BAT+','power_in',-33.02,-27.94,0),('D3 / GPIO4','output',33.02,25.4,180),('D7 / GPIO44','output',33.02,5.08,180),('D6 / GPIO43','output',33.02,-5.08,180),('3V3','power_out',33.02,20.32,180),('D4 / GPIO5','bidirectional',33.02,10.16,180),('D5 / GPIO6','bidirectional',33.02,0,180),('GND','power_in',33.02,-10.16,180),('D0 / GPIO1','output',33.02,-20.32,180),('D1 / GPIO2','input',33.02,-30.48,180)])
 driver_pins=[('5V MOTOR','power_in',-38.1,43.18,0),('GND MOTOR','power_in',-38.1,27.94,0),('3V3 LOGIC','power_in',-38.1,-10.16,0),('SDA','bidirectional',-38.1,-20.32,0),('SCL','input',-38.1,-30.48,0),('GND LOGIC','power_in',-38.1,-40.64,0)]
 for socket,cy in enumerate([60.96,86.36,111.76,137.16],1):
     for terminal,dy,typ in [('SIG',-5.08,'output'),('5V',0,'passive'),('GND',5.08,'passive')]:
@@ -92,6 +93,13 @@ define('BulkCap',7.62,5.08,[('+','passive',0,7.62,270),('-','passive',0,-7.62,90
 
 # HC-SR04 interface uses through-hole resistors and a ceramic bypass capacitor.
 define('OLED_SSD1327_QT',50.8,35.56,[('VIN','power_in',33.02,12.7,180),('DATA / SDA','bidirectional',33.02,5.08,180),('CLK / SCL','input',33.02,-5.08,180),('GND','power_in',33.02,-12.7,180)])
+
+define('DFR0954',50.8,27.94,[
+    ('VCC','power_in',-33.02,10.16,0),('BCLK','input',-33.02,5.08,0),
+    ('LRC','input',-33.02,0,0),('DIN','input',-33.02,-5.08,0),('GND','power_in',-33.02,-10.16,0),
+    ('SD','input',33.02,10.16,180),('SPK+','output',33.02,5.08,180),
+    ('GAIN','input',33.02,0,180),('SPK-','output',33.02,-5.08,180),('NC','passive',33.02,-10.16,180)])
+define('Speaker',35.56,17.78,[('+','passive',-25.4,5.08,0),('-','passive',-25.4,-5.08,0)])
 
 define('HC_SR04',40.64,45.72,[('VCC','power_in',-27.94,15.24,0),('TRIG','input',-27.94,5.08,0),('ECHO','output',-27.94,-5.08,0),('GND','power_in',-27.94,-15.24,0)])
 define('ResistorH',10.16,5.08,[('1','passive',-12.7,0,0),('2','passive',12.7,0,180)])
@@ -122,6 +130,17 @@ wire(points['U2','GND'],(101.6,93.98));junction(101.6,93.98)
 label('GND',(55.88,93.98))
 for pin in ['ON','OFF','CTRL']: nc('U2',pin)
 
+# Alternative hookup of the unplugged battery during external charging.
+place('ExternalBalancePort','J2','External charger 2S port',292.1,24.13)
+for pin, net in [('PACK-','GND'),('MID','CELL_MID'),('PACK+','BATTERY_PLUS')]:
+    end = points['J2',pin]
+    start = (241.3,end[1])
+    wire(start,end)
+    label(net,start)
+label('CELL_MID',points['BT1','MID'])
+text('7. EXTERNAL CHARGING ONLY',322.58,16.51,1.5)
+text('Unplug BT1 main lead from Cece. Insert its keyed\n3-wire balance plug into ONE charger: UC2 (USB-C)\nor B3AC (AU mains). Contacts shown by function.',322.58,21.59,1.1)
+
 # Servo supply with local bulk capacitor.
 wire(points['U3','OUT+'],points['C1','+'],points['U4','5V MOTOR'])
 wire(points['U3','OUT-'],points['C1','-'],points['U4','GND MOTOR'])
@@ -141,6 +160,27 @@ for src,dst,x,net in [('3V3','3V3 LOGIC',198.12,'3V3_LOGIC'),('D4 / GPIO5','SDA'
     a=points['U1',src];b=points['U4',dst]
     wire(a,(x,a[1]),(x,b[1]),b)
     label(net,(152.4,a[1]))
+
+# Separate standard I2S speaker output. The Sense PDM microphone uses its own pins.
+place('DFR0954','U7','MAX98357A / DFR0954',93.98,111.76)
+place('Speaker','LS1','28 mm / 4 ohm / 2.5 W',167.64,111.76)
+for esp_pin, amp_pin in [('D3 / GPIO4','BCLK'),('D7 / GPIO44','LRC'),('D6 / GPIO43','DIN')]:
+    start = points['U1',esp_pin]
+    end = (160.02,start[1])
+    wire(start,end)
+    label('I2S_'+amp_pin,(147.32,start[1]))
+for pin, net in [('VCC','5V_SERVO'),('GND','GND'),('BCLK','I2S_BCLK'),('LRC','I2S_LRC'),('DIN','I2S_DIN')]:
+    end = points['U7',pin]
+    start = (43.18,end[1])
+    wire(start,end)
+    label(net,start)
+for polarity, net in [('+','SPK_P'),('-','SPK_N')]:
+    start = points['U7','SPK'+polarity]
+    wire(start,points['LS1',polarity])
+    label(net,start)
+for pin in ('SD','GAIN','NC'): nc('U7',pin)
+text('6. SPEAKER / I2S AMPLIFIER',16.51,96.52,1.4)
+text('Use both SPK terminals. Keep both speaker leads isolated from GND.',15.24,127.0,1.05)
 
 # The named power wires are common inside the driver. No extra motor adapters.
 for i in range(1,5):
@@ -170,14 +210,14 @@ text('R1: ECHO to GPIO2; R2: GPIO2 to GND. 5V echo -> 3.0V.\nNever connect raw E
 text('CECE - BATTERY POWER + USB PROGRAMMING',20.32,15.24,2.54)
 text('Normal run: battery powers ESP + four SG90s | USB for programming only | Camera / mic / Wi-Fi retained',20.32,22.86,1.35)
 text('1. BATTERY / SWITCH / REGULATOR',20.32,30.48,1.6)
-text('2. CONTROLLER / SERVO SOCKETS',241.3,30.48,1.6)
+text('2. CONTROLLER / SERVO SOCKETS',241.3,36.83,1.6)
 text('Leave these three\ncontrol pins unwired.',76.2,27.94,.95)
 text('Set and measure\n5.0V BEFORE connecting.',157.48,86.36,1.1)
 text('C1 + to 5V; striped\nnegative side to GND.',195.58,99.06,1.05)
-text('3. ESP POWER + SIGNAL CONNECTIONS',20.32,119.38,1.6)
+text('3. ESP POWER + SIGNAL CONNECTIONS',20.32,133.35,1.6)
 text('Camera / mic on Sense add-on.\nUSB VBUS and 5V header are\ninternally common (ESP_5V).',86.36,185.42,1.05)
 text('JP1: fitted to RUN; REMOVE before USB.\nD1 banded end -> ESP 5V header.',15.24,208.28,1.05)
-text('Both address switches OFF\nI2C address 0x44\nSockets 1/2 = hips; 3/4 = feet\nChip channels = 3/2/1/0',246.38,162.56,1.15)
+text('Both address switches OFF\nI2C address 0x44\nSockets 1/2 = feet; 3/4 = hips\nChip channels = 3/2/1/0',246.38,162.56,1.15)
 # OLED shares the existing 3.3 V I2C bus; four-wire QT connection only.
 place('OLED_SSD1327_QT','U6','Adafruit 4741 / SSD1327',55.88,246.38)
 for pin,net in [('VIN','3V3_LOGIC'),('DATA / SDA','I2C_SDA'),('CLK / SCL','I2C_SCL'),('GND','GND')]:
@@ -185,7 +225,7 @@ for pin,net in [('VIN','3V3_LOGIC'),('DATA / SDA','I2C_SDA'),('CLK / SCL','I2C_S
     wire(start,end);label(net,end)
 text('5. OLED - 1.5 inch / 128 x 128',20.32,220.98,1.6)
 text('4-wire STEMMA QT cable to spare PiicoDev I2C socket.\nSame net labels = electrically joined. VIN uses 3V3, NOT 5V.\nDATA -> D4/GPIO5; CLK -> D5/GPIO6. No extra GPIO.\nJ1 + J2 closed (I2C); A0 open = 0x3D (driver = 0x44).\nOther OLED header pins unused. See OLED_WIRING.txt.',20.32,269.24,1.05)
-text('RUN: USB unplugged, JP1 fitted. PROGRAM: switch OFF,\nREMOVE JP1 before USB. D1 alone does not stop backfeed.\nNever connect 2S pack to ESP BAT+ or 5V header.\nCharging: unplug main battery lead from robot; use a 2S\nLiPo balance charger. Exact charger pinout still unverified.\nSee POWER_AND_CHARGING.txt for both battery plugs.',157.48,261.62,1.05)
+text('RUN: USB unplugged, JP1 fitted. PROGRAM: switch OFF,\nREMOVE JP1 before USB. D1 alone does not stop backfeed.\nNever connect 2S pack to ESP BAT+ or 5V header.\nCharging: disconnect BT1 from robot. Plug its 3-wire balance\nlead into the external UC2 or B3AC 2S port.\nSee POWER_AND_CHARGING.txt for both battery plugs.',157.48,261.62,1.05)
 text('MODULE DRAWING\nFollow printed terminal labels, not block positions.\nModule wiring only; no physical footprint mapping.\nSwitch is ON/OFF, not safety isolation.',294.64,243.84,1.05)
 
 external='(kicad_symbol_lib (version 20231120) (generator "kicad_symbol_editor")\n'+ '\n'.join(d['text'] for d in symbols.values())+'\n)\n'
@@ -193,7 +233,7 @@ external='(kicad_symbol_lib (version 20231120) (generator "kicad_symbol_editor")
 (ROOT/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "CeceModules") (type "KiCad") (uri "${KIPRJMOD}/CeceModules.kicad_sym") (options "") (descr "Cece module wiring symbols")))\n')
 cached='\n'.join(d['text'].replace('(symbol '+q(name),'(symbol '+q('CeceModules:'+name),1) for name,d in symbols.items())
 sheet=[f'(kicad_sch (version 20231120) (generator "eeschema") (uuid {q(root_id)}) (paper "A3")',
-       '(title_block (title "Cece - Battery operation / USB programming") (date "2026-11-10") (rev "1.4") (company "Cece the robot") (comment 1 "Remove JP1 before USB. Charger wiring pending model confirmation."))',
+       '(title_block (title "Cece - Battery operation / USB programming") (date "2026-11-15") (rev "1.5") (company "Cece the robot") (comment 1 "Remove JP1 before USB. External charge mode requires battery main lead unplugged."))',
        '(lib_symbols\n'+cached+'\n)',*placed,*wires,*labels,*graphics,'(sheet_instances (path "/" (page "1")))',')']
 (ROOT/(NAME+'.kicad_sch')).write_text('\n'.join(sheet)+'\n',encoding='utf-8')
 (ROOT/(NAME+'.kicad_pro')).write_text(json.dumps({'meta':{'filename':NAME+'.kicad_pro','version':1},'schematic':{},'text_variables':{}},indent=2)+'\n')

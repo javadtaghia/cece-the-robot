@@ -2,6 +2,7 @@
 // Arduino ESP32 3.3.12. USB CDC enabled, OPI PSRAM, 8 MB flash.
 // Adds PiicoDev CE09181 servo controller on GPIO5/6; all PWM outputs off at boot.
 #include <Arduino.h>
+#include <atomic>
 #include <WiFi.h>
 #include <Preferences.h>
 #include <ESP_I2S.h>
@@ -10,7 +11,7 @@
 #include "esp_random.h"
 #include "web_page.h"
 
-constexpr char VERSION[] = "CECE_S3_MEDIA_WALK_V8";
+constexpr char VERSION[] = "CECE_S3_MEDIA_WALK_V9";
 constexpr uint32_t SAMPLE_RATE = 16000;
 I2SClass microphone(I2S_NUM_0);
 bool cameraReady = false, micReady = false;
@@ -71,6 +72,34 @@ extern volatile uint8_t servoActiveSocket;
 extern volatile bool servoWalking;
 extern int CENTER_US[4];
 
+// The Sense microphone occupies I2S0. Start I2S1 only on a manual speaker test.
+enum class ToneState { Idle, Pending, Sent, Failed };
+std::atomic<ToneState> toneState(ToneState::Idle);
+
+bool playSpeakerTest() {
+  I2SClass speaker(I2S_NUM_1);
+  speaker.setPins(4, 44, 43); // D3 BCLK, D7 LRC, D6 DIN on the amplifier.
+  if (!speaker.begin(I2S_MODE_STD, SAMPLE_RATE, I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_STEREO)) return false;
+  // 240 ms at 500 Hz, ~3% full scale. Follow with silence to drain the DMA queue.
+  int16_t frames[256];
+  for (int block = 0; block < 60; ++block) {
+    for (int i = 0; i < 128; ++i) {
+      int16_t sample = block < 30 ? int16_t(960 * sinf(i * (2 * PI / 32))) : 0;
+      frames[2*i] = frames[2*i+1] = sample;
+    }
+    if (speaker.write((const uint8_t *)frames, sizeof(frames)) != sizeof(frames)) return false;
+  }
+  return true;
+}
+
+esp_err_t speakerTestHandler(httpd_req_t *req) {
+  char token[40] = {};
+  if (httpd_req_get_hdr_value_str(req, "X-Cece-Control", token, sizeof(token)) != ESP_OK ||
+      servoControlToken != token) return httpd_resp_send_err(req, HTTPD_403_FORBIDDEN, "Refresh Cece's page.");
+  toneState.store(ToneState::Pending);
+  return httpd_resp_sendstr(req, "Test requested.");
+}
+
 void commonHeaders(httpd_req_t *req) {
   httpd_resp_set_hdr(req, "Cache-Control", "no-store");
   httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
@@ -82,9 +111,9 @@ esp_err_t rootHandler(httpd_req_t *req) {
 }
 esp_err_t statusHandler(httpd_req_t *req) {
   char data[420]; const bool connected = WiFi.status() == WL_CONNECTED;
-  snprintf(data, sizeof(data), "{\"centers\":[%d,%d,%d,%d],\"camera\":%s,\"microphone\":%s,\"sensor\":\"0x%04x\",\"psram\":%u,\"connected\":%s,\"ip\":\"%s\",\"rssi\":%d,\"servo_driver\":%s,\"servo_socket\":%u,\"walking\":%s}",
+  snprintf(data, sizeof(data), "{\"centers\":[%d,%d,%d,%d],\"camera\":%s,\"microphone\":%s,\"tone\":%d,\"sensor\":\"0x%04x\",\"psram\":%u,\"connected\":%s,\"ip\":\"%s\",\"rssi\":%d,\"servo_driver\":%s,\"servo_socket\":%u,\"walking\":%s}",
     CENTER_US[0], CENTER_US[1], CENTER_US[2], CENTER_US[3],
-    cameraReady ? "true" : "false", micReady ? "true" : "false", sensorId,
+    cameraReady ? "true" : "false", micReady ? "true" : "false", int(toneState.load()), sensorId,
     ESP.getPsramSize(), connected ? "true" : "false", connected ? WiFi.localIP().toString().c_str() : "", connected ? WiFi.RSSI() : 0, servoControllerReady ? "true" : "false", servoActiveSocket, servoWalking ? "true" : "false");
   commonHeaders(req); httpd_resp_set_type(req, "application/json");
   return httpd_resp_send(req, data, HTTPD_RESP_USE_STRLEN);
@@ -237,12 +266,15 @@ void setup() {
   cameraLock=xSemaphoreCreateMutex();micLock=xSemaphoreCreateMutex();networkQueue=xQueueCreate(1,sizeof(NetworkSettings));
   if(!cameraLock || !micLock || !networkQueue) {Serial.println("FATAL no memory for locks/queue");while(true)delay(1000);}
   setupCamera();setupMicrophone();setupWifi();setupServoControl();
-  if(startServer(&webServer,80,32768)) {route(webServer,"/",HTTP_GET,rootHandler);route(webServer,"/status",HTTP_GET,statusHandler);route(webServer,"/wifi",HTTP_POST,wifiHandler);route(webServer,"/servo",HTTP_POST,servoHandler);}
+  if(startServer(&webServer,80,32768)) {route(webServer,"/",HTTP_GET,rootHandler);route(webServer,"/status",HTTP_GET,statusHandler);route(webServer,"/wifi",HTTP_POST,wifiHandler);route(webServer,"/servo",HTTP_POST,servoHandler);route(webServer,"/speaker-test",HTTP_POST,speakerTestHandler);}
   if(startServer(&videoServer,81,32769)) route(videoServer,"/video",HTTP_GET,videoHandler);
   if(startServer(&audioServer,82,32770)) route(audioServer,"/audio",HTTP_GET,audioHandler);
   printStatus();Serial.println("USB commands: i=status/setup, s=servo status, x=stop servos, c=JPEG, a=microphone PCM");
 }
 void loop() {
+  if (toneState.load() == ToneState::Pending) {
+    toneState.store(playSpeakerTest() ? ToneState::Sent : ToneState::Failed);
+  }
   NetworkSettings settings;
   if(xQueueReceive(networkQueue,&settings,0)==pdPASS) {
     Preferences prefs;prefs.begin("cece-media",false);prefs.putString("ssid",settings.ssid);prefs.putString("password",settings.password);prefs.end();

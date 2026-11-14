@@ -22,6 +22,8 @@ body{font:17px system-ui;background:#111b29;color:#f5f7fa;margin:0;padding:20px;
 <div class="panel"><img id="camera" alt="Tap Start camera to see Cece's view">
 <button id="videoStart">Start camera</button><button id="videoStop">Stop camera</button>
 <p id="videoMessage">Camera stopped.</p></div>
+<div class="panel"><button id="tone" disabled>Test robot speaker</button>
+<p id="toneStatus" role="status">Use battery RUN mode for this test.</p></div>
 <div class="panel"><button id="listen">Listen to robot mic</button><button id="stopAudio" disabled>Stop listening</button>
 <p id="message">Tap Listen and turn up your phone's media volume.</p>
 <label for="volume">Playback volume</label><input id="volume" type="range" min="0" max="3" step="0.1" value="1">
@@ -159,14 +161,25 @@ $('listen').onclick=async()=>{
     if(audioSession===session){stopAudio();$('message').textContent='Microphone disconnected. Tap Listen to reconnect.';}
   }catch(error){if(audioSession===session){stopAudio();$('message').textContent='Audio: '+error.message;}}
 };
+$('tone').onclick=async()=>{
+  $('tone').disabled=true;
+  try {
+    const response=await fetch('/speaker-test',{method:'POST',headers:{'X-Cece-Control':'__SERVO_TOKEN__'}});
+    if(!response.ok)throw new Error(await response.text());
+    $('toneStatus').textContent='Test requested.';
+  }catch(e){$('toneStatus').textContent=e.message;}
+};
 async function status(){const queriedOwner=owner,requestTime=performance.now();try{const response=await fetch('/status',{cache:'no-store'});const s=await response.json();cameraAllowed=s.camera;micAllowed=s.microphone;driverReady=s.servo_driver;activeServo=s.servo_socket;walking=s.walking;
   if(!walking && !pending && owner && owner===queriedOwner && performance.now()-requestTime<1500 && requestTime>walkSentAt+500)owner='';
   centers=s.centers;
+  $('tone').disabled=!Number.isInteger(s.tone) || s.tone===1;
+  if(s.tone===2)$('toneStatus').textContent='Test tone sent. Listen at the robot speaker.';
+  if(s.tone===3)$('toneStatus').textContent='ESP speaker output failed to start or write the tone.';
   enableServoButtons();
   $('servoStatus').textContent=!driverReady?'Driver unavailable. Check I²C wiring and rescan.':walking?'Walking forward':activeServo?'Moving servo '+activeServo:'Stopped · driver ready';
   $('listen').disabled=!micAllowed||!!audioSession;
   $('hardware').textContent=`Camera: ${s.camera?'ready (sensor '+s.sensor+')':'NOT DETECTED'} | Mic: ${s.microphone?'ready':'NOT DETECTED'} | PSRAM: ${Math.round(s.psram/1048576)} MB`;
   $('network').replaceChildren();if(s.connected){const link=document.createElement('a');link.href='http://'+s.ip;link.textContent='http://'+s.ip;$('network').append('Home Wi-Fi connected. Open ',link,` on your phone (${s.rssi} dBm).`);}else{$('network').textContent='Home Wi-Fi not connected. Open Wi-Fi setup below.';$('setup').open=true;}
-}catch(e){driverReady=false;enableServoButtons();$('servoStatus').textContent='Connection lost';$('hardware').textContent='Board not reachable. Check that your phone and Cece are on the same Wi-Fi.';}}
+}catch(e){$('tone').disabled=true;driverReady=false;enableServoButtons();$('servoStatus').textContent='Connection lost';$('hardware').textContent='Board not reachable. Check that your phone and Cece are on the same Wi-Fi.';}}
 status();setInterval(status,2500);window.addEventListener('pagehide',()=>{stopAudio();$('camera').removeAttribute('src');});
 </script></html>)CECEHTML";

@@ -178,3 +178,14 @@ https://raw.githubusercontent.com/CoreElectronics/CE-PiicoDev-Servo-Driver/main/
 https://www.hobbywingdirect.com/products/ubec-5a-air
 https://www.pololu.com/product/2808
 https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/
+
+ROBOT SPEAKER TEST (S3 media walk V9)
+With power off, connect D3/GPIO4 to BCLK, D7/GPIO44 to LRC, and D6/GPIO43
+to DIN on the DFRobot DFR0954. Use regulated UBEC 5 V for VCC and common
+GND. Leave SD, GAIN and NC open for the module defaults. Wire the 4 ohm,
+2.5 W speaker only across SPK+ and SPK-. Both terminals are driven.
+In battery RUN mode, open Cece's phone page and press Test robot speaker.
+Listen at the robot for a short, low-volume 500 Hz tone. The ESP reports
+whether it sent audio. This amplifier has no playback feedback.
+Mic capture uses I2S0 and speaker playback uses I2S1. Keep USB CDC enabled
+for programming and serial diagnostics because D6/D7 now carry audio.
