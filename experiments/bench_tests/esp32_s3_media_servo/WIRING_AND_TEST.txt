@@ -86,7 +86,7 @@ TEST SEQUENCE
 11. Disconnect battery after the bench test. This firmware has no battery
     voltage sensing or automatic LiPo low-voltage cutoff.
 
-PHONE CONTROLS (S3 media walk V3)
+PHONE CONTROLS (S3 media walk V4)
 Join Cece's setup Wi-Fi and open http://192.168.4.1/ or use the PHONE_URL
 printed on USB serial at 115200 when Cece joins your home Wi-Fi.
 Start camera and Listen to robot mic can run while the motion controls are active.
@@ -94,12 +94,27 @@ Choose a hip or foot, then -10 degrees, Center, +10 degrees or Test sweep.
 Positions are relative to that joint's configured center. The signal releases
 after 1.9 s. Verify all four centers and directions with Cece supported.
 Start walking forward commands all four joints. It settles for one second,
-plays the startup sequence, then repeats a 2.24 s gait cycle. Keep the
+eases in over two seconds, then repeats a 2.00 s gait cycle. Keep the
 controlling page visible. Stop movement releases all four outputs. If the
 phone loses contact, the ESP releases the outputs after 3 s without a heartbeat.
 The gait is open loop. Ground travel depends on horn alignment, joint signs
 and balance. CENTER_US and JOINT_SIGN in servo_control.h can be calibrated
 per socket. The initial signs assume all four installations have the same sign.
+
+Forward gait check: face Cece along a straight floor mark. Test on a level
+surface with the USB lead removed. Check the feet point forward at Center.
+With Cece supported, test +10 degrees on each upper socket from Center.
+The model expects both feet to turn counterclockwise when viewed from above.
+If only one turns clockwise, reverse JOINT_SIGN for that hip socket and retest.
+An SG90 has no position readback; an off-center joint can move immediately
+when first energized, even with the gait ramp.
+V4 eases both ankles in during the first cycle and limits the swing ankle
+to about 21 degrees. In Bullet, replaying the firmware pulse requests for
+20 half-steps at friction 0.8 gave 244.9 mm forward and 3.2 mm lateral
+displacement. At friction 0.6 the result was 241.7 mm forward and 2.7 mm
+lateral in the other direction. Both runs stayed upright with 19 detected
+foot lifts and landings. Actual horn directions and floor travel need a
+physical check.
 
 BATTERY-ONLY OPERATION (AFTER THE USB-POWERED TEST WORKS)
 Disconnect the PC USB cable. Keep the 5V UBEC branch to the servo controller.
